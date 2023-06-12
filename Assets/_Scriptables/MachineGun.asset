@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9f92ed43dbfbb04bbd8fd635f7285e9, type: 3}
+  m_Name: MachineGun
+  m_EditorClassIdentifier: 
+  firePointPos: {x: 0.58, y: -0.06}
+  barrel: {fileID: 1210790820, guid: 3a4f48e6536b9684fb56085d960765a1, type: 3}
+  frame: {fileID: -1153638114, guid: b4adc1cb4895a8b489c8a1b7b6ba0f5b, type: 3}
+  bulletSprite: {fileID: 0}
+  energyCost: 1
+  health: 6
+  damage: 3
+  range: 100
+  detectRadius: 0.5
+  explodeRadius: 0.5
+  isGravityAffected: 0
+  bulletCount: 10
+  bulletOffset: 0
+  bulletShootTime: 0.2
+  isRaycast: 0
+  isRayMultiple: 0

@@ -1,0 +1,16 @@
+using UnityEngine;
+
+public class WeaponVisuals : MonoBehaviour
+{
+    private Weapon weapon;
+    private SpriteRenderer barrelRen;
+    void Start()
+    {
+        weapon = GetComponent<WeaponController>().weapon;
+        barrelRen = transform.Find("Barrel").GetComponent<SpriteRenderer>();
+
+        //Sprite
+        barrelRen.sprite = weapon.barrel;
+        barrelRen.transform.eulerAngles = new(0, 0, -45);
+    }
+}
