@@ -31,7 +31,7 @@ public class Health : MonoBehaviour
     {
         if (collision.CompareTag(tag)) return;
         var bullet = collision.GetComponent<Bullet>();
-        DecreaseHealth(bullet.damage);
+        DecreaseHealth(bullet.Damage);
     }
 
 

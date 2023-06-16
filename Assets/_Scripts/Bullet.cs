@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    [HideInInspector] public int damage = 0;
+    public int Damage { get; private set; }
     private float explRadius;
 
     [Header("Dependencies")]
@@ -16,7 +16,7 @@ public class Bullet : MonoBehaviour
     public void Launch(Weapon weapon, string teamTag, Vector2 launchVec)
     {
         tag = teamTag;
-        damage = weapon.damage;
+        Damage = weapon.damage;
         explRadius = weapon.explodeRadius;
         rb.gravityScale = weapon.isGravityAffected? 1 : 0;
         rb.AddForce(launchVec, ForceMode2D.Impulse);
