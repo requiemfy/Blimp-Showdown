@@ -67,12 +67,12 @@ public class HUD : MonoBehaviour
         // stop observe current weapon
         if (curWeapon)
         {
-            curWeapon.health.onDamageTaken -= UpdateWeaponHealthUI;
+            curWeapon.health.OnDamageTaken -= UpdateWeaponHealthUI;
         }
 
         //start subscribe new weapon
         curWeapon = newWeapon;
-        curWeapon.health.onDamageTaken += UpdateWeaponHealthUI;
+        curWeapon.health.OnDamageTaken += UpdateWeaponHealthUI;
         SetTrajectoryTarget();
         UpdateWeaponHealthUI();
         UpdateShotAngleUI();
@@ -85,14 +85,14 @@ public class HUD : MonoBehaviour
         //stop observe currentplayer
         if (curPlayer)
         {
-            curPlayer.health.onDamageTaken -= UpdatePlayerHealthUI;
+            curPlayer.health.OnDamageTaken -= UpdatePlayerHealthUI;
             curPlayer.energy.onEnergyChanged -= UpdateEnergyBarUI;
             curPlayer.movement.whileMoving -= UpdateFuelUI;
         }
 
         //start subscribe new player
         curPlayer = newPlayer;
-        newPlayer.health.onDamageTaken += UpdatePlayerHealthUI;
+        newPlayer.health.OnDamageTaken += UpdatePlayerHealthUI;
         newPlayer.energy.onEnergyChanged += UpdateEnergyBarUI;
         newPlayer.movement.whileMoving += UpdateFuelUI;
         UpdatePlayerHealthUI();
@@ -139,12 +139,12 @@ public class HUD : MonoBehaviour
     private void UpdateWeaponHealthUI()
     {
         healthBar.DOFillAmount((float) curWeapon.health.GetRatio(), duration: 0.5f);
-        healthTMP.text = curWeapon.health.currentHealth.ToString();
+        healthTMP.text = curWeapon.health.CurrentHealth.ToString();
     }
     private void UpdatePlayerHealthUI()
     {
         playerHealthBar.DOFillAmount((float)curPlayer.health.GetRatio(), duration: 0.3f);
-        playerHealthTMP.text = curPlayer.health.currentHealth.ToString();
+        playerHealthTMP.text = curPlayer.health.CurrentHealth.ToString();
     }
     private void UpdateEnergyBarUI()
     {

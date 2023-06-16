@@ -25,16 +25,16 @@ public class PlayerController : MonoBehaviour
         energy = GetComponent<PlayerEnergy>();
         health = transform.Find("Ship").GetComponent<Health>();
         health.SetMaxHealth(30);
-        health.onDeath += () => shipCollapsedPS.Play();
+        health.OnDeath += () => shipCollapsedPS.Play();
+    }
+    private void Start()
+    {
+        health.tag = tag;
         MatchManager.Instance.onTurnEnded += () =>
         {
             movement.Restore(2);
             energy.Restore(1);
         };
-    }
-    private void Start()
-    {
-        health.tag = tag;
     }
 
 

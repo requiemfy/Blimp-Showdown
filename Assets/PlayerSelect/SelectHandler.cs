@@ -47,12 +47,12 @@ public class SelectHandler : MonoBehaviour
         }
     }
 
-    private const float scrollPadding = 1.5f;
+    private const float SCROLLPADDING = 80;
     private void ResizeWeaponBoard()
     {
         var childCount = weaponBoard.childCount;
         weaponBoard.sizeDelta = weaponBoard.sizeDelta.ChangeY(160 * childCount);
-        scrollLimit = (float)(weaponBoard.sizeDelta.y - (float)1920 / Screen.width * Screen.height) /2 + 80;
+        scrollLimit = (float)(weaponBoard.sizeDelta.y - (float)1920 / Screen.width * Screen.height) /2 + SCROLLPADDING;
     }
     public void TryMoveScrollContentTo(Vector2 target)
     {

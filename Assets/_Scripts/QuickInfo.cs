@@ -32,13 +32,13 @@ public class QuickInfo : MonoBehaviour
             {
                 //show weapon quickInfo
                 quickInfoMenu.transform.position = cam.WorldToScreenPoint(weapon.transform.position) + new Vector3(0,125,0);
-                title.text = $"{weapon.health.currentHealth}/{weapon.health.maxHealth}";
+                title.text = $"{weapon.health.CurrentHealth}/{weapon.health.MaxHealth}";
             }
             else if (targetIfHold is PlayerController player)
             {
                 //show player quickInfo
                 quickInfoMenu.transform.position = cam.WorldToScreenPoint(player.transform.position) + new Vector3(0, 125, 0);
-                title.text = $"{player.health.currentHealth}/{player.health.maxHealth}";
+                title.text = $"{player.health.CurrentHealth}/{player.health.MaxHealth}";
             }
         }
     }

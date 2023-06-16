@@ -18,7 +18,7 @@ public class WeaponController : MonoBehaviour
         shooter = GetComponent<WeaponShooting>();
 
         health.SetMaxHealth(weapon.health);
-        health.onDeath += () =>
+        health.OnDeath += () =>
         {
             isCollapsed = true;
             GetComponentInParent<PlayerController>().weaponLeft -=1;
