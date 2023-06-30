@@ -5299,7 +5299,6 @@ MonoBehaviour:
   healthTMP: {fileID: 1978445552}
   fireBtn: {fileID: 297388682}
   rangeIndicator: {fileID: 1876965238}
-  powerSlider: {fileID: 2003977298}
   powerTMP: {fileID: 1679722310}
   angleTMP: {fileID: 936942829}
   angleIdct: {fileID: 112210737}
@@ -5687,6 +5686,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1841826434}
   - component: {fileID: 1841826435}
+  - component: {fileID: 1841826436}
   m_Layer: 0
   m_Name: MatchManager
   m_TagString: Untagged
@@ -5723,6 +5723,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wind: {x: 0, y: 0}
   playerPrefab: {fileID: 6642035526497430091, guid: cfb16cad46d595642bc83ca3c2dba7e7, type: 3}
+--- !u!114 &1841826436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1841826433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a3b35161b349684eaa0691c6421cb8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1875987134
 GameObject:
   m_ObjectHideFlags: 0
