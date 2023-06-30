@@ -17,7 +17,6 @@ public class HUD : MonoBehaviour
     [SerializeField] TextMeshProUGUI healthTMP;
     [SerializeField] Button fireBtn;
     [SerializeField] Transform rangeIndicator;
-    [SerializeField] Slider powerSlider;
     [SerializeField] TextMeshProUGUI powerTMP;
     [SerializeField] TextMeshProUGUI angleTMP;
     [SerializeField] Transform angleIdct;
@@ -44,15 +43,13 @@ public class HUD : MonoBehaviour
         fireBtn.onClick.AddListener(() => { curWeapon.shooter.Fire(); });
         endTurnBtn.onClick.AddListener(() => MatchManager.Instance.NextTurn());
 
+        joystick.OnDragStarted = () => { curWeapon.shooter.OnDragBegin(); };
         joystick.WhileDraging = (Vector2 dragVec) => {
-            curWeapon.shooter.AdjustDirection(dragVec);
-            curWeapon.shooter.AdjustBarrel(dragVec);
+            curWeapon.shooter.Adjust(dragVec);
+            curWeapon.shooter.AdjustBarrelVisual(dragVec);
             UpdateShotAngleUI();
+            UpdatePowerTMP();
         };
-        powerSlider.onValueChanged.AddListener((float val) => {
-            curWeapon.shooter.AdjustPower(val);
-            UpdatePowerSliderUI();
-        });
         #endregion
     }
 
@@ -77,7 +74,7 @@ public class HUD : MonoBehaviour
         UpdateWeaponHealthUI();
         UpdateShotAngleUI();
         UpdateRangeIdctUI();
-        UpdatePowerSliderUI();
+        UpdatePowerTMP();
         ShowWeaponHUD(true);
     }
     public void StartObservePlayer(PlayerController newPlayer)
@@ -126,9 +123,8 @@ public class HUD : MonoBehaviour
     {
         trajectory.SetShooter(curWeapon);
     }
-    private void UpdatePowerSliderUI()
+    private void UpdatePowerTMP()
     {
-        powerSlider.value = curWeapon.shooter.Power;
         powerTMP.text = (curWeapon.shooter.Power * 100).ToString("0");
     }
     private void UpdateRangeIdctUI()

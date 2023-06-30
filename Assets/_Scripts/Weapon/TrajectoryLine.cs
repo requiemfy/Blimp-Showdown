@@ -38,9 +38,7 @@ public class TrajectoryLine : MonoBehaviour
         float lenghtLimit = (float)power * WEAPONRANGE * 0.7f;
         //
         float AbsAngle = Mathf.Abs(angle);
-        bool bool1 = 0 < AbsAngle && AbsAngle < 45;
-        bool bool2 = 135 < AbsAngle && AbsAngle < 180;
-        if ( bool1||bool2)
+        if ( AbsAngle.InRange(0,45) || AbsAngle.InRange(135, 180))
         {
             range = (float)lenghtLimit * 2;
         }

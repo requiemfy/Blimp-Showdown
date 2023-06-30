@@ -23,14 +23,32 @@ public class WeaponShooting : MonoBehaviour
         Angle = -45f;
     }
 
-    public void AdjustDirection(Vector2 dragVec)
+
+    private Vector2 baseDirection;
+    private Vector2 lastDragVec;
+
+    private const float ROTATESEN = 0.005f;
+    private const float POWERSEN = 0.005f;
+    public void OnDragBegin()
     {
-        Direction = dragVec.normalized;
+        baseDirection = Direction;
+        lastDragVec = Vector2.zero;
     }
-    public void AdjustPower(float val)
+    public void Adjust(Vector2 dragVec)
     {
-        Power = val;
-        if (Power > 1f) Power = 1f;
+        //direction
+        if ((int)dragVec.x == 0 || (int)dragVec.y == 0) return;
+        Direction = (baseDirection + dragVec * ROTATESEN).normalized;
+        //angle
+        Angle = GetTanDeg(Direction);
+        barrel.eulerAngles = new Vector3(0,0,Angle);
+
+        //power
+        var delta = dragVec - lastDragVec;
+        Power += (delta.x * Direction.x + delta.y * Direction.y) * POWERSEN;
+        Power = Mathf.Clamp(Power, 0.1f, 1f);
+
+        lastDragVec = dragVec;
     }
 
     private bool _isFiring = false;
@@ -100,22 +118,12 @@ public class WeaponShooting : MonoBehaviour
             };
     }
 
-    public void AdjustBarrel(Vector2 dragVec)
+    public void AdjustBarrelVisual(Vector2 dragVec)
     {
         if (_isFiring) return;
-        Angle = GetTanDeg(dragVec);
-        DOTween.Kill(barrel);
-        /*if (-90 < Angle && Angle < 90)
-        {
-            barrel.localScale = new(1, 1, 1);
-            barrel.eulerAngles = new(0, 0, Angle);
-        }
-        else
-        {
-            barrel.localScale = new(-1, 1, 1);
-            barrel.eulerAngles = new(0, 0, Angle + 180);
-        }*/
-        barrel.DORotate(new(0, 0, Angle), duration: 1f);
+        //Angle = GetTanDeg(dragVec);
+        //DOTween.Kill(barrel);
+        //barrel.DORotate(new(0, 0, Angle), duration: 1f);
     }
     private float GetTanDeg(Vector2 vec)
     {
