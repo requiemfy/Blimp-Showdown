@@ -6,15 +6,15 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Image))] // for raycast usable area
 public class Joystick : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler 
 {
-    [SerializeField] bool fixedOrigin;
-    [SerializeField] RectTransform knob;
-    [SerializeField] RectTransform origin;
-
     public Action OnDragStarted;
     public Action<Vector2> WhileDraging;
     public Action OnDragStopped;
 
-    private Vector2 firstTouchPos;
+    [SerializeField] bool fixedOrigin;
+    [SerializeField] RectTransform knob;
+    [SerializeField] RectTransform origin;
+
+    private Vector2 _firstTouchPos;
 
 
 
@@ -24,19 +24,19 @@ public class Joystick : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     //-------------------------------FUNCTIONS-------------------------------//
     public void OnBeginDrag(PointerEventData touch)
     {
-        firstTouchPos = touch.position;
+        _firstTouchPos = touch.position;
         OnDragStarted();
     }
 
-    private const int RADIUS = 200;
+    private const int RADIUS = 100;
     public void OnDrag(PointerEventData touch)
     {
-        Vector2 _anchor = fixedOrigin ? (Vector2)origin.position : firstTouchPos;
-        Vector2 _dragVec = touch.position - _anchor;
+        Vector2 anchor = fixedOrigin ? (Vector2)origin.position : _firstTouchPos;
+        Vector2 dragVec = touch.position - anchor;
         //knob.position = (Vector2)origin.position + _dragVec.normalized;
-        if (_dragVec.magnitude > RADIUS) knob.position = (Vector2)origin.position + RADIUS * _dragVec.normalized;
-        else knob.position = (Vector2)origin.position + _dragVec;
-        WhileDraging?.Invoke(_dragVec);
+        if (dragVec.magnitude < RADIUS) knob.position = (Vector2)origin.position + dragVec;
+        else knob.position = (Vector2)origin.position + RADIUS * dragVec.normalized;
+        WhileDraging?.Invoke(dragVec);
     }
 
     public void OnEndDrag(PointerEventData touch)
