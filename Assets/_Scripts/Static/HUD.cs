@@ -9,7 +9,7 @@ public class HUD : MonoBehaviour
     private WeaponController curWeapon;
     private PlayerController curPlayer;
 
-    [SerializeField] Joystick joystick;
+    [SerializeField] Joystick aimJoystick;
 
     [Header("Weapon")]
     [SerializeField] GameObject weaponHUD;
@@ -25,10 +25,8 @@ public class HUD : MonoBehaviour
     [Header("Player")]
     [SerializeField] GameObject playerHUD;
     [SerializeField] Button endTurnBtn;
-    [SerializeField] Image playerHealthBar;
-    [SerializeField] TextMeshProUGUI playerHealthTMP;
-    [SerializeField] Image fuelBar;
-    [SerializeField] TextMeshProUGUI fuelTMP;
+    [SerializeField] Bar playerHealthBar;
+    [SerializeField] Bar fuelBar;
 
     [Header("Common")]
     [SerializeField] TextMeshProUGUI title;
@@ -43,8 +41,8 @@ public class HUD : MonoBehaviour
         fireBtn.onClick.AddListener(() => { curWeapon.shooter.Fire(); });
         endTurnBtn.onClick.AddListener(() => MatchManager.Instance.NextTurn());
 
-        joystick.OnDragStarted = () => { curWeapon.shooter.OnDragBegin(); };
-        joystick.WhileDraging = (Vector2 dragVec) => {
+        aimJoystick.OnDragStarted = () => { curWeapon.shooter.OnDragBegin(); };
+        aimJoystick.WhileDraging = (Vector2 dragVec) => {
             curWeapon.shooter.Adjust(dragVec);
             curWeapon.shooter.AdjustBarrelVisual(dragVec);
             UpdateShotAngleUI();
@@ -139,8 +137,7 @@ public class HUD : MonoBehaviour
     }
     private void UpdatePlayerHealthUI()
     {
-        playerHealthBar.DOFillAmount((float)curPlayer.health.GetRatio(), duration: 0.3f);
-        playerHealthTMP.text = curPlayer.health.CurrentHealth.ToString();
+        playerHealthBar.SetFill(curPlayer.health.CurrentHealth, curPlayer.health.MaxHealth);
     }
     private void UpdateEnergyBarUI()
     {
@@ -155,8 +152,7 @@ public class HUD : MonoBehaviour
     }
     private void UpdateFuelUI()
     {
-        fuelBar.fillAmount = (float)curPlayer.movement.GetRatio();
-        fuelTMP.text = curPlayer.movement.GetRatio().ToString("0%");
+        fuelBar.SetFill((int)((float)curPlayer.movement.GetRatio() * 100), 100);
     }
 
 

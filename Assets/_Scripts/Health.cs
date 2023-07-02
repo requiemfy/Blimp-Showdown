@@ -2,20 +2,28 @@ using DG.Tweening;
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
 [RequireComponent(typeof(Collider2D))]
 public class Health : MonoBehaviour
 {
-    [SerializeField] private Image healthBar;
     public int MaxHealth { get; private set; }
     public int CurrentHealth { get; private set; }
     public Action OnDamageTaken;
     public Action OnDeath;
 
+    [SerializeField] private Bar healthBar;
     private void Awake()
     {
-        if (healthBar) healthBar.gameObject.SetActive(false);
+        if (healthBar) ShowHealthBar(false);
+    }
+    private void Start()
+    {
+        healthBar.SetFill(CurrentHealth, MaxHealth);
+        Start_Visual();
+    }
+    public void ShowHealthBar(bool state)
+    {
+        healthBar.gameObject.SetActive(state);
     }
     public void SetMaxHealth(int value)
     {
@@ -34,18 +42,19 @@ public class Health : MonoBehaviour
         DecreaseHealth(bullet.Damage);
     }
 
-
+    //take damage
     private bool isAlive = true;
     public void DecreaseHealth(int val)
     {
         CurrentHealth -= val;
         SwitchMaterial();
+        CountDownHealthBar();
         OnDamageTaken?.Invoke();
         if (healthBar) 
         {
             DOTween.Kill(healthBar);
             healthBar.gameObject.SetActive(true);
-            healthBar.DOFillAmount((float)GetRatio(), 0.3f);
+            healthBar.SetFill(CurrentHealth, MaxHealth);
         }
         if (CurrentHealth <= 0)
         {
@@ -58,13 +67,27 @@ public class Health : MonoBehaviour
         }
     }
 
+    //healthbar timer
+    private Coroutine _currentRoutine;
+    private void CountDownHealthBar()
+    {
+        if (_currentRoutine != null) StopCoroutine(_currentRoutine);
+        _currentRoutine = StartCoroutine(ShowHealthBarCO());
+        IEnumerator ShowHealthBarCO()
+        {
+            ShowHealthBar(true);
+            yield return new WaitForSeconds(2f);
+            ShowHealthBar(false);
+        }
+    }
+
     #region FLASH
     [SerializeField] private SpriteRenderer[] stunRens;
     [SerializeField] private Material flashMat;
     private Color[] originalCol;
     private Material[] originalMat;
 
-    private void Start()
+    private void Start_Visual()
     {
         originalCol = new Color[stunRens.Length];
         originalMat = new Material[stunRens.Length];

@@ -2,9 +2,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(EventTrigger))]
 [RequireComponent(typeof(Image))]
-public class CamDragable : MonoBehaviour
+public class CamDragable : MonoBehaviour, IBeginDragHandler, IDragHandler
 {
     [SerializeField] private float multiplier;
     private CameraManager cam;
@@ -12,22 +11,17 @@ public class CamDragable : MonoBehaviour
     {
         cam = CameraManager.Instance;
     }
-
-
     private Vector2 firstTouchPos;
     private Vector2 firstOffset;
-    public void DragBegin(BaseEventData baseEventData)
+    public void OnBeginDrag(PointerEventData touch)
     {
-        PointerEventData touch = baseEventData as PointerEventData;
         firstTouchPos = touch.position;
-        firstOffset = cam.offset;
+        firstOffset = cam.Offset;
     }
-
-    public void DragCamera(BaseEventData baseEventData)
+    public void OnDrag(PointerEventData touch)
     {
-        PointerEventData touch = baseEventData as PointerEventData;
+        if (Input.touchCount != 1) return;
         Vector2 dragVec = touch.position - firstTouchPos;
-        cam.offset = firstOffset - dragVec * multiplier;
+        cam.Offset = firstOffset - dragVec * multiplier;
     }
-
 }

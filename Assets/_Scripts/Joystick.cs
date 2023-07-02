@@ -15,6 +15,10 @@ public class Joystick : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     [SerializeField] RectTransform origin;
 
     private Vector2 _firstTouchPos;
+    private void Awake()
+    {
+        _radius = GetComponent<RectTransform>().sizeDelta.x / 2;
+    }
 
 
 
@@ -25,22 +29,22 @@ public class Joystick : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public void OnBeginDrag(PointerEventData touch)
     {
         _firstTouchPos = touch.position;
-        OnDragStarted();
+        OnDragStarted?.Invoke();
     }
 
-    private const int RADIUS = 100;
+    private float _radius;
     public void OnDrag(PointerEventData touch)
     {
         Vector2 anchor = fixedOrigin ? (Vector2)origin.position : _firstTouchPos;
         Vector2 dragVec = touch.position - anchor;
-        //knob.position = (Vector2)origin.position + _dragVec.normalized;
-        if (dragVec.magnitude < RADIUS) knob.position = (Vector2)origin.position + dragVec;
-        else knob.position = (Vector2)origin.position + RADIUS * dragVec.normalized;
+        if (dragVec.magnitude > _radius * Screen.width / 1920) knob.position = (Vector2)origin.position + _radius * Screen.width/1920 * dragVec.normalized; 
+        else knob.position = (Vector2)origin.position + dragVec;
         WhileDraging?.Invoke(dragVec);
     }
 
     public void OnEndDrag(PointerEventData touch)
     {
         knob.position = origin.position;
+        OnDragStopped?.Invoke();
     }
 }

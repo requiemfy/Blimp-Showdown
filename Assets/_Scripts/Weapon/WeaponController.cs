@@ -29,10 +29,10 @@ public class WeaponController : MonoBehaviour
     public void OnPointerDown()
     {
         onPointerDown();
-        QuickInfo.Instance.StartCheckHold(targetIfHold: this);
+        health.ShowHealthBar(true);
     }
     public void OnPointerUp()
     {
-        QuickInfo.Instance.StopCheckHold();
+        health.ShowHealthBar(false);
     }
 }

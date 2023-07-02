@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public enum Team
 {
@@ -12,6 +11,8 @@ public enum Team
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private ParticleSystem shipCollapsedPS;
+    [SerializeField] private Bar energyBar;
+    [SerializeField] private Bar fuelBar;
 
     [HideInInspector] public int weaponLeft = 3;
     [HideInInspector] public bool isInTurn = false;
@@ -35,18 +36,35 @@ public class PlayerController : MonoBehaviour
             movement.Restore(2);
             energy.Restore(1);
         };
+        energy.onEnergyChanged += () =>
+        {
+            energyBar.SetFill(energy.currentEnergy, 10);
+        };
+
+        fuelBar.gameObject.SetActive(false);
+        movement.whileMoving += () =>
+        {
+            fuelBar.gameObject.SetActive(true);
+            fuelBar.SetFill((int)((float)movement.GetRatio() * 100), 100);
+        };
+        movement.OnStopped += () =>
+        {
+            fuelBar.gameObject.SetActive(false);
+        };
     }
 
 
     public void OnPointerDown()
     {
-        QuickInfo.Instance.StartCheckHold(targetIfHold: this);
+        health.ShowHealthBar(true);
+        fuelBar.gameObject.SetActive(true);
         if (!isInTurn) return;
         HUD.Instance.ShowWeaponHUD(false);
     }
 
     public void OnPointerUp()
     {
-        QuickInfo.Instance.StopCheckHold();
+        health.ShowHealthBar(false);
+        fuelBar.gameObject.SetActive(false);
     }
 }

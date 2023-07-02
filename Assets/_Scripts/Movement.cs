@@ -4,6 +4,8 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     public Action whileMoving;
+    public Action OnStopped;
+
     [SerializeField] private float maxFuel;
     private float currentFuel;
     [SerializeField] private Vector2 maxSpd;
@@ -27,6 +29,7 @@ public class Movement : MonoBehaviour
         if (direction == Vector2.zero) 
         {
             enabled = false;
+            OnStopped?.Invoke();
             return;
         }
         if (currentFuel <= 0)

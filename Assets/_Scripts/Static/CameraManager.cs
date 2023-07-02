@@ -1,60 +1,101 @@
+using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.U2D;
 
 public class CameraManager : MonoBehaviour
 {
     public static CameraManager Instance { get; private set; }
 
-    [SerializeField] private float speed;
-    private Transform cam;
-    private Transform follow;
-    private bool onlyX = false;
+    private Camera _cam;
     private void Awake()
     {
         Instance= this;
-        cam = Camera.main.transform;
+        _cam = Camera.main;
     }
-    private Vector3 targetPos;
-    public Vector2 offset;
     private void Update()
     {
-        Vector3 camPos = cam.position;
-        if (follow)
+        Update_Follow();
+        Update_PitchZoom();
+    }
+
+    #region FOLLOW
+    public Vector2 Offset;
+
+    [SerializeField] 
+    private float speed;
+    private Transform _follow;
+    private Vector3 _targetPos;
+    private bool _onlyX = false;
+    private void Update_Follow()
+    {
+        Vector3 camPos = _cam.transform.position;
+        if (_follow)
         {
-            float X = follow.position.x + offset.x;
-            float Y = onlyX? camPos.y : follow.position.y + offset.y;
-            targetPos = new Vector3(X, Y, camPos.z);
+            float X = _follow.position.x + Offset.x;
+            float Y = _onlyX? camPos.y : _follow.position.y + Offset.y;
+            _targetPos = new Vector3(X, Y, camPos.z);
             StopAllCoroutines();
         }
         else
         {
-            if (!triggered) StartCoroutine(BackToCurrentPlayerCO());
+            if (!_triggered) StartCoroutine(BackToCurrentPlayerCO());
         }
-        cam.position = Vector3.Lerp(camPos, targetPos, Time.deltaTime * speed);
+        _cam.transform.position = Vector3.Lerp(camPos, _targetPos, Time.deltaTime * speed);
     }
     public void SetFollow(Transform transform, bool onlyX = false, float camSpeed = 1)
     {
-        follow = transform;
-        this.onlyX = onlyX;
+        _follow = transform;
+        this._onlyX = onlyX;
         speed = camSpeed;
-        offset = Vector2.zero;
-        triggered = false;
+        Offset = Vector2.zero;
+        _triggered = false;
     }
 
-    private Transform currentPlayer;
+    private Transform _currentPlayer;
     public void SetCurrentPlayer(Transform transform)
     {
-        currentPlayer = transform;
-        SetFollow(currentPlayer);
+        _currentPlayer = transform;
+        SetFollow(_currentPlayer);
     }
 
-    private bool triggered = false;
+    private bool _triggered = false;
     private IEnumerator BackToCurrentPlayerCO()
     {
-        triggered = true;
+        _triggered = true;
         yield return new WaitForSeconds(1.5f);
-        SetFollow(currentPlayer);
+        SetFollow(_currentPlayer);
     }
+    #endregion
+
+    #region PITCHZOOM
+    public Action<float> WhileZoomChanging;
+    private void Update_PitchZoom()
+    {
+        if (Input.touchCount == 2)
+        {
+            Touch touchZero = Input.GetTouch(0);
+            Touch touchOne = Input.GetTouch(1);
+
+            Vector2 touchZeroPos = touchZero.position;
+            Vector2 touchOnePos = touchOne.position;
+            float distance = (touchZeroPos - touchOnePos).magnitude;
+
+            Vector2 touchZeroPrevPos = touchZeroPos - touchZero.deltaPosition;
+            Vector2 touchOnePrevPos = touchOnePos - touchOne.deltaPosition;
+            float preDistance = (touchZeroPrevPos - touchOnePrevPos).magnitude;
+
+            float pitchAmount = distance - preDistance;
+            Zoom(pitchAmount * 0.01f);
+            return;
+        }
+        Zoom(Input.GetAxis("Mouse ScrollWheel"));
+    }
+
+    private void Zoom(float amount)
+    {
+        _cam.orthographicSize = Mathf.Clamp(_cam.orthographicSize - amount, 5f, 15f);
+        WhileZoomChanging(_cam.orthographicSize);
+    }
+    #endregion
 }
 

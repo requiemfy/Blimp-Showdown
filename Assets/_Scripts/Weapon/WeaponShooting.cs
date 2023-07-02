@@ -27,8 +27,8 @@ public class WeaponShooting : MonoBehaviour
     private Vector2 baseDirection;
     private Vector2 lastDragVec;
 
-    private const float ROTATESEN = 0.005f;
-    private const float POWERSEN = 0.005f;
+    private const float ROTATESEN = 0.004f;
+    private const float POWERSEN = 0.01f;
     public void OnDragBegin()
     {
         baseDirection = Direction;
@@ -38,14 +38,15 @@ public class WeaponShooting : MonoBehaviour
     {
         //direction
         if ((int)dragVec.x == 0 || (int)dragVec.y == 0) return;
-        Direction = (baseDirection + dragVec * ROTATESEN).normalized;
+        Direction = (baseDirection + (float)1920/Screen.width * ROTATESEN * dragVec ).normalized;
+        Debug.Log(Screen.width);
         //angle
         Angle = GetTanDeg(Direction);
         barrel.eulerAngles = new Vector3(0,0,Angle);
 
         //power
         var delta = dragVec - lastDragVec;
-        Power += (delta.x * Direction.x + delta.y * Direction.y) * POWERSEN;
+        Power += (delta.x * Direction.x + delta.y * Direction.y) * 1920 / Screen.width*POWERSEN;
         Power = Mathf.Clamp(Power, 0.1f, 1f);
 
         lastDragVec = dragVec;
