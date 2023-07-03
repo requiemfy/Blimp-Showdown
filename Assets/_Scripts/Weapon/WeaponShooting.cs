@@ -10,13 +10,13 @@ public class WeaponShooting : MonoBehaviour
     public Transform firePoint;
     [SerializeField] Bullet bulletPrefab;
 
-    private WeaponType weapon;
-    private PlayerEnergy energy;
+    private WeaponType _weapon;
+    private PlayerEnergy _energy;
 
     private void Start()
     {
-        energy = GetComponentInParent<PlayerEnergy>();
-        weapon = GetComponent<WeaponController>().WeaponType;
+        _energy = GetComponentInParent<PlayerEnergy>();
+        _weapon = GetComponent<WeaponController>().WeaponType;
         barrel = transform.Find("Barrel");
         Power = 1f;
         Direction = new Vector2(1, -1).normalized;
@@ -56,9 +56,9 @@ public class WeaponShooting : MonoBehaviour
     public void Fire()
     {
         if (_isFiring) return;
-        if (energy.Drain(weapon.energyCost))
+        if (_energy.Drain(_weapon.energyCost))
         {
-            if (weapon.isRaycast)
+            if (_weapon.isRaycast)
             {
                 FireRayCast();
                 return;
@@ -69,18 +69,18 @@ public class WeaponShooting : MonoBehaviour
     private IEnumerator FireCO()
     {
         _isFiring = true;
-        for (int i = 0; i < weapon.bulletCount; i++)
+        for (int i = 0; i < _weapon.bulletCount; i++)
         {
-            float offset = 1 - i * weapon.bulletOffset;
+            float offset = 1 - i * _weapon.bulletOffset;
             Bullet bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
-            Vector2 LaunchVec = Mathf.Sqrt(weapon.range * 10) * (offset * Power * Direction + GameManager.Instance.wind);
+            Vector2 LaunchVec = Mathf.Sqrt(_weapon.range * 10) * (offset * Power * Direction + GameManager.Instance.wind);
             bullet.Launch(
-                weapon: weapon,
+                weapon: _weapon,
                 teamTag: tag,
                 launchVec: LaunchVec
                 );
             Recoil();
-            yield return new WaitForSeconds(weapon.bulletShootTime);
+            yield return new WaitForSeconds(_weapon.bulletShootTime);
         }
         _isFiring = false;
     }
@@ -92,8 +92,8 @@ public class WeaponShooting : MonoBehaviour
         foreach(RaycastHit2D hit in hits)
         {
             if (hit.transform?.tag == tag) continue;
-            hit.transform?.GetComponent<Health>()?.DecreaseHealth(weapon.damage);
-            if (!weapon.isRayMultiple) return;
+            hit.transform?.GetComponent<Health>()?.DecreaseHealth(_weapon.damage);
+            if (!_weapon.isRayMultiple) return;
         }
     }
 

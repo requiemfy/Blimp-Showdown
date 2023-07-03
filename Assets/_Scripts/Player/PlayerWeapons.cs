@@ -14,8 +14,6 @@ public class PlayerWeapons : MonoBehaviour
             i++;
         }
     }
-
-
     public WeaponController GetWeaponCtrl(int index)
     {
         return weaponCtrls[index];
