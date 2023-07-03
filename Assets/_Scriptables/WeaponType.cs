@@ -4,7 +4,7 @@ using UnityEditor;
 #endif
 
 [CreateAssetMenu(menuName = "Weapon")]
-public class Weapon : ScriptableObject
+public class WeaponType : ScriptableObject
 {
     public Vector2 firePointPos;
     public Sprite barrel;
@@ -43,7 +43,7 @@ public class Weapon : ScriptableObject
 
 
 #if UNITY_EDITOR
-[CustomEditor(typeof(Weapon))]
+[CustomEditor(typeof(WeaponType))]
 public class WeaponEditor : Editor
 {
     private SerializedProperty firePointPos;

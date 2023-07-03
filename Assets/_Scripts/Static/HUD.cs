@@ -21,6 +21,9 @@ public class HUD : MonoBehaviour
     [SerializeField] TextMeshProUGUI angleTMP;
     [SerializeField] Transform angleIdct;
     [SerializeField] TrajectoryLine trajectory;
+    [SerializeField] Button weapon0;
+    [SerializeField] Button weapon1;
+    [SerializeField] Button weapon2;
 
     [Header("Player")]
     [SerializeField] GameObject playerHUD;
@@ -37,9 +40,8 @@ public class HUD : MonoBehaviour
     {
         Instance = this;
 
-        #region INIT BUTTONS
         fireBtn.onClick.AddListener(() => { curWeapon.shooter.Fire(); });
-        endTurnBtn.onClick.AddListener(() => MatchManager.Instance.NextTurn());
+        endTurnBtn.onClick.AddListener(() => GameManager.Instance.NextTurn());
 
         aimJoystick.OnDragStarted = () => { curWeapon.shooter.OnDragBegin(); };
         aimJoystick.WhileDraging = (Vector2 dragVec) => {
@@ -48,7 +50,19 @@ public class HUD : MonoBehaviour
             UpdateShotAngleUI();
             UpdatePowerTMP();
         };
-        #endregion
+
+        weapon0.onClick.AddListener(() =>
+        {
+            curPlayer.Weapons.GetWeaponCtrl(0).FocusOnMe();
+        });
+        weapon1.onClick.AddListener(() =>
+        {
+            curPlayer.Weapons.GetWeaponCtrl(1).FocusOnMe();
+        });
+        weapon2.onClick.AddListener(() =>
+        {
+            curPlayer.Weapons.GetWeaponCtrl(2).FocusOnMe();
+        });
     }
 
 

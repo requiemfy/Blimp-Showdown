@@ -20,7 +20,7 @@ public class CamDragable : MonoBehaviour, IBeginDragHandler, IDragHandler
     }
     public void OnDrag(PointerEventData touch)
     {
-        if (Input.touchCount != 1) return;
+        if (Input.touchCount != 1 && !Input.GetMouseButton(0)) return;
         Vector2 dragVec = touch.position - firstTouchPos;
         cam.Offset = firstOffset - dragVec * multiplier;
     }

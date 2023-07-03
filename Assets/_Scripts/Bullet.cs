@@ -13,7 +13,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] private Sprite explosion;
     [SerializeField] private SpriteRenderer explosionRen;
 
-    public void Launch(Weapon weapon, string teamTag, Vector2 launchVec)
+    public void Launch(WeaponType weapon, string teamTag, Vector2 launchVec)
     {
         tag = teamTag;
         Damage = weapon.damage;

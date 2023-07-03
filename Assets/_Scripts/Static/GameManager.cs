@@ -2,9 +2,9 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class MatchManager : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
-    public static MatchManager Instance { get; private set; }
+    public static GameManager Instance { get; private set; }
     public Team[] OpennedTeams { get; private set; }
     public Action onTurnEnded;
     public Vector2 wind;
@@ -17,12 +17,13 @@ public class MatchManager : MonoBehaviour
     }
     private void SpawnPlayers()
     {
-        OpennedTeams = TeamPref.GetOpenedTeams();
+        OpennedTeams = DataPersistence.GetOpenedTeams();
         foreach (Team team in OpennedTeams)
         {
             var playerCtrl = Instantiate(playerPrefab);
             team.Set(playerCtrl);
-            playerCtrl.tag = team.ToString();
+            var WeaponTypes = team.GetWeapons();
+            playerCtrl.Construct(team, WeaponTypes);
             playerCtrl.transform.position = new Vector2(UnityEngine.Random.Range(1, 15), UnityEngine.Random.Range(1, 15));
         }
     }

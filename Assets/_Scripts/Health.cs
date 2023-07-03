@@ -25,10 +25,11 @@ public class Health : MonoBehaviour
     {
         healthBar.gameObject.SetActive(state);
     }
-    public void SetMaxHealth(int value)
+    public void Construct(int maxHealth, string tag = null)
     {
-        MaxHealth = value;
-        CurrentHealth = value;
+        if (tag != null) this.tag = tag;
+        MaxHealth = maxHealth;
+        CurrentHealth = maxHealth;
     }
     public float GetRatio()
     {

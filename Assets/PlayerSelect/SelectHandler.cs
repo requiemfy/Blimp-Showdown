@@ -24,7 +24,7 @@ public class SelectHandler : MonoBehaviour
     [SerializeField] private TextMeshProUGUI healthTMP;
     [SerializeField] private TextMeshProUGUI damageTMP;
     [SerializeField] private Transform weaponCardPrefab;
-    [SerializeField] private Weapon[] weapons;
+    [SerializeField] private WeaponType[] weapons;
 
     private void Start()
     {
@@ -33,7 +33,7 @@ public class SelectHandler : MonoBehaviour
     }
     private void SpawnCards()
     {
-        foreach (Weapon weapon in weapons)
+        foreach (WeaponType weapon in weapons)
         {
             var prefab = Instantiate(weaponCardPrefab, weaponBoard.transform);
             var card = prefab.GetChild(0);
@@ -78,7 +78,7 @@ public class SelectHandler : MonoBehaviour
     private int GetTotalHealth()
     {
         int total = 0;
-        foreach (Weapon weapon in currentTeam.GetWeapons())
+        foreach (WeaponType weapon in currentTeam.GetWeapons())
         {
             if (!weapon) continue;
             total += weapon.health;
@@ -88,7 +88,7 @@ public class SelectHandler : MonoBehaviour
     private int GetTotalDamage()
     {
         int total = 0;
-        foreach (Weapon weapon in currentTeam.GetWeapons())
+        foreach (WeaponType weapon in currentTeam.GetWeapons())
         {
             if (!weapon) continue;
             total += weapon.damage;

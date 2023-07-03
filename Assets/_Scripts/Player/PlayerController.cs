@@ -1,46 +1,42 @@
 using UnityEngine;
 
-public enum Team
-{
-    Red = 0,
-    Green = 1,
-    Blue = 2,
-    Yellow = 3
-}
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private ParticleSystem shipCollapsedPS;
-    [SerializeField] private Bar energyBar;
-    [SerializeField] private Bar fuelBar;
-
     [HideInInspector] public int weaponLeft = 3;
     [HideInInspector] public bool isInTurn = false;
+    [HideInInspector] public PlayerWeapons Weapons;
     [HideInInspector] public Movement movement;
     [HideInInspector] public PlayerEnergy energy;
     [HideInInspector] public Health health;
 
+    [SerializeField] private ParticleSystem shipCollapsedPS;
+    [SerializeField] private Bar energyBar;
+    [SerializeField] private Bar fuelBar;
+
     private void Awake()
     {
+        Weapons = GetComponent<PlayerWeapons>();
         movement = GetComponent<Movement>();
         energy = GetComponent<PlayerEnergy>();
         health = transform.Find("Ship").GetComponent<Health>();
-        health.SetMaxHealth(30);
-        health.OnDeath += () => shipCollapsedPS.Play();
+        
     }
     private void Start()
     {
-        health.tag = tag;
-        MatchManager.Instance.onTurnEnded += () =>
+        GameManager.Instance.onTurnEnded += () =>
         {
             movement.Restore(2);
             energy.Restore(1);
         };
+        //health
+        health.OnDeath += () => shipCollapsedPS.Play();
+        //energy
         energy.onEnergyChanged += () =>
         {
             energyBar.SetFill(energy.currentEnergy, 10);
         };
-
+        //fuel
         fuelBar.gameObject.SetActive(false);
         movement.whileMoving += () =>
         {
@@ -54,6 +50,13 @@ public class PlayerController : MonoBehaviour
     }
 
 
+    public void Construct(Team team, WeaponType[] WeaponTypes)
+    {
+        tag = team.ToString();
+        health.Construct(30, tag);
+        Weapons.Construct(WeaponTypes);
+    }
+
     public void OnPointerDown()
     {
         health.ShowHealthBar(true);
@@ -61,7 +64,6 @@ public class PlayerController : MonoBehaviour
         if (!isInTurn) return;
         HUD.Instance.ShowWeaponHUD(false);
     }
-
     public void OnPointerUp()
     {
         health.ShowHealthBar(false);

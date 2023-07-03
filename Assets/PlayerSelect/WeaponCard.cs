@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class WeaponCard : DragableItem
 {
-    public Weapon represent;
+    public WeaponType represent;
 
     private Vector2 beginScrollPos;
 

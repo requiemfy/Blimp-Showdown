@@ -2,15 +2,11 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class TeamPref
+public static class DataPersistence
 {
     private static TeamData[] TeamDatas = new TeamData[4];//all null
 
     //METHODS
-    public static Team GetTeamFromTag(this string tag)
-    {
-        return (Team)Enum.Parse(typeof(Team), tag); ;
-    }
     public static void ClearPlayers()
     {
         TeamDatas = new TeamData[TeamDatas.Length]; //all null
@@ -36,10 +32,10 @@ public static class TeamPref
     }
 
     //SET
-    public static void Set(this Team team, Weapon weapon, int index)
+    public static void Set(this Team team, WeaponType weapon, int index)
     {
         var destination = TeamDatas[(int)team].weapons;
-        destination[index] = ScriptableObject.CreateInstance<Weapon>();
+        destination[index] = ScriptableObject.CreateInstance<WeaponType>();
         destination[index] = weapon;
     }
     public static void Set(this Team team, PlayerController ctrl)
@@ -48,7 +44,7 @@ public static class TeamPref
     }
 
     //GET
-    public static Weapon[] GetWeapons(this Team team)
+    public static WeaponType[] GetWeapons(this Team team)
     {
         return TeamDatas[(int)team].weapons;
     }
@@ -58,7 +54,7 @@ public static class TeamPref
     }
 } 
 public class TeamData {
-    public Weapon[] weapons = new Weapon[3];
+    public WeaponType[] weapons = new WeaponType[3];
     public PlayerController controller;
 }
 

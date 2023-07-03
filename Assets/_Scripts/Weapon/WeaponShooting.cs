@@ -10,7 +10,7 @@ public class WeaponShooting : MonoBehaviour
     public Transform firePoint;
     [SerializeField] Bullet bulletPrefab;
 
-    private Weapon weapon;
+    private WeaponType weapon;
     private PlayerEnergy energy;
 
     private void Start()
@@ -73,7 +73,7 @@ public class WeaponShooting : MonoBehaviour
         {
             float offset = 1 - i * weapon.bulletOffset;
             Bullet bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
-            Vector2 LaunchVec = Mathf.Sqrt(weapon.range * 10) * (offset * Power * Direction + MatchManager.Instance.wind);
+            Vector2 LaunchVec = Mathf.Sqrt(weapon.range * 10) * (offset * Power * Direction + GameManager.Instance.wind);
             bullet.Launch(
                 weapon: weapon,
                 teamTag: tag,

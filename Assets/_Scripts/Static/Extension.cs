@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public static class Extension
@@ -14,5 +15,10 @@ public static class Extension
     public static bool InRange(this float num, float min, float max)
     {
         return min < num && num < max;    
+    }
+
+    public static T ToEnum<T>(this string strg)
+    {
+        return (T)Enum.Parse(typeof(T), strg);
     }
 }

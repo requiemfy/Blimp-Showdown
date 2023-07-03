@@ -19,7 +19,7 @@ public class InfoSection : MonoBehaviour
         closeBtn.onClick.AddListener(() => { gameObject.SetActive(false); });
     }
 
-    public void ShowInfoOf(Weapon weapon)
+    public void ShowInfoOf(WeaponType weapon)
     {
         gameObject.SetActive(true);
         //flip card animation

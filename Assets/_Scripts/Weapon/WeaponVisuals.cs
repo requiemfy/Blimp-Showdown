@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class WeaponVisuals : MonoBehaviour
 {
-    private Weapon weapon;
+    private WeaponType weapon;
     private SpriteRenderer barrelRen;
     void Start()
     {
