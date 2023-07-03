@@ -16,7 +16,7 @@ public class WeaponShooting : MonoBehaviour
     private void Start()
     {
         energy = GetComponentInParent<PlayerEnergy>();
-        weapon = GetComponent<WeaponController>().weapon;
+        weapon = GetComponent<WeaponController>().WeaponType;
         barrel = transform.Find("Barrel");
         Power = 1f;
         Direction = new Vector2(1, -1).normalized;

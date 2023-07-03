@@ -3,22 +3,21 @@ using UnityEngine;
 
 public class WeaponController : MonoBehaviour
 {
-    [HideInInspector] public Health health;
-    [HideInInspector] public WeaponShooting shooter;
+    public WeaponType WeaponType { get; private set; }
+    [HideInInspector] public Health Health;
+    [HideInInspector] public WeaponShooting Shooter;
 
     [SerializeField] private ParticleSystem collapsePS;
-
-    public WeaponType weapon;
     private bool _isCollapsed = false;
     private PlayerController _parentShip;
 
     private void Start()
     {
         _parentShip = GetComponentInParent<PlayerController>();
-        health = GetComponent<Health>();
-        shooter = GetComponent<WeaponShooting>();
+        Health = GetComponent<Health>();
+        Shooter = GetComponent<WeaponShooting>();
 
-        health.OnDeath += () =>
+        Health.OnDeath += () =>
         {
             _isCollapsed = true;
             _parentShip.WeaponLeft -=1;
@@ -26,10 +25,11 @@ public class WeaponController : MonoBehaviour
         };
     }
 
-    public void Construct(string tag)
+    public void Construct(string tag, WeaponType weaponType)
     {
         this.tag = tag;
-        health.Construct(weapon.health);
+        this.WeaponType = weaponType;
+        Health.Construct(weaponType.health);
     }
     public void FocusOnMe()
     {
@@ -45,10 +45,10 @@ public class WeaponController : MonoBehaviour
     public void OnPointerDown()
     {
         FocusOnMe();
-        health.ShowHealthBar(true);
+        Health.ShowHealthBar(true);
     }
     public void OnPointerUp()
     {
-        health.ShowHealthBar(false);
+        Health.ShowHealthBar(false);
     }
 }

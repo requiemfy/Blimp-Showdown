@@ -40,13 +40,13 @@ public class HUD : MonoBehaviour
     {
         Instance = this;
 
-        fireBtn.onClick.AddListener(() => { curWeapon.shooter.Fire(); });
+        fireBtn.onClick.AddListener(() => { curWeapon.Shooter.Fire(); });
         endTurnBtn.onClick.AddListener(() => GameManager.Instance.NextTurn());
 
-        aimJoystick.OnDragStarted = () => { curWeapon.shooter.OnDragBegin(); };
+        aimJoystick.OnDragStarted = () => { curWeapon.Shooter.OnDragBegin(); };
         aimJoystick.WhileDraging = (Vector2 dragVec) => {
-            curWeapon.shooter.Adjust(dragVec);
-            curWeapon.shooter.AdjustBarrelVisual(dragVec);
+            curWeapon.Shooter.Adjust(dragVec);
+            curWeapon.Shooter.AdjustBarrelVisual(dragVec);
             UpdateShotAngleUI();
             UpdatePowerTMP();
         };
@@ -76,12 +76,12 @@ public class HUD : MonoBehaviour
         // stop observe current weapon
         if (curWeapon)
         {
-            curWeapon.health.OnDamageTaken -= UpdateWeaponHealthUI;
+            curWeapon.Health.OnDamageTaken -= UpdateWeaponHealthUI;
         }
 
         //start subscribe new weapon
         curWeapon = newWeapon;
-        curWeapon.health.OnDamageTaken += UpdateWeaponHealthUI;
+        curWeapon.Health.OnDamageTaken += UpdateWeaponHealthUI;
         SetTrajectoryTarget();
         UpdateWeaponHealthUI();
         UpdateShotAngleUI();
@@ -124,7 +124,7 @@ public class HUD : MonoBehaviour
         playerHUD.SetActive(!status);
         if (status)
         {
-            title.text = curWeapon.weapon.name;
+            title.text = curWeapon.WeaponType.name;
         }
         else
         {
@@ -137,17 +137,17 @@ public class HUD : MonoBehaviour
     }
     private void UpdatePowerTMP()
     {
-        powerTMP.text = (curWeapon.shooter.Power * 100).ToString("0");
+        powerTMP.text = (curWeapon.Shooter.Power * 100).ToString("0");
     }
     private void UpdateRangeIdctUI()
     {
         rangeIndicator.position = (Vector2)curWeapon.transform.position;
-        rangeIndicator.localScale = new Vector2(2*curWeapon.weapon.range, rangeIndicator.lossyScale.y);
+        rangeIndicator.localScale = new Vector2(2*curWeapon.WeaponType.range, rangeIndicator.lossyScale.y);
     }
     private void UpdateWeaponHealthUI()
     {
-        healthBar.DOFillAmount((float) curWeapon.health.GetRatio(), duration: 0.5f);
-        healthTMP.text = curWeapon.health.CurrentHealth.ToString();
+        healthBar.DOFillAmount((float) curWeapon.Health.GetRatio(), duration: 0.5f);
+        healthTMP.text = curWeapon.Health.CurrentHealth.ToString();
     }
     private void UpdatePlayerHealthUI()
     {
@@ -160,7 +160,7 @@ public class HUD : MonoBehaviour
     }
     private void UpdateShotAngleUI()
     {
-        float angle = curWeapon.shooter.Angle;
+        float angle = curWeapon.Shooter.Angle;
         angleTMP.text = angle.ToString("0");
         angleIdct.eulerAngles = new Vector3(0, 0, angle);
     }

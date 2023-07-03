@@ -10,8 +10,7 @@ public class PlayerWeapons : MonoBehaviour
         weaponCtrls = GetComponentsInChildren<WeaponController>();
         foreach (WeaponController weaponCtrl in weaponCtrls)
         {
-            weaponCtrl.weapon = WeaponTypes[i];
-            weaponCtrl.Construct(tag);
+            weaponCtrl.Construct(tag, WeaponTypes[i]);
             i++;
         }
     }

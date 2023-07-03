@@ -6,7 +6,7 @@ public class WeaponVisuals : MonoBehaviour
     private SpriteRenderer barrelRen;
     void Start()
     {
-        weapon = GetComponent<WeaponController>().weapon;
+        weapon = GetComponent<WeaponController>().WeaponType;
         barrelRen = transform.Find("Barrel").GetComponent<SpriteRenderer>();
 
         //Sprite

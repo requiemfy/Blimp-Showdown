@@ -13,9 +13,9 @@ public class TrajectoryLine : MonoBehaviour
     private const float GRAVITY = 9.81f;
     public void SetShooter(WeaponController target)
     {
-        shooter = target.shooter;
+        shooter = target.Shooter;
         firePoint = shooter.firePoint;
-        WEAPONRANGE = target.weapon.range;
+        WEAPONRANGE = target.WeaponType.range;
     }
 
     private void Update()
