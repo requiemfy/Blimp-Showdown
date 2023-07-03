@@ -3,12 +3,12 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [HideInInspector] public int weaponLeft = 3;
-    [HideInInspector] public bool isInTurn = false;
+    [HideInInspector] public int WeaponLeft = 3;
+    [HideInInspector] public bool IsInTurn = false;
     [HideInInspector] public PlayerWeapons Weapons;
-    [HideInInspector] public Movement movement;
-    [HideInInspector] public PlayerEnergy energy;
-    [HideInInspector] public Health health;
+    [HideInInspector] public Movement Movement;
+    [HideInInspector] public PlayerEnergy Energy;
+    [HideInInspector] public Health Health;
 
     [SerializeField] private ParticleSystem shipCollapsedPS;
     [SerializeField] private Bar energyBar;
@@ -17,56 +17,55 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         Weapons = GetComponent<PlayerWeapons>();
-        movement = GetComponent<Movement>();
-        energy = GetComponent<PlayerEnergy>();
-        health = transform.Find("Ship").GetComponent<Health>();
+        Movement = GetComponent<Movement>();
+        Energy = GetComponent<PlayerEnergy>();
+        Health = transform.Find("Ship").GetComponent<Health>();
         
     }
     private void Start()
     {
         GameManager.Instance.onTurnEnded += () =>
         {
-            movement.Restore(2);
-            energy.Restore(1);
+            Movement.Restore(2);
+            Energy.Restore(1);
         };
         //health
-        health.OnDeath += () => shipCollapsedPS.Play();
+        Health.OnDeath += () => shipCollapsedPS.Play();
         //energy
-        energy.onEnergyChanged += () =>
+        Energy.onEnergyChanged += () =>
         {
-            energyBar.SetFill(energy.currentEnergy, 10);
+            energyBar.SetFill(Energy.currentEnergy, 10);
         };
         //fuel
         fuelBar.gameObject.SetActive(false);
-        movement.whileMoving += () =>
+        Movement.whileMoving += () =>
         {
             fuelBar.gameObject.SetActive(true);
-            fuelBar.SetFill((int)((float)movement.GetRatio() * 100), 100);
+            fuelBar.SetFill((int)((float)Movement.GetRatio() * 100), 100);
         };
-        movement.OnStopped += () =>
+        Movement.OnStopped += () =>
         {
             fuelBar.gameObject.SetActive(false);
         };
     }
 
 
-    public void Construct(Team team, WeaponType[] WeaponTypes)
+    public void Construct(Team team, WeaponType[] weaponTypes)
     {
         tag = team.ToString();
-        health.Construct(30, tag);
-        Weapons.Construct(WeaponTypes);
+        Health.Construct(30, tag);
+        Weapons.Construct(weaponTypes);
     }
-
     public void OnPointerDown()
     {
-        health.ShowHealthBar(true);
+        Health.ShowHealthBar(true);
         fuelBar.gameObject.SetActive(true);
-        if (!isInTurn) return;
+        if (!IsInTurn) return;
         HUD.Instance.ShowWeaponHUD(false);
     }
     public void OnPointerUp()
     {
-        health.ShowHealthBar(false);
+        Health.ShowHealthBar(false);
         fuelBar.gameObject.SetActive(false);
     }
 }

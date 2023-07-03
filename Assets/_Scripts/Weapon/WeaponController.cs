@@ -21,7 +21,7 @@ public class WeaponController : MonoBehaviour
         health.OnDeath += () =>
         {
             _isCollapsed = true;
-            _parentShip.weaponLeft -=1;
+            _parentShip.WeaponLeft -=1;
             collapsePS.Play();
         };
     }
@@ -33,7 +33,7 @@ public class WeaponController : MonoBehaviour
     }
     public void FocusOnMe()
     {
-        if (!_parentShip.isInTurn) return;
+        if (!_parentShip.IsInTurn) return;
         if (_isCollapsed)
         {
             Debug.Log("Weapon collapsed");

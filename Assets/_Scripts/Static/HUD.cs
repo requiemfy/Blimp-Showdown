@@ -94,16 +94,16 @@ public class HUD : MonoBehaviour
         //stop observe currentplayer
         if (curPlayer)
         {
-            curPlayer.health.OnDamageTaken -= UpdatePlayerHealthUI;
-            curPlayer.energy.onEnergyChanged -= UpdateEnergyBarUI;
-            curPlayer.movement.whileMoving -= UpdateFuelUI;
+            curPlayer.Health.OnDamageTaken -= UpdatePlayerHealthUI;
+            curPlayer.Energy.onEnergyChanged -= UpdateEnergyBarUI;
+            curPlayer.Movement.whileMoving -= UpdateFuelUI;
         }
 
         //start subscribe new player
         curPlayer = newPlayer;
-        newPlayer.health.OnDamageTaken += UpdatePlayerHealthUI;
-        newPlayer.energy.onEnergyChanged += UpdateEnergyBarUI;
-        newPlayer.movement.whileMoving += UpdateFuelUI;
+        newPlayer.Health.OnDamageTaken += UpdatePlayerHealthUI;
+        newPlayer.Energy.onEnergyChanged += UpdateEnergyBarUI;
+        newPlayer.Movement.whileMoving += UpdateFuelUI;
         UpdatePlayerHealthUI();
         UpdateEnergyBarUI();
         UpdateFuelUI();
@@ -151,12 +151,12 @@ public class HUD : MonoBehaviour
     }
     private void UpdatePlayerHealthUI()
     {
-        playerHealthBar.SetFill(curPlayer.health.CurrentHealth, curPlayer.health.MaxHealth);
+        playerHealthBar.SetFill(curPlayer.Health.CurrentHealth, curPlayer.Health.MaxHealth);
     }
     private void UpdateEnergyBarUI()
     {
-        energyBar.DOFillAmount((float)curPlayer.energy.GetRatio(), duration: 0.5f);
-        energyTMP.text = curPlayer.energy.currentEnergy.ToString();
+        energyBar.DOFillAmount((float)curPlayer.Energy.GetRatio(), duration: 0.5f);
+        energyTMP.text = curPlayer.Energy.currentEnergy.ToString();
     }
     private void UpdateShotAngleUI()
     {
@@ -166,33 +166,33 @@ public class HUD : MonoBehaviour
     }
     private void UpdateFuelUI()
     {
-        fuelBar.SetFill((int)((float)curPlayer.movement.GetRatio() * 100), 100);
+        fuelBar.SetFill((int)((float)curPlayer.Movement.GetRatio() * 100), 100);
     }
 
 
     public void StartMoveRight()
     {
-        curPlayer.movement.StartMoveRight();
+        curPlayer.Movement.StartMoveRight();
     }
     public void StartMoveLeft()
     {
-        curPlayer.movement.StartMoveLeft();
+        curPlayer.Movement.StartMoveLeft();
     }
     public void StopMoveX()
     {
-        curPlayer.movement.StopMoveX();
+        curPlayer.Movement.StopMoveX();
     }
 
     public void StartMoveUp()
     {
-        curPlayer.movement.StartMoveUp();
+        curPlayer.Movement.StartMoveUp();
     }
     public void StartMoveDown()
     {
-        curPlayer.movement.StartMoveDown();
+        curPlayer.Movement.StartMoveDown();
     }
     public void StopMoveY()
     {
-        curPlayer.movement.StopMoveY();
+        curPlayer.Movement.StopMoveY();
     }
 }

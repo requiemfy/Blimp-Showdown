@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
         onTurnEnded();
         i++;
         i %= OpennedTeams.Length;
-        if (OpennedTeams[i].GetContrl().weaponLeft == 0)
+        if (OpennedTeams[i].GetContrl().WeaponLeft == 0)
         {
             Debug.Log("Ship shinked" + i);
             NextTurn();
@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
         CameraManager.Instance.SetCurrentPlayer(target.transform);
         HUD.Instance.StartObserveWeapon(null);
         HUD.Instance.StartObservePlayer(target);
-        target.isInTurn = true;
+        target.IsInTurn = true;
 
         foreach (Team otherTeam in OpennedTeams)
         {
@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
             {
                 continue;
             }
-            otherTeam.GetContrl().isInTurn = false;
+            otherTeam.GetContrl().IsInTurn = false;
         }
     }
 }
