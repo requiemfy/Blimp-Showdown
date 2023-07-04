@@ -271,11 +271,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a74fda6df9508349acab805a6f76153, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Health: {fileID: 0}
+  Shooter: {fileID: 0}
   collapsePS: {fileID: 6906666177626736829}
-  weapon: {fileID: 11400000, guid: 884adb0dcee0bab45b3126e59dc8742b, type: 2}
-  isCollapsed: 0
-  health: {fileID: 0}
-  shooter: {fileID: 0}
 --- !u!114 &4543192888884246428
 MonoBehaviour:
   m_ObjectHideFlags: 0

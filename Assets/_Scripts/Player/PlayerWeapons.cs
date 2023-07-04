@@ -3,14 +3,15 @@ using UnityEngine;
 public class PlayerWeapons : MonoBehaviour
 {
     private WeaponController[] weaponCtrls;
-
-    public void Construct(WeaponType[] WeaponTypes)
+    public void Construct(WeaponType[] weaponTypes)
     {
         int i = 0;
         weaponCtrls = GetComponentsInChildren<WeaponController>();
         foreach (WeaponController weaponCtrl in weaponCtrls)
         {
-            weaponCtrl.Construct(tag, WeaponTypes[i]);
+            WeaponType type = weaponTypes[i];
+            Debug.Log(type.name);
+            weaponCtrl.Construct(tag, type);
             i++;
         }
     }

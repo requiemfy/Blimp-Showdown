@@ -13,7 +13,12 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        
+    }
+    private void Start()
+    {
         SpawnPlayers();
+        SetTurn(OpennedTeams[0]);
     }
     private void SpawnPlayers()
     {
@@ -21,18 +26,12 @@ public class GameManager : MonoBehaviour
         foreach (Team team in OpennedTeams)
         {
             var playerCtrl = Instantiate(playerPrefab);
-            team.Set(playerCtrl);
-            var WeaponTypes = team.GetWeapons();
-            playerCtrl.Construct(team, WeaponTypes);
+            playerCtrl.Construct(team);
             playerCtrl.transform.position = new Vector2(UnityEngine.Random.Range(1, 15), UnityEngine.Random.Range(1, 15));
         }
     }
 
 
-    private void Start()
-    {
-        SetTurn(OpennedTeams[0]);
-    }
 
     private int i = 0;
     public void NextTurn()
@@ -48,7 +47,6 @@ public class GameManager : MonoBehaviour
         }
         SetTurn(OpennedTeams[i]);
     }
-
     private IEnumerator TimedManageTurn()
     {
         while(gameObject.activeInHierarchy)
@@ -57,15 +55,8 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(8);
         }
     }
-
     private void SetTurn(Team team)
     {
-        var target = team.GetContrl();
-        CameraManager.Instance.SetCurrentPlayer(target.transform);
-        HUD.Instance.StartObserveWeapon(null);
-        HUD.Instance.StartObservePlayer(target);
-        target.IsInTurn = true;
-
         foreach (Team otherTeam in OpennedTeams)
         {
             if (otherTeam == team)
@@ -74,5 +65,10 @@ public class GameManager : MonoBehaviour
             }
             otherTeam.GetContrl().IsInTurn = false;
         }
+        var target = team.GetContrl();
+        target.IsInTurn = true;
+        CameraManager.Instance.SetCurrentPlayer(target.transform);
+        HUD.Instance.StartObserveWeapon(null);
+        HUD.Instance.StartObservePlayer(target);
     }
 }

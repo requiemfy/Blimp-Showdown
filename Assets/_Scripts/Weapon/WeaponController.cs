@@ -4,6 +4,10 @@ using UnityEngine;
 public class WeaponController : MonoBehaviour
 {
     public WeaponType WeaponType { get; private set; }
+    public bool IsFocusable 
+    {
+        get { return !_isCollapsed && _parentShip.IsInTurn; }
+    }
     [HideInInspector] public Health Health;
     [HideInInspector] public WeaponShooting Shooter;
 
@@ -11,7 +15,7 @@ public class WeaponController : MonoBehaviour
     private bool _isCollapsed = false;
     private PlayerController _parentShip;
 
-    private void Start()
+    private void Awake()
     {
         _parentShip = GetComponentInParent<PlayerController>();
         Health = GetComponent<Health>();
@@ -30,21 +34,11 @@ public class WeaponController : MonoBehaviour
         this.tag = tag;
         this.WeaponType = weaponType;
         Health.Construct(weaponType.health);
-    }
-    public void FocusOnMe()
-    {
-        if (!_parentShip.IsInTurn) return;
-        if (_isCollapsed)
-        {
-            Debug.Log("Weapon collapsed");
-            return;
-        }
-
-        HUD.Instance.StartObserveWeapon(this);
+        Shooter.Construct(weaponType);
     }
     public void OnPointerDown()
     {
-        FocusOnMe();
+        HUD.Instance.StartObserveWeapon(this);
         Health.ShowHealthBar(true);
     }
     public void OnPointerUp()
@@ -52,3 +46,4 @@ public class WeaponController : MonoBehaviour
         Health.ShowHealthBar(false);
     }
 }
+

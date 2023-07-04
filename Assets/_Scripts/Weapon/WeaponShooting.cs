@@ -13,10 +13,13 @@ public class WeaponShooting : MonoBehaviour
     private WeaponType _weapon;
     private PlayerEnergy _energy;
 
+    public void Construct(WeaponType weaponType)
+    {
+        _weapon = weaponType;
+    }
     private void Start()
     {
         _energy = GetComponentInParent<PlayerEnergy>();
-        _weapon = GetComponent<WeaponController>().WeaponType;
         barrel = transform.Find("Barrel");
         Power = 1f;
         Direction = new Vector2(1, -1).normalized;

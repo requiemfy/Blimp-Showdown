@@ -11,6 +11,10 @@ public static class Extension
     {
         return new Vector2(vec.x, value);
     }
+    public static Vector3 ChangeZ(this Vector3 vec, float value)
+    {
+        return new Vector3(vec.x, vec.y, value);
+    }
 
     public static bool InRange(this float num, float min, float max)
     {

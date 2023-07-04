@@ -20,7 +20,6 @@ public class PlayerController : MonoBehaviour
         Movement = GetComponent<Movement>();
         Energy = GetComponent<PlayerEnergy>();
         Health = transform.Find("Ship").GetComponent<Health>();
-        
     }
     private void Start()
     {
@@ -50,18 +49,19 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    public void Construct(Team team, WeaponType[] weaponTypes)
+    public void Construct(Team team)
     {
         tag = team.ToString();
+        team.Set(this);
         Health.Construct(30, tag);
-        Weapons.Construct(weaponTypes);
+        Weapons.Construct(team.GetWeapons());
+        Debug.Log(team.GetWeapons());
     }
     public void OnPointerDown()
     {
         Health.ShowHealthBar(true);
         fuelBar.gameObject.SetActive(true);
-        if (!IsInTurn) return;
-        HUD.Instance.ShowWeaponHUD(false);
+        HUD.Instance.StartObservePlayer(this);
     }
     public void OnPointerUp()
     {

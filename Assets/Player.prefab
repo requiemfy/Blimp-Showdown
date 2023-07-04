@@ -5206,15 +5206,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a66fc9be66cc59c4589494ddbeb01c0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  WeaponLeft: 3
+  IsInTurn: 0
+  Weapons: {fileID: 0}
+  Movement: {fileID: 0}
+  Energy: {fileID: 0}
+  Health: {fileID: 0}
   shipCollapsedPS: {fileID: 5904094876357294496}
   energyBar: {fileID: 7034790355377646169}
   fuelBar: {fileID: 3711300234344205812}
-  weaponLeft: 3
-  isInTurn: 0
-  Weapons: {fileID: 0}
-  movement: {fileID: 0}
-  energy: {fileID: 0}
-  health: {fileID: 0}
 --- !u!114 &3067302567888788034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5240,7 +5240,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3b464c06ae076241b618208a37db766, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  indicator: {fileID: 0}
 --- !u!114 &5643642822504018294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6078,7 +6077,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: af6cf509bce34eb44a9dd14dd011a6a8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -6512,7 +6511,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4543192888884246419, guid: bdd6b0507aaed7445b1bc2d58732513f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4543192888884246419, guid: bdd6b0507aaed7445b1bc2d58732513f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6574,7 +6573,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4543192888884246419, guid: bdd6b0507aaed7445b1bc2d58732513f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4543192888884246419, guid: bdd6b0507aaed7445b1bc2d58732513f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6636,7 +6635,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4543192888884246419, guid: bdd6b0507aaed7445b1bc2d58732513f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4543192888884246419, guid: bdd6b0507aaed7445b1bc2d58732513f, type: 3}
       propertyPath: m_LocalRotation.w

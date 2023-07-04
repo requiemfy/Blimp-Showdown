@@ -53,16 +53,17 @@ public class HUD : MonoBehaviour
 
         weapon0.onClick.AddListener(() =>
         {
-            curPlayer.Weapons.GetWeaponCtrl(0).FocusOnMe();
+            StartObserveWeapon(curPlayer.Weapons.GetWeaponCtrl(0));
         });
         weapon1.onClick.AddListener(() =>
         {
-            curPlayer.Weapons.GetWeaponCtrl(1).FocusOnMe();
+            StartObserveWeapon(curPlayer.Weapons.GetWeaponCtrl(1));
         });
         weapon2.onClick.AddListener(() =>
         {
-            curPlayer.Weapons.GetWeaponCtrl(2).FocusOnMe();
+            StartObserveWeapon(curPlayer.Weapons.GetWeaponCtrl(2));
         });
+        ShowWeaponHUD(false);
     }
 
 
@@ -73,15 +74,18 @@ public class HUD : MonoBehaviour
             ShowWeaponHUD(false);
             return;
         }
+        if (!newWeapon.IsFocusable) return;
         // stop observe current weapon
         if (curWeapon)
         {
+            curWeapon.transform.localPosition = curWeapon.transform.localPosition.ChangeZ(-1);
             curWeapon.Health.OnDamageTaken -= UpdateWeaponHealthUI;
         }
 
         //start subscribe new weapon
         curWeapon = newWeapon;
-        curWeapon.Health.OnDamageTaken += UpdateWeaponHealthUI;
+        curWeapon.transform.localPosition = curWeapon.transform.localPosition.ChangeZ(-2);
+        newWeapon.Health.OnDamageTaken += UpdateWeaponHealthUI;
         SetTrajectoryTarget();
         UpdateWeaponHealthUI();
         UpdateShotAngleUI();
@@ -91,12 +95,14 @@ public class HUD : MonoBehaviour
     }
     public void StartObservePlayer(PlayerController newPlayer)
     {
+        if (!newPlayer.IsInTurn) return;
         //stop observe currentplayer
         if (curPlayer)
         {
             curPlayer.Health.OnDamageTaken -= UpdatePlayerHealthUI;
             curPlayer.Energy.onEnergyChanged -= UpdateEnergyBarUI;
             curPlayer.Movement.whileMoving -= UpdateFuelUI;
+            curPlayer.transform.position = curPlayer.transform.position.ChangeZ(0);
         }
 
         //start subscribe new player
@@ -104,6 +110,7 @@ public class HUD : MonoBehaviour
         newPlayer.Health.OnDamageTaken += UpdatePlayerHealthUI;
         newPlayer.Energy.onEnergyChanged += UpdateEnergyBarUI;
         newPlayer.Movement.whileMoving += UpdateFuelUI;
+        curPlayer.transform.position = curPlayer.transform.position.ChangeZ(-10);
         UpdatePlayerHealthUI();
         UpdateEnergyBarUI();
         UpdateFuelUI();
