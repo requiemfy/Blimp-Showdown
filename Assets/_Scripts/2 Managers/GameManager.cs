@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     }
     private void RandomizeTurnOrder()
     {
-        Random random = new Random();
+        Random random = new();
         OpennedTeams = OpennedTeams.OrderBy(x => random.Next()).ToArray();
     }
     private void Start()
