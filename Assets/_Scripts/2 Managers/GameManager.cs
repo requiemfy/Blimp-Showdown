@@ -1,19 +1,29 @@
 using System;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
+using Random = System.Random;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-    public Team[] OpennedTeams { get; private set; }
     public Action onTurnEnded;
+    public Action<Team, Team> afterTurnChanged;
+    public Team[] OpennedTeams { get; private set; }
     public Vector2 wind;
 
     [SerializeField] private PlayerController playerPrefab;
+
     private void Awake()
     {
         Instance = this;
-        
+        OpennedTeams = DataPersistence.GetOpenedTeams();
+        RandomizeTurnOrder();
+    }
+    private void RandomizeTurnOrder()
+    {
+        Random random = new Random();
+        OpennedTeams = OpennedTeams.OrderBy(x => random.Next()).ToArray();
     }
     private void Start()
     {
@@ -22,7 +32,6 @@ public class GameManager : MonoBehaviour
     }
     private void SpawnPlayers()
     {
-        OpennedTeams = DataPersistence.GetOpenedTeams();
         foreach (Team team in OpennedTeams)
         {
             var playerCtrl = Instantiate(playerPrefab);
@@ -33,27 +42,21 @@ public class GameManager : MonoBehaviour
 
 
 
-    private int i = 0;
+    private int current = 0;
     public void NextTurn()
     {
+        Team before = OpennedTeams[current];
         onTurnEnded();
-        i++;
-        i %= OpennedTeams.Length;
-        if (OpennedTeams[i].GetContrl().WeaponLeft == 0)
+        current++;
+        current %= OpennedTeams.Length;
+        if (OpennedTeams[current].GetContrl().WeaponLeft == 0)
         {
-            Debug.Log("Ship shinked" + i);
+            Debug.Log("Ship shinked" + current);
             NextTurn();
             return;
         }
-        SetTurn(OpennedTeams[i]);
-    }
-    private IEnumerator TimedManageTurn()
-    {
-        while(gameObject.activeInHierarchy)
-        {
-            NextTurn();
-            yield return new WaitForSeconds(8);
-        }
+        SetTurn(OpennedTeams[current]);
+        afterTurnChanged?.Invoke(before, OpennedTeams[current]);
     }
     private void SetTurn(Team team)
     {

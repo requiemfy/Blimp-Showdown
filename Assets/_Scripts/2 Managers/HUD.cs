@@ -1,5 +1,6 @@
 using DG.Tweening;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -35,11 +36,20 @@ public class HUD : MonoBehaviour
     [SerializeField] TextMeshProUGUI title;
     [SerializeField] Image energyBar;
     [SerializeField] TextMeshProUGUI energyTMP;
+    [SerializeField] Image turnPrefab;
+    [SerializeField] Transform turnIndicatorParent;
 
     private void Awake()
     {
         Instance = this;
-
+        InitializeButtons();
+    }
+    private void Start()
+    {
+        SpawnTurnIndicator();
+    }
+    private void InitializeButtons()
+    {
         fireBtn.onClick.AddListener(() => { curWeapon.Shooter.Fire(); });
         endTurnBtn.onClick.AddListener(() => GameManager.Instance.NextTurn());
 
@@ -64,6 +74,26 @@ public class HUD : MonoBehaviour
             StartObserveWeapon(curPlayer.Weapons.GetWeaponCtrl(2));
         });
         ShowWeaponHUD(false);
+    }
+    private void SpawnTurnIndicator()
+    {
+        foreach (Team team in GameManager.Instance.OpennedTeams)
+        {
+            var indicator = Instantiate(turnPrefab, turnIndicatorParent);
+            indicator.color = team.GetColorPalette();
+            indicator.name = team.ToString();
+            GameManager.Instance.afterTurnChanged += (Team before, Team after) =>
+            {
+                if (team == after)
+                {
+                    Color32 apparentColor = team.GetColorPalette(); apparentColor.a = 255;
+                    indicator.color = apparentColor;
+                    return;
+                }
+                Color32 faintColor = team.GetColorPalette(); faintColor.a = 50;
+                indicator.color = faintColor;
+            };
+        }
     }
 
 
