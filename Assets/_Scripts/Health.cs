@@ -41,6 +41,7 @@ public class Health : MonoBehaviour
         if (collision.CompareTag(tag)) return;
         var bullet = collision.GetComponent<Bullet>();
         DecreaseHealth(bullet.Damage);
+        PopUpManager.Instance.SpawnText(bullet.Damage.ToString(), collision.transform.position);
     }
 
     //take damage
