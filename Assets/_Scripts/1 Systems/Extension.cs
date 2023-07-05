@@ -26,23 +26,12 @@ public static class Extension
     {
         return (T)Enum.Parse(typeof(T), strg);
     }
-
-    //Palette
-    public static Color32 GetColorPalette (this Team team)
-    {
-        switch (team)
-        {
-            case Team.Red:
-                return new Color32(255, 0, 0,255);
-            case Team.Blue:
-                return new Color32(75, 154,255,255);
-            case Team.Yellow:
-                return new Color32(255,226,75,255);
-            case Team.Green:
-                return new Color32(41, 233, 105,255);
-            default:
-                break;
-        }
-        throw new Exception("Team has no color in palette");
-    }
+}
+public static class CustomColors
+{
+    public static Color32 Red { get; } = new Color32(255, 0, 0, 255);
+    public static Color32 Blue { get; } = new Color32(75, 154, 255, 255);
+    public static Color32 Yellow { get; } = new Color32(255, 226, 75, 255);
+    public static Color32 Green { get; } = new Color32(41, 233, 105, 255);
+    public static Color32 Purple { get; } = new Color32(128, 0, 255, 255);
 }

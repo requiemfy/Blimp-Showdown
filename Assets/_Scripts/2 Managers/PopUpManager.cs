@@ -11,10 +11,11 @@ public class PopUpManager : MonoBehaviour
     {
         Instance = this;
     }
-    public void SpawnText(string strg, Vector2 position)
+    public void SpawnText(string strg, Vector2 position, Color32 color)
     {
         TextMeshPro TMP = Instantiate(textPrefab);
         TMP.text = strg;
+        TMP.color = color;
         TMP.transform.position = position + new Vector2(Random.Range(-2f,2f), Random.Range(0f,2f));
         TMP.transform.DOMoveY(position.y + 3, duration: 1.5f)
             .onComplete = () => Destroy(TMP.gameObject);

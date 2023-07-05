@@ -52,6 +52,23 @@ public static class DataPersistence
     {
         return _teamDatas[(int)team].controller;
     }
+    public static Color32 GetTeamColor(this Team team)
+    {
+        switch (team)
+        {
+            case Team.Red:
+                return CustomColors.Red;
+            case Team.Blue:
+                return CustomColors.Blue;
+            case Team.Yellow:
+                return CustomColors.Yellow;
+            case Team.Green:
+                return CustomColors.Green;
+            default:
+                break;
+        }
+        throw new Exception("Team has no color in palette");
+    }
 } 
 public class TeamData {
     public WeaponType[] weapons = new WeaponType[3];

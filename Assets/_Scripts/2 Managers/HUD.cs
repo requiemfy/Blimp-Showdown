@@ -18,8 +18,8 @@ public class HUD : MonoBehaviour
     [SerializeField] TextMeshProUGUI healthTMP;
     [SerializeField] Button fireBtn;
     [SerializeField] Transform rangeIndicator;
-    [SerializeField] TextMeshProUGUI powerTMP;
-    [SerializeField] TextMeshProUGUI angleTMP;
+    [SerializeField] TextMeshPro powerTMP;
+    [SerializeField] TextMeshPro angleTMP;
     [SerializeField] Transform angleIdct;
     [SerializeField] TrajectoryLine trajectory;
     [SerializeField] Button weapon0;
@@ -57,8 +57,7 @@ public class HUD : MonoBehaviour
         aimJoystick.WhileDraging = (Vector2 dragVec) => {
             curWeapon.Shooter.Adjust(dragVec);
             curWeapon.Shooter.AdjustBarrelVisual(dragVec);
-            UpdateShotAngleUI();
-            UpdatePowerTMP();
+            UpdatePowerAndAngleTMP();
         };
 
         weapon0.onClick.AddListener(() =>
@@ -80,17 +79,17 @@ public class HUD : MonoBehaviour
         foreach (Team team in GameManager.Instance.OpennedTeams)
         {
             var indicator = Instantiate(turnPrefab, turnIndicatorParent);
-            indicator.color = team.GetColorPalette();
+            indicator.color = team.GetTeamColor();
             indicator.name = team.ToString();
             GameManager.Instance.afterTurnChanged += (Team before, Team after) =>
             {
                 if (team == after)
                 {
-                    Color32 apparentColor = team.GetColorPalette(); apparentColor.a = 255;
+                    Color32 apparentColor = team.GetTeamColor(); apparentColor.a = 255;
                     indicator.color = apparentColor;
                     return;
                 }
-                Color32 faintColor = team.GetColorPalette(); faintColor.a = 50;
+                Color32 faintColor = team.GetTeamColor(); faintColor.a = 50;
                 indicator.color = faintColor;
             };
         }
@@ -118,9 +117,8 @@ public class HUD : MonoBehaviour
         newWeapon.Health.OnDamageTaken += UpdateWeaponHealthUI;
         SetTrajectoryTarget();
         UpdateWeaponHealthUI();
-        UpdateShotAngleUI();
         UpdateRangeIdctUI();
-        UpdatePowerTMP();
+        UpdatePowerAndAngleTMP();
         ShowWeaponHUD(true);
     }
     public void StartObservePlayer(PlayerController newPlayer)
@@ -172,10 +170,6 @@ public class HUD : MonoBehaviour
     {
         trajectory.SetShooter(curWeapon);
     }
-    private void UpdatePowerTMP()
-    {
-        powerTMP.text = (curWeapon.Shooter.Power * 100).ToString("0");
-    }
     private void UpdateRangeIdctUI()
     {
         rangeIndicator.position = (Vector2)curWeapon.transform.position;
@@ -195,8 +189,10 @@ public class HUD : MonoBehaviour
         energyBar.DOFillAmount((float)curPlayer.Energy.GetRatio(), duration: 0.5f);
         energyTMP.text = curPlayer.Energy.currentEnergy.ToString();
     }
-    private void UpdateShotAngleUI()
+    private void UpdatePowerAndAngleTMP()
     {
+        powerTMP.text = (curWeapon.Shooter.Power * 100).ToString("0");
+
         float angle = curWeapon.Shooter.Angle;
         angleTMP.text = angle.ToString("0");
         angleIdct.eulerAngles = new Vector3(0, 0, angle);
