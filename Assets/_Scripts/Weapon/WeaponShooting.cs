@@ -40,7 +40,7 @@ public class WeaponShooting : MonoBehaviour
     public void Adjust(Vector2 dragVec)
     {
         //direction
-        if ((int)dragVec.x == 0 || (int)dragVec.y == 0) return;
+        if ((int)dragVec.x == 0 && (int)dragVec.y == 0) return;
         Direction = (baseDirection + (float)1920/Screen.width * ROTATESEN * dragVec ).normalized;
         Debug.Log(Screen.width);
         //angle

@@ -18,8 +18,7 @@ public class HUD : MonoBehaviour
     [SerializeField] TextMeshProUGUI healthTMP;
     [SerializeField] Button fireBtn;
     [SerializeField] Transform rangeIndicator;
-    [SerializeField] TextMeshPro powerTMP;
-    [SerializeField] TextMeshPro angleTMP;
+    [SerializeField] PowerAnglePad powerAnglePad;
     [SerializeField] Transform angleIdct;
     [SerializeField] TrajectoryLine trajectory;
     [SerializeField] Button weapon0;
@@ -191,11 +190,22 @@ public class HUD : MonoBehaviour
     }
     private void UpdatePowerAndAngleTMP()
     {
+        var shooter = curWeapon.Shooter;
+        powerAnglePad.UpdateValues((float)shooter.Power,(int)shooter.Angle);
+        if (shooter.Angle.InRange(0, 180))
+        {
+            powerAnglePad.transform.position = curWeapon.transform.position + new Vector3(0,-1,0);
+        }
+        else
+        {
+            powerAnglePad.transform.position = curWeapon.transform.position + new Vector3(0,1,0);
+        }
+        /*
         powerTMP.text = (curWeapon.Shooter.Power * 100).ToString("0");
 
         float angle = curWeapon.Shooter.Angle;
         angleTMP.text = angle.ToString("0");
-        angleIdct.eulerAngles = new Vector3(0, 0, angle);
+        angleIdct.eulerAngles = new Vector3(0, 0, angle);*/
     }
     private void UpdateFuelUI()
     {
