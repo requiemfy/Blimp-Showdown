@@ -1341,7 +1341,7 @@ RectTransform:
   m_Children:
   - {fileID: 1953550581}
   m_Father: {fileID: 1356371110}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1387,7 +1387,7 @@ RectTransform:
   - {fileID: 1808319317}
   - {fileID: 1228469035}
   m_Father: {fileID: 1356371110}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1632,8 +1632,8 @@ RectTransform:
   - {fileID: 534890889}
   - {fileID: 1236284413}
   - {fileID: 1965931299}
-  - {fileID: 1239413972}
   - {fileID: 1272499476}
+  - {fileID: 1239413972}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1846,7 +1846,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -2330,7 +2330,10 @@ MonoBehaviour:
   scrollContent: {fileID: 1965931299}
   sensitivity: 1
   infoSection: {fileID: 1272499479}
-  currentTeam: 0
+  StagedWeapons:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   weaponBoard: {fileID: 1965931299}
   healthTMP: {fileID: 534890890}
   damageTMP: {fileID: 1236284414}
@@ -2403,7 +2406,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 0}
-  m_Type: 1
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
