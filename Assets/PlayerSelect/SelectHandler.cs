@@ -1,5 +1,7 @@
 using System;
+using System.Data;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -26,8 +28,6 @@ public class SelectHandler : MonoBehaviour
     [SerializeField] private TextMeshProUGUI healthTMP;
     [SerializeField] private TextMeshProUGUI damageTMP;
     [SerializeField] private Transform weaponCardPrefab;
-    [SerializeField] private WeaponType[] weapons;
-
     private void Start()
     {
         SpawnCards();
@@ -35,7 +35,9 @@ public class SelectHandler : MonoBehaviour
     }
     private void SpawnCards()
     {
-        foreach (WeaponType weapon in weapons)
+        WeaponType[] allWeapons = Resources.LoadAll<WeaponType>("Weapons");
+        Debug.Log(allWeapons.Length);
+        foreach (WeaponType weapon in allWeapons)
         {
             var prefab = Instantiate(weaponCardPrefab, weaponBoard.transform);
             var card = prefab.GetChild(0);
