@@ -52,11 +52,10 @@ public class PlayerController : MonoBehaviour
 
     public void Construct(Team team)
     {
+        DataPersistence.Push(team, this);
         tag = team.ToString();
-        team.Set(this);
         Health.Construct(30, tag);
-        Weapons.Construct(team.GetWeapons());
-        Debug.Log(team.GetWeapons());
+        Weapons.Construct(DataPersistence.Get(team).Weapons);
     }
     public void OnPointerDown()
     {

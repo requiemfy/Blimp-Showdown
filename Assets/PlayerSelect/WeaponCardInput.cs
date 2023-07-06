@@ -26,9 +26,7 @@ public class WeaponCardInput : DropSlot
     {
         image.color = Color.clear;
         var droppedWeapon = droppedItem.GetComponent<WeaponCard>().represent;
-        var currentTeam = SelectHandler.Instance.currentTeam;
-        currentTeam.Open();
-        currentTeam.Set(droppedWeapon, order);
+        SelectHandler.Instance.StagedWeapons[order] = droppedWeapon;
         SelectHandler.Instance.UpdateTotalHealth();
         SelectHandler.Instance.UpdateTotalDamage();
     }

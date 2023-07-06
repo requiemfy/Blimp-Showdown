@@ -18,7 +18,9 @@ public class SelectHandler : MonoBehaviour
     public float sensitivity;
     private float scrollLimit;
     public InfoSection infoSection;
-    [HideInInspector] public Team currentTeam;
+
+    public WeaponType[] StagedWeapons = new WeaponType[3];
+    private Team _currentTeam;
 
     [SerializeField] private RectTransform weaponBoard;
     [SerializeField] private TextMeshProUGUI healthTMP;
@@ -61,11 +63,15 @@ public class SelectHandler : MonoBehaviour
     }
     public void NextTeam()
     {
-        currentTeam += 1;
-        onTeamChanged();
-        if ((int)currentTeam > 3) {
-            SceneManager.LoadScene("Game");
+        if (!StagedWeapons.HasNullElement())
+        {
+            TeamData data = new(StagedWeapons);
+            DataPersistence.Push(_currentTeam, data);
         }
+        StagedWeapons = new WeaponType[3];
+        _currentTeam += 1;
+        onTeamChanged();
+        if ((int)_currentTeam > 3) SceneManager.LoadScene("Game");
     }
     public void UpdateTotalHealth()
     {
@@ -78,7 +84,7 @@ public class SelectHandler : MonoBehaviour
     private int GetTotalHealth()
     {
         int total = 0;
-        foreach (WeaponType weapon in currentTeam.GetWeapons())
+        foreach (WeaponType weapon in StagedWeapons)
         {
             if (!weapon) continue;
             total += weapon.health;
@@ -88,7 +94,7 @@ public class SelectHandler : MonoBehaviour
     private int GetTotalDamage()
     {
         int total = 0;
-        foreach (WeaponType weapon in currentTeam.GetWeapons())
+        foreach (WeaponType weapon in StagedWeapons)
         {
             if (!weapon) continue;
             total += weapon.damage;

@@ -16,15 +16,38 @@ public static class Extension
     {
         return new Vector3(vec.x, vec.y, value);
     }
-
     public static bool InRange(this float num, float min, float max)
     {
         return min < num && num < max;    
     }
-
     public static T ToEnum<T>(this string strg)
     {
         return (T)Enum.Parse(typeof(T), strg);
+    }
+    public static bool HasNullElement(this Array array)
+    {
+        foreach(var element in array)
+        {
+            if (element == null) return true;
+        }
+        return false;
+    }
+    public static Color32 GetTeamColor(this Team team)
+    {
+        switch (team)
+        {
+            case Team.Red:
+                return CustomColors.Red;
+            case Team.Blue:
+                return CustomColors.Blue;
+            case Team.Yellow:
+                return CustomColors.Yellow;
+            case Team.Green:
+                return CustomColors.Green;
+            default:
+                break;
+        }
+        throw new Exception("Team has no color in palette");
     }
 }
 public static class CustomColors
