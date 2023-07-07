@@ -38,6 +38,15 @@ public class SelectManager : MonoBehaviour
         };
     }
    
+    public void LoadGame()
+    {
+        if (ReadyCard.NotReadyCount > 0)
+        {
+            Debug.LogWarning("not all team ready");
+            return;
+        }
+        SceneManager.LoadScene(1);
+    }
     public void Save()
     {
         TeamData data = new(StagedWeapons);
@@ -45,7 +54,6 @@ public class SelectManager : MonoBehaviour
         StagedWeapons = new WeaponType[3];
         readyScreen.SetActive(true);
         onSaved();
-        if ((int)StagedTeam > 3) SceneManager.LoadScene("Game");
     }
     public void UpdateTotalHealth()
     {

@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -5,7 +6,10 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Image))]
 public class ReadyCard : MonoBehaviour, IPointerDownHandler
 {
+    public static int NotReadyCount = 0;
+
     [SerializeField] Team targetTeam;
+    [SerializeField] TextMeshProUGUI stateTMP;
 
     private GameObject _parent;
     private Image _image;
@@ -30,7 +34,8 @@ public class ReadyCard : MonoBehaviour, IPointerDownHandler
         if (DataPersistence.Get(targetTeam) == null) return; //first time
         if (DataPersistence.Get(targetTeam).Weapons.HasNullElement()) return;
         _state = TeamState.Ready;
-        Debug.Log("ready");
+        NotReadyCount--;
+        stateTMP.text = "ready";
     }
     public void OnPointerDown(PointerEventData eventData)
     {
@@ -39,15 +44,25 @@ public class ReadyCard : MonoBehaviour, IPointerDownHandler
             case TeamState.Closed:
                 _image.color = targetTeam.GetTeamColor();
                 _state = TeamState.NotReady;
+                stateTMP.text = "not ready";
+                NotReadyCount++;
                 break;
 
             case TeamState.NotReady:
-                SelectManager.Instance.StagedTeam = targetTeam;
-                _parent.SetActive(false);
+                EnterEdit();
+                break;
+
+            case TeamState.Ready:
+                EnterEdit();
                 break;
 
             default:
                 break;
         }
+    }
+    private void EnterEdit()
+    {
+        SelectManager.Instance.StagedTeam = targetTeam;
+        _parent.SetActive(false);
     }
 }
