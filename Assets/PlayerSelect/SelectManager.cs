@@ -1,39 +1,51 @@
 using System;
-using System.Data;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
-public class SelectHandler : MonoBehaviour
+public class SelectManager : MonoBehaviour
 {
-    public static SelectHandler Instance { get; private set; }
+    public static SelectManager Instance { get; private set; }
 
-    public Action onTeamChanged;
+    public Action onSaved;
+    public Action<Team> onStartedEdit;
     public InfoSection infoSection;
 
     public WeaponType[] StagedWeapons = new WeaponType[3];
-    private Team _currentTeam;
+    public Team StagedTeam 
+    {
+        get { return _stagedTeam; }
+        set 
+        {
+            _stagedTeam = value;
+            onStartedEdit(value);
+        }
+    }
+    private Team _stagedTeam;
 
+    [SerializeField] private GameObject readyScreen;
     [SerializeField] private TextMeshProUGUI healthTMP;
     [SerializeField] private TextMeshProUGUI damageTMP;
+
     private void Awake()
     {
         Instance = this;
+        onStartedEdit += (team) =>
+        {
+            TeamData data = DataPersistence.Get(team);
+            if (data == null) return;
+            StagedWeapons = data.Weapons;
+        };
     }
    
-    public void NextTeam()
+    public void Save()
     {
-        if (!StagedWeapons.HasNullElement())
-        {
-            TeamData data = new(StagedWeapons);
-            DataPersistence.Push(_currentTeam, data);
-        }
+        TeamData data = new(StagedWeapons);
+        DataPersistence.Push(StagedTeam, data);
         StagedWeapons = new WeaponType[3];
-        _currentTeam += 1;
-        onTeamChanged();
-        if ((int)_currentTeam > 3) SceneManager.LoadScene("Game");
+        readyScreen.SetActive(true);
+        onSaved();
+        if ((int)StagedTeam > 3) SceneManager.LoadScene("Game");
     }
     public void UpdateTotalHealth()
     {

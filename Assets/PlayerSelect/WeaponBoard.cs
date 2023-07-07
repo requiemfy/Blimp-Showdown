@@ -10,8 +10,7 @@ public class WeaponBoard : MonoBehaviour
     public static WeaponBoard Instance { get; private set; }
     public RectTransform RectTransfrom { get; private set; }
 
-    [SerializeField]
-    private Transform weaponCardPrefab;
+    public WeaponCard WeaponCardPrefab;
 
     private float _scrollLimit;
 
@@ -34,14 +33,8 @@ public class WeaponBoard : MonoBehaviour
         Debug.Log(allWeapons.Length);
         foreach (WeaponType weapon in allWeapons)
         {
-            var prefab = Instantiate(weaponCardPrefab, transform);
-            var card = prefab.GetChild(0);
-            card.GetComponent<WeaponCard>().represent = weapon;
-            card.GetComponent<Image>().sprite = weapon.barrel;
-
-            var energyTMP = prefab.GetChild(1).GetComponent<TextMeshProUGUI>();
-            energyTMP.text = $"{weapon.energyCost}";
-
+            WeaponCard card = Instantiate(WeaponCardPrefab, transform);
+            card.SetRepresent(weapon);
         }
     }
     private void ResizeWeaponBoard()

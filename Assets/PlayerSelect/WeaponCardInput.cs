@@ -1,33 +1,31 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class WeaponCardInput : DropSlot
 {
     [SerializeField] int order;
-    private Image image;
-    private Color originalCol;
-
-    private void Awake()
-    {
-        image = GetComponent<Image>();
-    }
+  
     private void Start()
     {
-        originalCol = image.color;
-        SelectHandler.Instance.onTeamChanged += ResetSlot;
+        SelectManager.Instance.onSaved += ResetSlot;
+        SelectManager.Instance.onStartedEdit += (team) =>
+        {
+            TeamData data = DataPersistence.Get(team);
+            if (data == null) return;
+            if (data.Weapons[order] == null) return;
+            var card = Instantiate(WeaponBoard.Instance.WeaponCardPrefab, transform);
+            card.SetRepresent(data.Weapons[order]);
+        };
     }
     private void ResetSlot()
     {
         ClearDropSlot();
-        image.color = originalCol;
     }
 
     protected override void OnItemDropped(DragableItem droppedItem)
     {
-        image.color = Color.clear;
-        var droppedWeapon = droppedItem.GetComponent<WeaponCard>().represent;
-        SelectHandler.Instance.StagedWeapons[order] = droppedWeapon;
-        SelectHandler.Instance.UpdateTotalHealth();
-        SelectHandler.Instance.UpdateTotalDamage();
+        var droppedWeapon = droppedItem.GetComponent<WeaponCard>().Represent;
+        SelectManager.Instance.StagedWeapons[order] = droppedWeapon;
+        SelectManager.Instance.UpdateTotalHealth();
+        SelectManager.Instance.UpdateTotalDamage();
     }
 }

@@ -5,7 +5,8 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Image))]
 public abstract class DragableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerDownHandler, IPointerUpHandler
 {
-    [HideInInspector] public Transform parentAfterDrag;
+    [HideInInspector] 
+    public Transform parentAfterDrag;
     protected abstract void OnBeginScroll();
     protected abstract void WhileScrolling(Vector2 scrollVec);
     protected abstract void OnTap();
@@ -14,8 +15,9 @@ public abstract class DragableItem : MonoBehaviour, IBeginDragHandler, IDragHand
     private Image image;
     private Vector2 potentialDrag;
     private bool isScrolling;
+    private int _siblingIndex;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         image = GetComponent<Image>();
     }
@@ -23,6 +25,7 @@ public abstract class DragableItem : MonoBehaviour, IBeginDragHandler, IDragHand
     {
         isTap = true;
         potentialDrag = eventData.position;
+        _siblingIndex = transform.GetSiblingIndex();
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -70,7 +73,8 @@ public abstract class DragableItem : MonoBehaviour, IBeginDragHandler, IDragHand
     private void Duplicate()
     {
         originalParent = transform.parent;
-        Instantiate(gameObject, originalParent);
+        var duplicate = Instantiate(gameObject, originalParent);
+        duplicate.transform.SetSiblingIndex(_siblingIndex);
         parentAfterDrag = transform.parent;
         transform.SetParent(transform.root);
         transform.SetAsLastSibling();
