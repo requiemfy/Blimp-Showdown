@@ -37,7 +37,7 @@ public class SelectManager : MonoBehaviour
             StagedWeapons = data.Weapons;
         };
     }
-   
+
     public void LoadGame()
     {
         if (ReadyCard.NotReadyCount > 0)

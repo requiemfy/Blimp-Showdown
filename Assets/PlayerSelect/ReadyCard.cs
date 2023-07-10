@@ -10,6 +10,7 @@ public class ReadyCard : MonoBehaviour, IPointerDownHandler
 
     [SerializeField] Team targetTeam;
     [SerializeField] TextMeshProUGUI stateTMP;
+    [SerializeField] Button closeBtn;
 
     private GameObject _parent;
     private Image _image;
@@ -25,10 +26,10 @@ public class ReadyCard : MonoBehaviour, IPointerDownHandler
     {
         _parent = transform.parent.gameObject;
         _image = GetComponent<Image>();
-        var faithColor = targetTeam.GetTeamColor();
-        faithColor.a = 100;
-        _image.color = faithColor;
+        _image.color = Color.white;
+        closeBtn.onClick.AddListener(CloseSlot);
     }
+
     private void OnEnable()
     {
         if (DataPersistence.Get(targetTeam) == null) return; //first time
@@ -45,6 +46,7 @@ public class ReadyCard : MonoBehaviour, IPointerDownHandler
                 _image.color = targetTeam.GetTeamColor();
                 _state = TeamState.NotReady;
                 stateTMP.text = "not ready";
+                closeBtn.gameObject.SetActive(true);
                 NotReadyCount++;
                 break;
 
@@ -64,5 +66,14 @@ public class ReadyCard : MonoBehaviour, IPointerDownHandler
     {
         SelectManager.Instance.StagedTeam = targetTeam;
         _parent.SetActive(false);
+    }
+    private void CloseSlot()
+    {
+        if (_state == TeamState.NotReady) NotReadyCount--;
+        _image.color = Color.white;
+        _state = TeamState.Closed;
+        stateTMP.text = "add player";
+        closeBtn.gameObject.SetActive(false);
+        DataPersistence.Push(targetTeam, data: null);
     }
 }
