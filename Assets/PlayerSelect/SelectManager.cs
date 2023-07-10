@@ -23,7 +23,6 @@ public class SelectManager : MonoBehaviour
     }
     private Team _stagedTeam;
 
-    [SerializeField] private GameObject readyScreen;
     [SerializeField] private TextMeshProUGUI healthTMP;
     [SerializeField] private TextMeshProUGUI damageTMP;
 
@@ -52,7 +51,6 @@ public class SelectManager : MonoBehaviour
         TeamData data = new(StagedWeapons);
         DataPersistence.Push(StagedTeam, data);
         StagedWeapons = new WeaponType[3];
-        readyScreen.SetActive(true);
         onSaved();
     }
     public void UpdateTotalHealth()
