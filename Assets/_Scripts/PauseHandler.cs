@@ -33,5 +33,6 @@ public class PauseHandler : MonoBehaviour
     {
         SceneManager.LoadScene(0);
         DataPersistence.ClearTeamDB();
+        ResumeGame();
     }
 }
