@@ -29,4 +29,8 @@ public class PauseHandler : MonoBehaviour
         SceneManager.LoadScene(1);
         ResumeGame();
     }
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
 }
