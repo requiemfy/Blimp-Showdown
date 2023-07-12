@@ -11,6 +11,7 @@ public class HUD : MonoBehaviour
     private PlayerController curPlayer;
 
     [SerializeField] Joystick aimJoystick;
+    [SerializeField] Joystick moveJoystick;
 
     [Header("Weapon")]
     [SerializeField] GameObject weaponHUD;
@@ -52,13 +53,33 @@ public class HUD : MonoBehaviour
         fireBtn.onClick.AddListener(() => { curWeapon.Shooter.Fire(); });
         endTurnBtn.onClick.AddListener(() => GameManager.Instance.NextTurn());
 
-        aimJoystick.OnDragStarted = () => { curWeapon.Shooter.OnDragBegin(); };
+        //aim
+        aimJoystick.OnDragStarted = () => 
+        {
+            powerAnglePad.gameObject.SetActive(true);
+            curWeapon.Shooter.OnDragBegin(); 
+        };
         aimJoystick.WhileDraging = (Vector2 dragVec) => {
             curWeapon.Shooter.Adjust(dragVec);
             curWeapon.Shooter.AdjustBarrelVisual(dragVec);
             UpdatePowerAndAngleTMP();
         };
+        aimJoystick.UponPointerUp = () =>
+        {
+            powerAnglePad.gameObject.SetActive(false);
+        };
 
+        //move
+        moveJoystick.WhileDraging = (Vector2 dragVec) =>
+        {
+            curPlayer.Movement.Move(dragVec);
+        };
+        moveJoystick.UponPointerUp = () =>
+        {
+            curPlayer.Movement.StopMove();
+        };
+
+        //weapons
         weapon0.onClick.AddListener(() =>
         {
             StartObserveWeapon(curPlayer.Weapons.GetWeaponCtrl(0));
@@ -210,32 +231,5 @@ public class HUD : MonoBehaviour
     private void UpdateFuelUI()
     {
         fuelBar.SetFill((int)((float)curPlayer.Movement.GetRatio() * 100), 100);
-    }
-
-
-    public void StartMoveRight()
-    {
-        curPlayer.Movement.StartMoveRight();
-    }
-    public void StartMoveLeft()
-    {
-        curPlayer.Movement.StartMoveLeft();
-    }
-    public void StopMoveX()
-    {
-        curPlayer.Movement.StopMoveX();
-    }
-
-    public void StartMoveUp()
-    {
-        curPlayer.Movement.StartMoveUp();
-    }
-    public void StartMoveDown()
-    {
-        curPlayer.Movement.StartMoveDown();
-    }
-    public void StopMoveY()
-    {
-        curPlayer.Movement.StopMoveY();
     }
 }

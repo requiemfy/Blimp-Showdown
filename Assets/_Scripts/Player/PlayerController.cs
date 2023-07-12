@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
     {
         GameManager.Instance.onTurnEnded += () =>
         {
-            Movement.Restore(2);
+            Movement.Restore(500);
             Energy.Restore(1);
             PopUpManager.Instance.SpawnText("+1", energyBar.transform.position, CustomColors.Purple);
         };

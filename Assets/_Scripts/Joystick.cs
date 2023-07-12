@@ -4,11 +4,11 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Image))] // for raycast usable area
-public class Joystick : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler 
+public class Joystick : MonoBehaviour, IBeginDragHandler, IDragHandler
 {
     public Action OnDragStarted;
     public Action<Vector2> WhileDraging;
-    public Action OnDragStopped;
+    public Action UponPointerUp;
 
     [SerializeField] bool fixedOrigin;
     [SerializeField] RectTransform knob;
@@ -42,9 +42,9 @@ public class Joystick : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         WhileDraging?.Invoke(dragVec);
     }
 
-    public void OnEndDrag(PointerEventData touch)
+    public void OnPointerUp(BaseEventData eventData)
     {
         knob.position = origin.position;
-        OnDragStopped?.Invoke();
+        UponPointerUp?.Invoke();
     }
 }

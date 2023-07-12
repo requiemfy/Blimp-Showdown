@@ -6,10 +6,15 @@ public class Movement : MonoBehaviour
     public Action whileMoving;
     public Action OnStopped;
 
-    [SerializeField] private float maxFuel;
+    [SerializeField]
+    private int testStrength;
+
+    [SerializeField] 
+    private float maxFuel;
     private float currentFuel;
-    [SerializeField] private Vector2 maxSpd;
+
     private Vector2 direction;
+    private Rigidbody2D rb;
 
     public float GetRatio()
     {
@@ -19,60 +24,41 @@ public class Movement : MonoBehaviour
     {
         currentFuel = maxFuel;
         enabled= false;
+        rb = GetComponent<Rigidbody2D>();
     }
-    private void Update()
+
+    private bool _isMaxHeight = false;
+    private void FixedUpdate()
     {
-        Move();
-    }
-    private void Move()
-    {
-        if (direction == Vector2.zero) 
+        if (transform.position.y > 10)
         {
-            enabled = false;
-            OnStopped?.Invoke();
-            return;
+            direction.y = Mathf.Min(direction.y, 0);
+            if (!_isMaxHeight)
+            {
+                _isMaxHeight = true;
+                Debug.Log("A blimp cannot fly too high");
+            }
         }
-        if (currentFuel <= 0)
+        else
         {
-            Debug.Log("Out of fuel");
-            StopMoveX();
-            StopMoveY();
-            return;
+            _isMaxHeight = false;
         }
-        Vector2 moveVec = new(direction.normalized.x * maxSpd.x, direction.normalized.y * maxSpd.y);
-        transform.position += Time.deltaTime * (Vector3) moveVec;
-        currentFuel -= moveVec.magnitude * Time.deltaTime;
+        if (currentFuel <= 0) return;
+        rb.AddForce(testStrength * Time.fixedDeltaTime * direction);
+        currentFuel -= testStrength * Time.fixedDeltaTime * direction.magnitude;
         whileMoving();
     }
 
-    public void StartMoveRight()
+    public void Move(Vector2 dragVec)
     {
-        direction = new(1, direction.y);
-        enabled = true;
-    }
-    public void StartMoveLeft()
-    {
-        direction = new(-1, direction.y);
-        enabled = true;
-    }
-    public void StopMoveX()
-    {
-        direction = new(0, direction.y);
+        this.enabled = true;
+        direction = dragVec.normalized;
     }
 
-    public void StartMoveUp()
+    public void StopMove()
     {
-        direction = new(direction.x, 1);
-        enabled = true;
-    }
-    public void StartMoveDown()
-    {
-        direction = new(direction.x, -1);
-        enabled = true;
-    }
-    public void StopMoveY()
-    {
-        direction = new(direction.x, 0);
+        OnStopped();
+        this.enabled = false;
     }
 
     public void Restore(int amount)
