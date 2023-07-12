@@ -93,7 +93,7 @@ public class CameraManager : MonoBehaviour
 
     private void Zoom(float amount)
     {
-        _cam.orthographicSize = Mathf.Clamp(_cam.orthographicSize - amount, 5f, 15f);
+        _cam.orthographicSize = Mathf.Clamp(_cam.orthographicSize - amount, 5f, 20f);
         WhileZoomChanging(_cam.orthographicSize);
     }
     #endregion
