@@ -32,5 +32,6 @@ public class PauseHandler : MonoBehaviour
     public void BackToMenu()
     {
         SceneManager.LoadScene(0);
+        DataPersistence.ClearTeamDB();
     }
 }
