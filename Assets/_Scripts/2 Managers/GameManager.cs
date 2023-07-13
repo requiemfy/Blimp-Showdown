@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour
         }
         var target = DataPersistence.Get(team).Controller;
         target.IsInTurn = true;
-        CameraManager.Instance.SetCurrentPlayer(target.transform);
+        CinemachineManager.Instance.SetFollow(target.transform);
         HUD.Instance.StartObserveWeapon(null);
         HUD.Instance.StartObservePlayer(target);
     }

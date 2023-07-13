@@ -21,7 +21,7 @@ MonoBehaviour:
   damage: 2
   range: 12
   detectRadius: 0.5
-  explodeRadius: 2
+  explodeRadius: 3
   isGravityAffected: 1
   bulletCount: 3
   bulletOffset: 0.07

@@ -21,10 +21,10 @@ MonoBehaviour:
   damage: 3
   range: 100
   detectRadius: 0.5
-  explodeRadius: 0.5
+  explodeRadius: 2
   isGravityAffected: 0
   bulletCount: 10
   bulletOffset: 0
-  bulletShootTime: 0.2
+  bulletShootTime: 0.3
   isRaycast: 0
   isRayMultiple: 0

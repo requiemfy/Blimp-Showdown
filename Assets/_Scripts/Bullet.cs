@@ -22,7 +22,7 @@ public class Bullet : MonoBehaviour
         rb.gravityScale = weapon.isGravityAffected? 1 : 0;
         rb.AddForce(launchVec, ForceMode2D.Impulse);
         OnLaunch();
-        CameraManager.Instance.SetFollow(transform, camSpeed: rb.velocity.magnitude / 4);
+        CinemachineManager.Instance.SetFollow(transform);
         Destroy(gameObject, 20);
     }
 
