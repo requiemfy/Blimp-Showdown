@@ -36,7 +36,7 @@ public class Movement : MonoBehaviour
             if (!_isMaxHeight)
             {
                 _isMaxHeight = true;
-                Debug.Log("A blimp cannot fly too high");
+                PopUpManager.Instance.SpawnText("A blimp cannot fly too high", transform.position, Color.white);
             }
         }
         else
