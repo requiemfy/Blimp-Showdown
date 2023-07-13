@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Linq;
+using Unity.Mathematics;
 using UnityEngine;
 using Random = System.Random;
 
@@ -13,6 +14,8 @@ public class GameManager : MonoBehaviour
     public Vector2 wind;
 
     [SerializeField] private PlayerController playerPrefab;
+
+    private GameObject[] _respawnPoints;
 
     private void Awake()
     {
@@ -27,16 +30,25 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
+        GetRespawnPoints();
         SpawnPlayers();
         SetTurn(OpennedTeams[0]);
     }
+    private void GetRespawnPoints()
+    {
+        _respawnPoints = GameObject.FindGameObjectsWithTag("Respawn");
+        Random random = new();
+        _respawnPoints = _respawnPoints.OrderBy(x => random.Next()).ToArray();
+    }
     private void SpawnPlayers()
     {
+        int i = 0;
         foreach (Team team in OpennedTeams)
         {
             var playerCtrl = Instantiate(playerPrefab);
             playerCtrl.Construct(team);
-            playerCtrl.transform.position = new Vector2(UnityEngine.Random.Range(1, 15), UnityEngine.Random.Range(1, 15));
+            playerCtrl.transform.position = _respawnPoints[i].transform.position;
+            i++;
         }
     }
 

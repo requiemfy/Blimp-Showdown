@@ -34,6 +34,7 @@ public class ReadyCard : MonoBehaviour, IPointerDownHandler
     {
         if (DataPersistence.Get(targetTeam) == null) return; //first time
         if (DataPersistence.Get(targetTeam).Weapons.HasNullElement()) return;
+        if (_state == TeamState.Ready) return;
         _state = TeamState.Ready;
         NotReadyCount--;
         stateTMP.text = "ready";
