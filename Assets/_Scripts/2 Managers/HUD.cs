@@ -61,7 +61,6 @@ public class HUD : MonoBehaviour
         };
         aimJoystick.WhileDraging = (Vector2 dragVec) => {
             curWeapon.Shooter.Adjust(dragVec);
-            curWeapon.Shooter.AdjustBarrelVisual(dragVec);
             UpdatePowerAndAngleTMP();
         };
         aimJoystick.UponPointerUp = () =>

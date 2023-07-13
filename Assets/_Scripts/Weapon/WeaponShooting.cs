@@ -11,6 +11,7 @@ public class WeaponShooting : MonoBehaviour
     [SerializeField] Bullet bulletPrefab;
 
     private WeaponType _weapon;
+    private Rigidbody2D _parentRB;
     private PlayerEnergy _energy;
 
     public void Construct(WeaponType weaponType)
@@ -19,6 +20,7 @@ public class WeaponShooting : MonoBehaviour
     }
     private void Start()
     {
+        _parentRB = GetComponentInParent<Rigidbody2D>();
         _energy = GetComponentInParent<PlayerEnergy>();
         barrel = transform.Find("Barrel");
         Power = 1f;
@@ -43,6 +45,7 @@ public class WeaponShooting : MonoBehaviour
         if ((int)dragVec.x == 0 && (int)dragVec.y == 0) return;
         Direction = (baseDirection + (float)1920/Screen.width * ROTATESEN * dragVec ).normalized;
         Debug.Log(Screen.width);
+
         //angle
         Angle = GetTanDeg(Direction);
         barrel.eulerAngles = new Vector3(0,0,Angle);
@@ -83,6 +86,7 @@ public class WeaponShooting : MonoBehaviour
                 launchVec: LaunchVec
                 );
             Recoil();
+            ShipKnockBack();
             yield return new WaitForSeconds(_weapon.bulletShootTime);
         }
         _isFiring = false;
@@ -104,6 +108,12 @@ public class WeaponShooting : MonoBehaviour
 
     #region SHOOTING VISUAL
     private Transform barrel;
+    private void ShipKnockBack()
+    {
+        Debug.Log("knockback");
+        Vector2 knockBack = 0.2f * Mathf.Sqrt(_weapon.range * 10) * Power * -Direction;
+        _parentRB.AddForce(knockBack, ForceMode2D.Impulse);
+    }
     private void Recoil()
     {
         DOTween.Kill(barrel, true);
@@ -120,14 +130,6 @@ public class WeaponShooting : MonoBehaviour
                     firePoint.localPosition = originalPos;
                 };
             };
-    }
-
-    public void AdjustBarrelVisual(Vector2 dragVec)
-    {
-        if (_isFiring) return;
-        //Angle = GetTanDeg(dragVec);
-        //DOTween.Kill(barrel);
-        //barrel.DORotate(new(0, 0, Angle), duration: 1f);
     }
     private float GetTanDeg(Vector2 vec)
     {
