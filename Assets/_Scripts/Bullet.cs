@@ -10,6 +10,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] private SpriteRenderer bulletRen;
     [SerializeField] private CircleCollider2D colldr;
     [SerializeField] private Rigidbody2D rb;
+    [Header("Explosion")]
     [SerializeField] private Sprite explosion;
     [SerializeField] private SpriteRenderer explosionRen;
 
