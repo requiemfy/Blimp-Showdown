@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class TrajectoryLine : MonoBehaviour
@@ -16,11 +17,13 @@ public class TrajectoryLine : MonoBehaviour
         shooter = target.Shooter;
         firePoint = shooter.firePoint;
         WEAPONRANGE = target.WeaponType.range;
+        onUpdate = target.WeaponType.isGravityAffected ? UpdateTrajectory : UpdateStraightLine;
     }
 
+    private Action onUpdate;
     private void Update()
     {
-        UpdateTrajectory();
+        onUpdate();
     }
     private void UpdateTrajectory()
     {
@@ -63,5 +66,16 @@ public class TrajectoryLine : MonoBehaviour
             }
             lineRen.SetPosition(i, position);
         }
+    }
+
+
+    //STRAIGHT LINE
+    private const int AIMLENGTH = 8;
+    private void UpdateStraightLine()
+    {
+        lineRen.transform.position = firePoint.position;
+        lineRen.positionCount = 2;
+        lineRen.SetPosition(0, Vector2.zero);
+        lineRen.SetPosition(1, AIMLENGTH * shooter.Power * shooter.Direction);
     }
 }
