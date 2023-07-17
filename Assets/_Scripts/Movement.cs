@@ -13,6 +13,10 @@ public class Movement : MonoBehaviour
     private float maxFuel;
     private float currentFuel;
 
+    [SerializeField]
+    private int maxHeight;
+
+
     private Vector2 direction;
     private Rigidbody2D rb;
 
@@ -30,7 +34,16 @@ public class Movement : MonoBehaviour
     private bool _isMaxHeight = false;
     private void FixedUpdate()
     {
-        if (transform.position.y > 10)
+        CheckBorderMax();
+        if (currentFuel <= 0) return;
+        rb.AddForce(testStrength * Time.fixedDeltaTime * direction);
+        currentFuel -= testStrength * Time.fixedDeltaTime * direction.magnitude;
+        whileMoving();
+    }
+
+    private void CheckBorderMax()
+    {
+        if (transform.position.y > maxHeight)
         {
             direction.y = Mathf.Min(direction.y, 0);
             if (!_isMaxHeight)
@@ -43,10 +56,6 @@ public class Movement : MonoBehaviour
         {
             _isMaxHeight = false;
         }
-        if (currentFuel <= 0) return;
-        rb.AddForce(testStrength * Time.fixedDeltaTime * direction);
-        currentFuel -= testStrength * Time.fixedDeltaTime * direction.magnitude;
-        whileMoving();
     }
 
     public void Move(Vector2 dragVec)
