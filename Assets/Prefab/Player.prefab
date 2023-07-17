@@ -5255,6 +5255,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   testStrength: 50
   maxFuel: 1000
+  maxHeight: 15
 --- !u!50 &4588193078420657678
 Rigidbody2D:
   serializedVersion: 4
