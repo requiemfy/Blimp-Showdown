@@ -29,9 +29,9 @@ public class WeaponController : MonoBehaviour
         };
     }
 
-    public void Construct(string tag, WeaponType weaponType)
+    public void Construct(LayerMask layer, WeaponType weaponType)
     {
-        this.tag = tag;
+        gameObject.layer = layer;
         this.WeaponType = weaponType;
         Health.Construct(weaponType.health);
         Shooter.Construct(weaponType);

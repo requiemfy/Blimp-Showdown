@@ -10,13 +10,13 @@ public class Bullet : MonoBehaviour
     [SerializeField] private SpriteRenderer bulletRen;
     [SerializeField] private CircleCollider2D colldr;
     [SerializeField] private Rigidbody2D rb;
-    [Header("Explosion")]
-    [SerializeField] private Sprite explosion;
-    [SerializeField] private SpriteRenderer explosionRen;
 
-    public void Launch(WeaponType weapon, string teamTag, Vector2 launchVec)
+    [SerializeField]
+    private GameObject explosion;
+
+    public void Launch(WeaponType weapon, LayerMask layer, Vector2 launchVec)
     {
-        tag = teamTag;
+        gameObject.layer = layer;
         Damage = weapon.damage;
         explRadius = weapon.explodeRadius;
         rb.gravityScale = weapon.isGravityAffected? 1 : 0;
@@ -29,15 +29,24 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag(tag)) return;
+        Explode();
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (!collision.collider.CompareTag("ExplodeImmediate")) return;
+        Explode();
+    }
+
+    private void Explode()
+    {
         rb.velocity = Vector2.zero;
         rb.gravityScale = 0f;
 
-        explosionRen.gameObject.SetActive(true);
-        explosionRen.sprite = explosion;
-        explosionRen.transform.localScale = new Vector2(explRadius, explRadius);
+        explosion.SetActive(true);
+        explosion.transform.localScale = new Vector2(explRadius, explRadius);
 
         bulletRen.enabled = false;
-        colldr.radius = explRadius;
+        colldr.enabled = false;
         Destroy(gameObject, 0.5f);
     }
 
@@ -48,18 +57,13 @@ public class Bullet : MonoBehaviour
         StartCoroutine(FireEffectCO());
     }
 
-    private const int durationFrames = 5;
+    private const float duration = 0.5f;
     private IEnumerator FireEffectCO()
     {
-        int i = 0;
-        Sprite original = bulletRen.sprite;
-        bulletRen.sprite = explosion;
-        while (i < durationFrames)
-        {
-            yield return null;
-            i++;
-        }
-        bulletRen.sprite = original;
+        Color original = bulletRen.color;
+        bulletRen.color = Color.red;
+        yield return new WaitForSeconds(duration);
+        bulletRen.color = original;
     }
     #endregion
 }

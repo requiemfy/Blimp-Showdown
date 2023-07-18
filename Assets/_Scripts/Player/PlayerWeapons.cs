@@ -10,8 +10,7 @@ public class PlayerWeapons : MonoBehaviour
         foreach (WeaponController weaponCtrl in weaponCtrls)
         {
             WeaponType type = weaponTypes[i];
-            Debug.Log(type.name);
-            weaponCtrl.Construct(tag, type);
+            weaponCtrl.Construct(gameObject.layer, type);
             i++;
         }
     }

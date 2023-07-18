@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
     public void Construct(Team team)
     {
         DataPersistence.Push(team, this);
-        tag = team.ToString();
+        gameObject.layer = LayerMask.NameToLayer(team.ToString());
         Health.Construct(30, tag);
         Weapons.Construct(DataPersistence.Get(team).Weapons);
     }

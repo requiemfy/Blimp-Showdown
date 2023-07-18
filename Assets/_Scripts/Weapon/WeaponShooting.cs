@@ -82,11 +82,11 @@ public class WeaponShooting : MonoBehaviour
             Vector2 LaunchVec = Mathf.Sqrt(_weapon.range * 10) * (offset * Power * Direction + GameManager.Instance.wind);
             bullet.Launch(
                 weapon: _weapon,
-                teamTag: tag,
+                layer: gameObject.layer,
                 launchVec: LaunchVec
                 );
             Recoil();
-            ShipKnockBack();
+            //ShipKnockBack();
             yield return new WaitForSeconds(_weapon.bulletShootTime);
         }
         _isFiring = false;
