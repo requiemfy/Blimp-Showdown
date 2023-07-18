@@ -65,6 +65,7 @@ public class Health : MonoBehaviour
             {
                 OnDeath?.Invoke();
                 isAlive = false;
+                GetComponent<Collider2D>().enabled = false;
             }
         }
     }

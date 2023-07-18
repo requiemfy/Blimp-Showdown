@@ -36,7 +36,7 @@ public class Movement : MonoBehaviour
     {
         CheckBorderMax();
         if (currentFuel <= 0) return;
-        rb.AddForce(testStrength * Time.fixedDeltaTime * direction);
+        rb.AddForce(testStrength * rb.mass * Time.fixedDeltaTime * direction);
         currentFuel -= testStrength * Time.fixedDeltaTime * direction.magnitude;
         whileMoving();
     }

@@ -23,20 +23,30 @@ public class Bullet : MonoBehaviour
         rb.AddForce(launchVec, ForceMode2D.Impulse);
         OnLaunch();
         CinemachineManager.Instance.SetFollow(transform);
-        Destroy(gameObject, 20);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+
+    private Coroutine timeRoutine;
+    private void StartTimeCounter()
     {
-        if (collision.CompareTag(tag)) return;
-        Explode();
+        if (timeRoutine != null) StopCoroutine(timeRoutine);
+        timeRoutine = StartCoroutine(TimeCounter());
+        IEnumerator TimeCounter()
+        {
+            yield return new WaitForSeconds(2);
+            Explode();
+        }
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!collision.collider.CompareTag("ExplodeImmediate")) return;
-        Explode();
-    }
+        if (collision.collider.CompareTag("ExplodeImmediate"))
+        {
+            Explode();
+            return;
+        }
 
+        StartTimeCounter();
+    }
     private void Explode()
     {
         rb.velocity = Vector2.zero;
