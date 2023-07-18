@@ -9,6 +9,6 @@ public class WeaponVisuals : MonoBehaviour
 
         //Sprite
         barrelRen.sprite = weapon.barrel;
-        barrelRen.transform.eulerAngles = new(0, 0, -135);
+        barrelRen.transform.eulerAngles = new(0, 0, 135);
     }
 }

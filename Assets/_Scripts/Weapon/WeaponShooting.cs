@@ -24,8 +24,8 @@ public class WeaponShooting : MonoBehaviour
         _energy = GetComponentInParent<PlayerEnergy>();
         barrel = transform.Find("Barrel");
         Power = 1f;
-        Direction = new Vector2(-1, -1).normalized;
-        Angle = -135f;
+        Direction = new Vector2(-1, 1).normalized;
+        Angle = 135f;
     }
 
 
