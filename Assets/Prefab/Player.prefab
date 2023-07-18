@@ -5166,6 +5166,7 @@ GameObject:
   - component: {fileID: 3067302567888788033}
   - component: {fileID: 5643642822504018294}
   - component: {fileID: 7191063437545320678}
+  - component: {fileID: 8476764041067037457}
   - component: {fileID: 4588193078420657678}
   m_Layer: 0
   m_Name: Player
@@ -5273,6 +5274,32 @@ CapsuleCollider2D:
   m_Offset: {x: 0.000002831263, y: -0.24964908}
   m_Size: {x: 9.224695, y: 2.6388404}
   m_Direction: 1
+--- !u!61 &8476764041067037457
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3067302567888788044}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.30292034, y: -1.9246128}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.0748787, y: 0.76468515}
+  m_EdgeRadius: 0
 --- !u!50 &4588193078420657678
 Rigidbody2D:
   serializedVersion: 4
@@ -6537,17 +6564,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Weapon
       objectReference: {fileID: 0}
+    - target: {fileID: 4543192888884246416, guid: bdd6b0507aaed7445b1bc2d58732513f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4543192888884246419, guid: bdd6b0507aaed7445b1bc2d58732513f, type: 3}
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4543192888884246419, guid: bdd6b0507aaed7445b1bc2d58732513f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.966
+      value: 1.8
       objectReference: {fileID: 0}
     - target: {fileID: 4543192888884246419, guid: bdd6b0507aaed7445b1bc2d58732513f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.136
+      value: 1.65
       objectReference: {fileID: 0}
     - target: {fileID: 4543192888884246419, guid: bdd6b0507aaed7445b1bc2d58732513f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6599,17 +6630,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Weapon_1
       objectReference: {fileID: 0}
+    - target: {fileID: 4543192888884246416, guid: bdd6b0507aaed7445b1bc2d58732513f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4543192888884246419, guid: bdd6b0507aaed7445b1bc2d58732513f, type: 3}
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4543192888884246419, guid: bdd6b0507aaed7445b1bc2d58732513f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.081
+      value: -0.06
       objectReference: {fileID: 0}
     - target: {fileID: 4543192888884246419, guid: bdd6b0507aaed7445b1bc2d58732513f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.141
+      value: 1.6449999
       objectReference: {fileID: 0}
     - target: {fileID: 4543192888884246419, guid: bdd6b0507aaed7445b1bc2d58732513f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6661,17 +6696,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Weapon_2
       objectReference: {fileID: 0}
+    - target: {fileID: 4543192888884246416, guid: bdd6b0507aaed7445b1bc2d58732513f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4543192888884246419, guid: bdd6b0507aaed7445b1bc2d58732513f, type: 3}
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4543192888884246419, guid: bdd6b0507aaed7445b1bc2d58732513f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.134
+      value: -1.99
       objectReference: {fileID: 0}
     - target: {fileID: 4543192888884246419, guid: bdd6b0507aaed7445b1bc2d58732513f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.151
+      value: 1.65
       objectReference: {fileID: 0}
     - target: {fileID: 4543192888884246419, guid: bdd6b0507aaed7445b1bc2d58732513f, type: 3}
       propertyPath: m_LocalPosition.z
