@@ -1,9 +1,25 @@
 using UnityEngine;
-
+using UnityEngine.XR;
 
 public class PlayerController : MonoBehaviour
 {
-    [HideInInspector] public int WeaponLeft = 3;
+    private int _weaponLeft = 3;
+    public int WeaponLeft
+    { 
+        get { return _weaponLeft; }
+        set 
+        { 
+            _weaponLeft = value;
+            if (value <= 0) PlayerDie();
+        }
+    }
+    private void PlayerDie()
+    {
+        RB.constraints = RigidbodyConstraints2D.None;
+        RB.gravityScale = 0.5f;
+        shipCollapsedPS.Play();
+    }
+
     [HideInInspector] public bool IsInTurn = false;
     [HideInInspector] public PlayerWeapons Weapons;
     [HideInInspector] public Movement Movement;
@@ -14,12 +30,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Bar energyBar;
     [SerializeField] private Bar fuelBar;
 
+    private Rigidbody2D RB;
+
     private void Awake()
     {
         Weapons = GetComponent<PlayerWeapons>();
         Movement = GetComponent<Movement>();
         Energy = GetComponent<PlayerEnergy>();
         Health = transform.Find("Ship").GetComponent<Health>();
+
+        RB = GetComponent<Rigidbody2D>();
     }
     private void Start()
     {
