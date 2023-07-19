@@ -40,7 +40,8 @@ public class WeaponBoard : MonoBehaviour
     private void ResizeWeaponBoard()
     {
         var childCount = transform.childCount;
-        RectTransfrom.sizeDelta = RectTransfrom.sizeDelta.ChangeY(160 * childCount);
+        var gridLayout = GetComponent<GridLayoutGroup>();
+        RectTransfrom.sizeDelta = RectTransfrom.sizeDelta.ChangeY((gridLayout.cellSize.y + gridLayout.spacing.y) * childCount);
         _scrollLimit = (float)(RectTransfrom.sizeDelta.y - (float)1920 / Screen.width * Screen.height) / 2 + SCROLLPADDING;
     }
 

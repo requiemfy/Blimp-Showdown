@@ -317,7 +317,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7335363363007185041, guid: af1b06c17a2ff974a882f909bb9eb98e, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 992
+      value: 964
       objectReference: {fileID: 0}
     - target: {fileID: 7335363363007185041, guid: af1b06c17a2ff974a882f909bb9eb98e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -928,7 +928,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7335363363007185041, guid: af1b06c17a2ff974a882f909bb9eb98e, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1456
+      value: 1442
       objectReference: {fileID: 0}
     - target: {fileID: 7335363363007185041, guid: af1b06c17a2ff974a882f909bb9eb98e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1183,8 +1183,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 160}
+  m_AnchoredPosition: {x: 0, y: 8}
+  m_SizeDelta: {x: -16, y: 152}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &992219907
 MonoBehaviour:
@@ -2877,7 +2877,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7335363363007185041, guid: af1b06c17a2ff974a882f909bb9eb98e, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 528
+      value: 486
       objectReference: {fileID: 0}
     - target: {fileID: 7335363363007185041, guid: af1b06c17a2ff974a882f909bb9eb98e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3132,7 +3132,7 @@ MonoBehaviour:
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 320, y: 160}
-  m_Spacing: {x: 0, y: 0}
+  m_Spacing: {x: 0, y: 30}
   m_Constraint: 1
   m_ConstraintCount: 1
 --- !u!114 &1965931301
@@ -3181,10 +3181,10 @@ RectTransform:
   m_Father: {fileID: 1027629996}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2138023229
 MonoBehaviour:
@@ -3199,7 +3199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
