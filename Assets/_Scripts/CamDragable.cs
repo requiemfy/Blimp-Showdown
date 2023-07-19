@@ -1,3 +1,4 @@
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -6,22 +7,22 @@ using UnityEngine.UI;
 public class CamDragable : MonoBehaviour, IBeginDragHandler, IDragHandler
 {
     [SerializeField] private float multiplier;
-    private CameraManager cam;
+    private CinemachineFramingTransposer _transposer;
     private void Start()
     {
-        cam = CameraManager.Instance;
+        _transposer = CinemachineManager.Instance.Transposer;
     }
     private Vector2 firstTouchPos;
     private Vector2 firstOffset;
     public void OnBeginDrag(PointerEventData touch)
     {
         firstTouchPos = touch.position;
-        firstOffset = cam.Offset;
+        firstOffset = _transposer.m_TrackedObjectOffset;
     }
     public void OnDrag(PointerEventData touch)
     {
         if (Input.touchCount != 1 && !Input.GetMouseButton(0)) return;
         Vector2 dragVec = touch.position - firstTouchPos;
-        cam.Offset = firstOffset - dragVec * multiplier;
+        _transposer.m_TrackedObjectOffset = firstOffset - dragVec * multiplier;
     }
 }

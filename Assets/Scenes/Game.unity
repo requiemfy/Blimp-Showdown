@@ -8858,7 +8858,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b5f2bc4eca60d04c9ae55e22ec60903, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cinemachine: {fileID: 1814538070}
+  VCam: {fileID: 1814538070}
 --- !u!1 &1876561288
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,7 +15,7 @@ public class CameraManager : MonoBehaviour
     }
     private void Update()
     {
-        Update_Follow();
+        //Update_Follow();
         Update_PitchZoom();
     }
 
