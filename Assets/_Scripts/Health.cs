@@ -52,12 +52,6 @@ public class Health : MonoBehaviour
         SwitchMaterial();
         CountDownHealthBar();
         OnDamageTaken?.Invoke();
-        if (healthBar) 
-        {
-            DOTween.Kill(healthBar);
-            healthBar.gameObject.SetActive(true);
-            healthBar.SetFill(CurrentHealth, MaxHealth);
-        }
         if (CurrentHealth <= 0)
         {
             CurrentHealth = 0;
@@ -67,6 +61,12 @@ public class Health : MonoBehaviour
                 isAlive = false;
                 GetComponent<Collider2D>().enabled = false;
             }
+        }
+        if (healthBar) 
+        {
+            DOTween.Kill(healthBar);
+            healthBar.gameObject.SetActive(true);
+            healthBar.SetFill(CurrentHealth, MaxHealth);
         }
     }
 

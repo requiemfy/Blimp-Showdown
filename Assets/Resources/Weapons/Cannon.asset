@@ -15,7 +15,7 @@ MonoBehaviour:
   firePointPos: {x: 0.58, y: -0.06}
   barrel: {fileID: 21300000, guid: 6aadc32187c4a0140b9fe7aaf4e1f39d, type: 3}
   frame: {fileID: -1153638114, guid: b4adc1cb4895a8b489c8a1b7b6ba0f5b, type: 3}
-  bulletSprite: {fileID: 0}
+  bulletSprite: {fileID: -719182461, guid: 712264267df3aa549af218d13c576b8d, type: 3}
   energyCost: 1
   health: 12
   damage: 5

@@ -16,7 +16,6 @@ public class WeaponType : ScriptableObject
     public int range;
 
     //projectile
-    public float detectRadius;
     public float explodeRadius;
     public bool isGravityAffected;
     public int bulletCount;
@@ -33,7 +32,6 @@ public class WeaponType : ScriptableObject
 
     private void OnValidate()
     {
-        explodeRadius = Mathf.Max(detectRadius, explodeRadius);
         bulletCount = Mathf.Max(bulletCount, 1);
         bulletOffset = Mathf.Min((float)1 / bulletCount, bulletOffset);
         bulletOffset = Mathf.Max(bulletOffset, 0);
@@ -49,6 +47,7 @@ public class WeaponEditor : Editor
     private SerializedProperty firePointPos;
     private SerializedProperty barrel;
     private SerializedProperty frame;
+    private SerializedProperty bulletSprite;
     private SerializedProperty energyCost;
     private SerializedProperty health;
     private SerializedProperty damage;
@@ -69,12 +68,12 @@ public class WeaponEditor : Editor
         firePointPos = serializedObject.FindProperty("firePointPos");
         barrel = serializedObject.FindProperty("barrel");
         frame = serializedObject.FindProperty("frame");
+        bulletSprite = serializedObject.FindProperty("bulletSprite");
         energyCost = serializedObject.FindProperty("energyCost");
         health = serializedObject.FindProperty("health");
         damage = serializedObject.FindProperty("damage");
         range = serializedObject.FindProperty("range");
 
-        detectRadius = serializedObject.FindProperty("detectRadius");
         explodeRadius = serializedObject.FindProperty("explodeRadius");
         isGravityAffected = serializedObject.FindProperty("isGravityAffected");
         bulletCount = serializedObject.FindProperty("bulletCount");
@@ -92,6 +91,7 @@ public class WeaponEditor : Editor
         EditorGUILayout.PropertyField(firePointPos);
         EditorGUILayout.PropertyField(barrel);
         EditorGUILayout.PropertyField(frame);
+        EditorGUILayout.PropertyField(bulletSprite);
         EditorGUILayout.PropertyField(energyCost);
         EditorGUILayout.PropertyField(health);
         EditorGUILayout.PropertyField(damage);
@@ -104,7 +104,6 @@ public class WeaponEditor : Editor
         }
         else
         {
-            EditorGUILayout.PropertyField(detectRadius);
             EditorGUILayout.PropertyField(explodeRadius);
             EditorGUILayout.PropertyField(isGravityAffected);
             EditorGUILayout.PropertyField(bulletCount);

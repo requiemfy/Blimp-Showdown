@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using UnityEngine;
 
@@ -10,14 +11,17 @@ public class Bullet : MonoBehaviour
     [SerializeField] private SpriteRenderer bulletRen;
     [SerializeField] private CircleCollider2D colldr;
     [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private GameObject trailPS;
 
     [SerializeField]
-    private GameObject explosion;
+    private SpriteRenderer explosion;
 
     public void Launch(WeaponType weapon, LayerMask layer, Vector2 launchVec)
     {
         gameObject.layer = layer;
         Damage = weapon.damage;
+        bulletRen.sprite = weapon.bulletSprite;
+        colldr.radius = 0.5f * weapon.bulletSprite.rect.width / weapon.bulletSprite.pixelsPerUnit;
         explRadius = weapon.explodeRadius;
         rb.gravityScale = weapon.isGravityAffected? 1 : 0;
         rb.AddForce(launchVec, ForceMode2D.Impulse);
@@ -41,6 +45,7 @@ public class Bullet : MonoBehaviour
     {
         if (collision.collider.CompareTag("ExplodeImmediate"))
         {
+            if (timeRoutine != null) StopCoroutine(timeRoutine);
             Explode();
             return;
         }
@@ -52,12 +57,14 @@ public class Bullet : MonoBehaviour
         rb.velocity = Vector2.zero;
         rb.gravityScale = 0f;
 
-        explosion.SetActive(true);
+        explosion.gameObject.SetActive(true);
+        explosion.DOColor(Color.clear, 0.5f);
         explosion.transform.localScale = new Vector2(explRadius, explRadius);
 
         bulletRen.enabled = false;
         colldr.enabled = false;
-        Destroy(gameObject, 0.5f);
+        trailPS.SetActive(false);
+        Destroy(gameObject, 2f);
     }
 
 

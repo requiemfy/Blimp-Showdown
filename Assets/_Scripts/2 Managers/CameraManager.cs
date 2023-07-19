@@ -1,3 +1,4 @@
+using Cinemachine;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -69,6 +70,9 @@ public class CameraManager : MonoBehaviour
 
     #region PITCHZOOM
     public Action<float> WhileZoomChanging;
+
+    [SerializeField]
+    private CinemachineVirtualCamera virtualCam;
     private void Update_PitchZoom()
     {
         if (Input.touchCount == 2)
@@ -93,8 +97,8 @@ public class CameraManager : MonoBehaviour
 
     private void Zoom(float amount)
     {
-        _cam.orthographicSize = Mathf.Clamp(_cam.orthographicSize - amount, 5f, 20f);
-        WhileZoomChanging(_cam.orthographicSize);
+        virtualCam.m_Lens.OrthographicSize = Mathf.Clamp(virtualCam.m_Lens.OrthographicSize - amount, 5f, 20f);
+        WhileZoomChanging(virtualCam.m_Lens.OrthographicSize);
     }
     #endregion
 }
