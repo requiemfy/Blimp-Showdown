@@ -25,8 +25,8 @@ public class Bullet : MonoBehaviour
         explRadius = weapon.explodeRadius;
         rb.gravityScale = weapon.isGravityAffected? 1 : 0;
         rb.AddForce(launchVec, ForceMode2D.Impulse);
-        OnLaunch();
         CinemachineManager.Instance.SetFollow(transform);
+        CinemachineManager.Instance.PlayCamShake(0.5f, 0.25f);
     }
 
 
@@ -67,7 +67,7 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject, 2f);
     }
 
-
+    /*
     #region VISUAL
     private void OnLaunch()
     {
@@ -83,4 +83,5 @@ public class Bullet : MonoBehaviour
         bulletRen.color = original;
     }
     #endregion
+    */
 }

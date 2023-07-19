@@ -7,22 +7,22 @@ using UnityEngine.UI;
 public class CamDragable : MonoBehaviour, IBeginDragHandler, IDragHandler
 {
     [SerializeField] private float multiplier;
-    private CinemachineFramingTransposer _transposer;
+    private CinemachineCameraOffset _transposer;
     private void Start()
     {
-        _transposer = CinemachineManager.Instance.Transposer;
+        _transposer = CinemachineManager.Instance.Offset;
     }
     private Vector2 firstTouchPos;
     private Vector2 firstOffset;
     public void OnBeginDrag(PointerEventData touch)
     {
         firstTouchPos = touch.position;
-        firstOffset = _transposer.m_TrackedObjectOffset;
+        firstOffset = _transposer.m_Offset;
     }
     public void OnDrag(PointerEventData touch)
     {
         if (Input.touchCount != 1 && !Input.GetMouseButton(0)) return;
         Vector2 dragVec = touch.position - firstTouchPos;
-        _transposer.m_TrackedObjectOffset = firstOffset - dragVec * multiplier;
+        _transposer.m_Offset = firstOffset - dragVec * multiplier;
     }
 }
