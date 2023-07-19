@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
         RB.constraints = RigidbodyConstraints2D.None;
         RB.gravityScale = 0.5f;
         shipCollapsedPS.Play();
+        CinemachineManager.Instance.PlayCamShake(0.7f, 2f);
+        CinemachineManager.Instance.SetFollow(transform);
     }
 
     [HideInInspector] public bool IsInTurn = false;
