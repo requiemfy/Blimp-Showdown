@@ -21,6 +21,7 @@ public class WeaponCardInput : DropSlot
     {
         if (droppedItem.TryGetComponent(out WeaponCard card))
         {
+            Debug.Log("hello" + order);
             var droppedWeapon = card.Represent;
             SelectManager.Instance.StagedWeapons[order] = droppedWeapon;
             SelectManager.Instance.UpdateTotalHealth();

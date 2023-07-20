@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class WeaponCard : DragableItem
 {
     //WARNING: Remember to check for raycast before changing prefab
+    [field: SerializeField] //needed because weapon has to be serialize when duplicate
     public WeaponType Represent { get; private set; }
 
     [SerializeField] GameObject BG;
