@@ -13,6 +13,7 @@ public class WeaponCardInput : DropSlot
             if (data == null) return;
             if (data.Weapons[order] == null) return;
             var card = Instantiate(WeaponBoard.Instance.WeaponCardPrefab, transform);
+            card.HideFrame();
             card.SetRepresent(data.Weapons[order]);
         };
     }

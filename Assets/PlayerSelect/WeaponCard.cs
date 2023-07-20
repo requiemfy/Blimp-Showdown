@@ -20,8 +20,7 @@ public class WeaponCard : DragableItem
     private Vector2 beginScrollPos;
     protected override void OnBeginDrag()
     {
-        BG.SetActive(false);
-        energyTMP.gameObject.SetActive(false);
+        HideFrame();
     }
     protected override void OnBeginScroll()
     {
@@ -47,4 +46,9 @@ public class WeaponCard : DragableItem
         energyTMP.text = weapon.energyCost.ToString();
     }
 
+    public void HideFrame()
+    {
+        BG.SetActive(false);
+        energyTMP.gameObject.SetActive(false);
+    }
 }
