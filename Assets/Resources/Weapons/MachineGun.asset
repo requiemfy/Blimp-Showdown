@@ -22,7 +22,7 @@ MonoBehaviour:
   range: 100
   explodeRadius: 2
   isGravityAffected: 0
-  bulletCount: 10
+  bulletCount: 5
   bulletOffset: 0
   bulletShootTime: 0.3
   isRaycast: 0
