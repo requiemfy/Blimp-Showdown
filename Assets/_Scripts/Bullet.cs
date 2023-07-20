@@ -49,7 +49,7 @@ public class Bullet : MonoBehaviour
             Explode();
             return;
         }
-
+        rb.gravityScale = 1f;
         StartTimeCounter();
     }
     private void Explode()
