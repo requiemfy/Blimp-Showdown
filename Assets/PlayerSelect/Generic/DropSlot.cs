@@ -9,10 +9,13 @@ public abstract class DropSlot : MonoBehaviour, IDropHandler
     protected abstract void OnItemDropped(DragableItem droppedItem);
     public void OnDrop(PointerEventData eventData)
     {
-        ClearDropSlot();
-        DragableItem droppedItem = eventData.pointerDrag.GetComponent<DragableItem>();
-        droppedItem.parentAfterDrag = transform;
-        OnItemDropped(droppedItem);
+        if (eventData.pointerDrag.TryGetComponent(out DragableItem droppedItem))
+        {
+            if (droppedItem.isScrolling) return;
+            ClearDropSlot();
+            droppedItem.parentAfterDrag = transform;
+            OnItemDropped(droppedItem);
+        }
     }
 
     protected void ClearDropSlot()

@@ -7,6 +7,9 @@ public abstract class DragableItem : MonoBehaviour, IBeginDragHandler, IDragHand
 {
     [HideInInspector] 
     public Transform parentAfterDrag;
+    public bool isScrolling;
+
+    protected abstract void OnBeginDrag();
     protected abstract void OnBeginScroll();
     protected abstract void WhileScrolling(Vector2 scrollVec);
     protected abstract void OnTap();
@@ -14,7 +17,6 @@ public abstract class DragableItem : MonoBehaviour, IBeginDragHandler, IDragHand
     private Transform originalParent;
     private Image image;
     private Vector2 potentialDrag;
-    private bool isScrolling;
     private int _siblingIndex;
 
     protected virtual void Awake()
@@ -37,6 +39,7 @@ public abstract class DragableItem : MonoBehaviour, IBeginDragHandler, IDragHand
             return;
         }
         Duplicate();
+        OnBeginDrag();
     }
     public void OnDrag(PointerEventData eventData)
     {

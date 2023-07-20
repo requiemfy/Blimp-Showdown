@@ -305,6 +305,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parentAfterDrag: {fileID: 0}
   <Represent>k__BackingField: {fileID: 0}
+  BG: {fileID: 3945699126509971890}
   barrelImg: {fileID: 7881497244935926113}
   energyTMP: {fileID: 141386729}
 --- !u!1 &7881497244935926124

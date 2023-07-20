@@ -5,9 +5,9 @@ using UnityEngine.UI;
 public class WeaponCard : DragableItem
 {
     //WARNING: Remember to check for raycast before changing prefab
-    [field: SerializeField]
     public WeaponType Represent { get; private set; }
 
+    [SerializeField] GameObject BG;
     [SerializeField] Image barrelImg;
     [SerializeField] TextMeshProUGUI energyTMP;
     protected override void Awake()
@@ -17,6 +17,11 @@ public class WeaponCard : DragableItem
 
 
     private Vector2 beginScrollPos;
+    protected override void OnBeginDrag()
+    {
+        BG.SetActive(false);
+        energyTMP.gameObject.SetActive(false);
+    }
     protected override void OnBeginScroll()
     {
         beginScrollPos = WeaponBoard.Instance.RectTransfrom.anchoredPosition;
@@ -40,4 +45,5 @@ public class WeaponCard : DragableItem
         barrelImg.sprite = weapon.barrel;
         energyTMP.text = weapon.energyCost.ToString();
     }
+
 }

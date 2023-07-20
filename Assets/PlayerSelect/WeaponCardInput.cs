@@ -6,7 +6,7 @@ public class WeaponCardInput : DropSlot
   
     private void Start()
     {
-        SelectManager.Instance.onSaved += ResetSlot;
+        SelectManager.Instance.onSaved += ClearDropSlot;
         SelectManager.Instance.onStartedEdit += (team) =>
         {
             TeamData data = DataPersistence.Get(team);
@@ -16,16 +16,15 @@ public class WeaponCardInput : DropSlot
             card.SetRepresent(data.Weapons[order]);
         };
     }
-    private void ResetSlot()
-    {
-        ClearDropSlot();
-    }
 
     protected override void OnItemDropped(DragableItem droppedItem)
     {
-        var droppedWeapon = droppedItem.GetComponent<WeaponCard>().Represent;
-        SelectManager.Instance.StagedWeapons[order] = droppedWeapon;
-        SelectManager.Instance.UpdateTotalHealth();
-        SelectManager.Instance.UpdateTotalDamage();
+        if (droppedItem.TryGetComponent(out WeaponCard card))
+        {
+            var droppedWeapon = card.Represent;
+            SelectManager.Instance.StagedWeapons[order] = droppedWeapon;
+            SelectManager.Instance.UpdateTotalHealth();
+            SelectManager.Instance.UpdateTotalDamage();
+        }
     }
 }
