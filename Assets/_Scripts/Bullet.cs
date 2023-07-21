@@ -52,7 +52,7 @@ public class Bullet : MonoBehaviour
         rb.gravityScale = 1f;
         StartTimeCounter();
     }
-    private void Explode()
+    public void Explode()
     {
         rb.velocity = Vector2.zero;
         rb.gravityScale = 0f;
