@@ -10,34 +10,22 @@ public class CinemachineManager : MonoBehaviour
     public CinemachineVirtualCamera VCam;
     public CinemachineCameraOffset Offset { get; private set; }
 
-    private CinemachineBasicMultiChannelPerlin _basicMultiChannelPerlin;
+    private Transform _currentPlayer;
 
     private void Awake()
     {
         Instance = this;
         Offset = VCam.GetComponent<CinemachineCameraOffset>();
-        _basicMultiChannelPerlin = VCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
     }
 
-    public void SetFollow(Transform target)
+    public void SetFollow(Transform target, bool isPlayer = false)
     {
+        if (target == null) target = _currentPlayer;
+        if (isPlayer) _currentPlayer = target;
         VCam.Follow = target;
         //Offset.m_Offset = Vector2.zero;
         DOTween.To(() => (Vector2)Offset.m_Offset, x => Offset.m_Offset = x, Vector2.zero, 1.5f);
     }
-
-    /*
-    public void PlayCamShake(int amplitute, float duration)
-    {
-        StopAllCoroutines();
-        StartCoroutine(ShakeCountDown());
-        IEnumerator ShakeCountDown()
-        {
-            _basicMultiChannelPerlin.m_AmplitudeGain = amplitute;
-            yield return new WaitForSeconds(duration);
-            _basicMultiChannelPerlin.m_AmplitudeGain = 0f;
-        }
-    }*/
 
     public void PlayCamShake(float intensity, float duration)
     {
