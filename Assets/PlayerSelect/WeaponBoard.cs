@@ -26,6 +26,7 @@ public class WeaponBoard : MonoBehaviour
     {
         SpawnCards();
         ResizeWeaponBoard();
+        BackToTop();
     }
     private void SpawnCards()
     {
@@ -53,5 +54,10 @@ public class WeaponBoard : MonoBehaviour
         bool exceedLim = Mathf.Abs(targetPos.y) > _scrollLimit;
         if (exceedLim) return;
         RectTransfrom.anchoredPosition = targetPos;
+    }
+
+    public void BackToTop()
+    {
+        RectTransfrom.anchoredPosition = new(0,-_scrollLimit);
     }
 }

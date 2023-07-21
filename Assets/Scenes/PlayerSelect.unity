@@ -372,7 +372,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7881497244606989834, guid: 7b05568ad2e54be45bdbddce870d3a21, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7881497244606989834, guid: 7b05568ad2e54be45bdbddce870d3a21, type: 3}
       propertyPath: m_AnchorMin.x
@@ -380,15 +380,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7881497244606989834, guid: 7b05568ad2e54be45bdbddce870d3a21, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7881497244606989834, guid: 7b05568ad2e54be45bdbddce870d3a21, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 320
       objectReference: {fileID: 0}
     - target: {fileID: 7881497244606989834, guid: 7b05568ad2e54be45bdbddce870d3a21, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 7881497244606989834, guid: 7b05568ad2e54be45bdbddce870d3a21, type: 3}
       propertyPath: m_LocalPosition.x
@@ -420,11 +420,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7881497244606989834, guid: 7b05568ad2e54be45bdbddce870d3a21, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 7881497244606989834, guid: 7b05568ad2e54be45bdbddce870d3a21, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -150
       objectReference: {fileID: 0}
     - target: {fileID: 7881497244606989834, guid: 7b05568ad2e54be45bdbddce870d3a21, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1623,7 +1623,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7881497244606989834, guid: 7b05568ad2e54be45bdbddce870d3a21, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7881497244606989834, guid: 7b05568ad2e54be45bdbddce870d3a21, type: 3}
       propertyPath: m_AnchorMin.x
@@ -1631,15 +1631,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7881497244606989834, guid: 7b05568ad2e54be45bdbddce870d3a21, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7881497244606989834, guid: 7b05568ad2e54be45bdbddce870d3a21, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 320
       objectReference: {fileID: 0}
     - target: {fileID: 7881497244606989834, guid: 7b05568ad2e54be45bdbddce870d3a21, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 7881497244606989834, guid: 7b05568ad2e54be45bdbddce870d3a21, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1671,11 +1671,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7881497244606989834, guid: 7b05568ad2e54be45bdbddce870d3a21, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 7881497244606989834, guid: 7b05568ad2e54be45bdbddce870d3a21, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -480
       objectReference: {fileID: 0}
     - target: {fileID: 7881497244606989834, guid: 7b05568ad2e54be45bdbddce870d3a21, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3139,6 +3139,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1965931301}
+        m_TargetAssemblyTypeName: WeaponBoard, Assembly-CSharp
+        m_MethodName: BackToTop
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
