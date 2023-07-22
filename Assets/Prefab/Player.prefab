@@ -5130,6 +5130,7 @@ MonoBehaviour:
   Energy: {fileID: 0}
   Health: {fileID: 0}
   shipCollapsedPS: {fileID: 5904094876357294496}
+  explosionPS: {fileID: 3386273078259645330, guid: 32c6eefe97d4ca644a4f58e965639b34, type: 3}
   energyBar: {fileID: 7034790355377646169}
   fuelBar: {fileID: 3711300234344205812}
 --- !u!114 &3067302567888788034

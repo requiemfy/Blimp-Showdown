@@ -1,5 +1,5 @@
+using System.Collections;
 using UnityEngine;
-using UnityEngine.XR;
 
 public class PlayerController : MonoBehaviour
 {
@@ -18,8 +18,23 @@ public class PlayerController : MonoBehaviour
         RB.constraints = RigidbodyConstraints2D.None;
         RB.gravityScale = 0.5f;
         shipCollapsedPS.Play();
+        SpawnExplosionsOnShipBody();
         CinemachineManager.Instance.PlayCamShake(0.7f, 2f);
         CinemachineManager.Instance.SetFollow(transform);
+    }
+    private void SpawnExplosionsOnShipBody()
+    {
+        StartCoroutine(ExplodeSequence());
+        IEnumerator ExplodeSequence()
+        {
+            for (int i =0; i <5; i++)
+            {
+                var explodePos = transform.position + new Vector3(Random.Range(-3,3), Random.Range(-1.5f, 1.5f), 0);
+                var explosion = Instantiate(explosionPS, explodePos, Quaternion.identity);
+                Destroy(explosion.gameObject, 2f);
+                yield return new WaitForSeconds(0.5f);
+            }
+        }
     }
 
     [HideInInspector] public bool IsInTurn = false;
@@ -29,6 +44,7 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public Health Health;
 
     [SerializeField] private ParticleSystem shipCollapsedPS;
+    [SerializeField] private Transform explosionPS;
     [SerializeField] private Bar energyBar;
     [SerializeField] private Bar fuelBar;
 
@@ -51,8 +67,7 @@ public class PlayerController : MonoBehaviour
             Energy.Restore(1);
             PopUpManager.Instance.SpawnText("+1", energyBar.transform.position, CustomColors.Purple);
         };
-        //health
-        Health.OnDeath += () => shipCollapsedPS.Play();
+       
         //energy
         Energy.onEnergyChanged += () =>
         {
@@ -70,6 +85,7 @@ public class PlayerController : MonoBehaviour
             fuelBar.gameObject.SetActive(false);
         };
     }
+
 
 
     public void Construct(Team team)

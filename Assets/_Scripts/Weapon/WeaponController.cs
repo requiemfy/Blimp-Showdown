@@ -11,7 +11,10 @@ public class WeaponController : MonoBehaviour
     [HideInInspector] public Health Health;
     [HideInInspector] public WeaponShooting Shooter;
 
-    [SerializeField] private ParticleSystem collapsePS;
+    [Header("Effects")]
+    [SerializeField] private ParticleSystem smokingPS;
+    [SerializeField] private ParticleSystem burningPS;
+
     private bool _isCollapsed = false;
     private PlayerController _parentShip;
 
@@ -21,11 +24,22 @@ public class WeaponController : MonoBehaviour
         Health = GetComponent<Health>();
         Shooter = GetComponent<WeaponShooting>();
 
+        Health.OnDamageTaken += () =>
+        {
+            float healthRatio = (float)Health.GetRatio();
+            if (healthRatio >= 0.5f) return;
+            if (healthRatio >= 0.2f)
+            {
+                smokingPS.Play();
+                return;
+            }
+        };
         Health.OnDeath += () =>
         {
             _isCollapsed = true;
             _parentShip.WeaponLeft -=1;
-            collapsePS.Play();
+            burningPS.Play();
+            smokingPS.Stop();
         };
     }
 

@@ -12,6 +12,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] private CircleCollider2D colldr;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private GameObject trailPS;
+    [SerializeField] private TrailRenderer trailRen;
 
     [SerializeField]
     private SpriteRenderer explosion;
@@ -25,6 +26,7 @@ public class Bullet : MonoBehaviour
         explRadius = weapon.explodeRadius;
         rb.gravityScale = weapon.isGravityAffected? 1 : 0;
         rb.AddForce(launchVec, ForceMode2D.Impulse);
+        trailRen.startWidth = colldr.radius * 2;
         CinemachineManager.Instance.SetFollow(transform);
         CinemachineManager.Instance.PlayCamShake(0.5f, 0.25f);
     }

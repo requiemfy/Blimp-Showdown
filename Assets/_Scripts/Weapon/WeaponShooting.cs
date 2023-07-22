@@ -8,7 +8,9 @@ public class WeaponShooting : MonoBehaviour
     public Vector2 Direction { get; private set; }
     public float Angle { get; private set; }
     public Transform firePoint;
-    [SerializeField] Bullet bulletPrefab;
+
+    [SerializeField] private Bullet bulletPrefab;
+    [SerializeField] private Transform fireSparkPS;
 
     private WeaponType _weapon;
     private Rigidbody2D _parentRB;
@@ -85,6 +87,7 @@ public class WeaponShooting : MonoBehaviour
                 layer: gameObject.layer,
                 launchVec: LaunchVec
                 );
+            SpawnSpark();
             Recoil();
             //ShipKnockBack();
             yield return new WaitForSeconds(_weapon.bulletShootTime);
@@ -103,7 +106,12 @@ public class WeaponShooting : MonoBehaviour
             if (!_weapon.isRayMultiple) return;
         }
     }
-
+    private void SpawnSpark()
+    {
+        var spark = Instantiate(fireSparkPS, firePoint.position, Quaternion.identity);
+        spark.up = Direction;
+        Destroy(spark.gameObject, 2f);
+    }
 
 
     #region SHOOTING VISUAL
