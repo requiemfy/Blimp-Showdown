@@ -49,6 +49,11 @@ public static class Extension
         }
         throw new Exception("Team has no color in palette");
     }
+    public static Color32 ChangeAlpha(this Color32 color, byte alphaVal)
+    {
+        var targetColor = color; targetColor.a = alphaVal;
+        return targetColor;
+    }
 }
 public static class CustomColors
 {

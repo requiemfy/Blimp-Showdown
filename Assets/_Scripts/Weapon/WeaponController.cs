@@ -27,12 +27,9 @@ public class WeaponController : MonoBehaviour
         Health.OnDamageTaken += () =>
         {
             float healthRatio = (float)Health.GetRatio();
+            Debug.Log(healthRatio);
             if (healthRatio >= 0.5f) return;
-            if (healthRatio >= 0.2f)
-            {
-                smokingPS.Play();
-                return;
-            }
+            smokingPS.Play();
         };
         Health.OnDeath += () =>
         {

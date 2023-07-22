@@ -43,11 +43,9 @@ public class HUD : MonoBehaviour
     {
         Instance = this;
         InitializeButtons();
-    }
-    private void Start()
-    {
         SpawnTurnIndicator();
     }
+
     private void InitializeButtons()
     {
         fireBtn.onClick.AddListener(() => { curWeapon.Shooter.Fire(); });
@@ -93,24 +91,26 @@ public class HUD : MonoBehaviour
         });
         ShowWeaponHUD(false);
     }
+
+    public Image FindTurnIndicator(Team target)
+    {
+        foreach(Transform child in turnIndicatorParent)
+        {
+            if (child.name == target.ToString())
+            {
+                return child.GetComponent<Image>();
+            }
+        }
+        throw new System.Exception("No turn indicator found for the given team");
+    }
     private void SpawnTurnIndicator()
     {
         foreach (Team team in GameManager.Instance.OpennedTeams)
         {
             var indicator = Instantiate(turnPrefab, turnIndicatorParent);
-            indicator.color = team.GetTeamColor();
+            Color32 faintColor = team.GetTeamColor(); faintColor.a = 50;
+            indicator.color = faintColor;
             indicator.name = team.ToString();
-            GameManager.Instance.afterTurnChanged += (Team before, Team after) =>
-            {
-                if (team == after)
-                {
-                    Color32 apparentColor = team.GetTeamColor(); apparentColor.a = 255;
-                    indicator.color = apparentColor;
-                    return;
-                }
-                Color32 faintColor = team.GetTeamColor(); faintColor.a = 50;
-                indicator.color = faintColor;
-            };
         }
     }
 

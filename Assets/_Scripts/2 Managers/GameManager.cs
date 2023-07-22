@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     public Action onTurnEnded;
-    public Action<Team, Team> afterTurnChanged;
     public Team[] OpennedTeams { get; private set; }
     public Vector2 wind;
 
@@ -33,6 +32,7 @@ public class GameManager : MonoBehaviour
         GetRespawnPoints();
         SpawnPlayers();
         SetTurn(OpennedTeams[0]);
+        HUD.Instance.FindTurnIndicator(OpennedTeams[0]).color = OpennedTeams[0].GetTeamColor();
     }
     private void GetRespawnPoints()
     {
@@ -57,8 +57,12 @@ public class GameManager : MonoBehaviour
     private int current = 0;
     public void NextTurn()
     {
-        Team before = OpennedTeams[current];
+        //before
+        var before = OpennedTeams[current];
+        HUD.Instance.FindTurnIndicator(before).color = before.GetTeamColor().ChangeAlpha(50);
         onTurnEnded();
+
+        //after
         current++;
         current %= OpennedTeams.Length;
         if (DataPersistence.Get(OpennedTeams[current]).Controller.WeaponLeft == 0)
@@ -67,8 +71,9 @@ public class GameManager : MonoBehaviour
             NextTurn();
             return;
         }
-        SetTurn(OpennedTeams[current]);
-        afterTurnChanged?.Invoke(before, OpennedTeams[current]);
+        var after = OpennedTeams[current];
+        SetTurn(after);
+        HUD.Instance.FindTurnIndicator(after).color = after.GetTeamColor();
     }
     private void SetTurn(Team team)
     {

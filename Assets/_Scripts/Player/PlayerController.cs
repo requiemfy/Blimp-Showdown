@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -21,6 +22,7 @@ public class PlayerController : MonoBehaviour
         SpawnExplosionsOnShipBody();
         CinemachineManager.Instance.PlayCamShake(0.7f, 2f);
         CinemachineManager.Instance.SetFollow(transform);
+        HUD.Instance.FindTurnIndicator(_team).sprite = deathIcon;
     }
     private void SpawnExplosionsOnShipBody()
     {
@@ -43,11 +45,14 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public PlayerEnergy Energy;
     [HideInInspector] public Health Health;
 
-    [SerializeField] private ParticleSystem shipCollapsedPS;
-    [SerializeField] private Transform explosionPS;
     [SerializeField] private Bar energyBar;
     [SerializeField] private Bar fuelBar;
+    [Header("Visual")]
+    [SerializeField] private ParticleSystem shipCollapsedPS;
+    [SerializeField] private Transform explosionPS;
+    [SerializeField] private Sprite deathIcon;
 
+    private Team _team;
     private Rigidbody2D RB;
 
     private void Awake()
@@ -90,6 +95,7 @@ public class PlayerController : MonoBehaviour
 
     public void Construct(Team team)
     {
+        _team = team;
         DataPersistence.Push(team, this);
         gameObject.layer = LayerMask.NameToLayer(team.ToString());
         Health.Construct(30, tag);
