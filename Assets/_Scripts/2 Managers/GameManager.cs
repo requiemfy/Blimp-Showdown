@@ -1,7 +1,5 @@
 using System;
-using System.Collections;
 using System.Linq;
-using Unity.Mathematics;
 using UnityEngine;
 using Random = System.Random;
 
@@ -99,5 +97,10 @@ public class GameManager : MonoBehaviour
         _playerRemaining--;
         if (_playerRemaining > 1) return;
         Debug.Log("GameOver");
+        foreach(Team team in OpennedTeams)
+        {
+            if (DataPersistence.Get(team).isDestroyed) continue;
+            Debug.LogWarning("Winner: " + team);
+        }
     }
 }

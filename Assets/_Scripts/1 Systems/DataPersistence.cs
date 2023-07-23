@@ -42,6 +42,8 @@ public static class DataPersistence
 public class TeamData {
     public WeaponType[] Weapons { get; private set; }
     public PlayerController Controller;
+    public bool isDestroyed = false;
+
     public TeamData(WeaponType[] weapons)
     {
         Weapons = weapons;
