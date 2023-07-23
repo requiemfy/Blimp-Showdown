@@ -23,8 +23,7 @@ public class PlayerController : MonoBehaviour
         CinemachineManager.Instance.PlayCamShake(0.7f, 2f);
         CinemachineManager.Instance.SetFollow(transform);
         HUD.Instance.FindTurnIndicator(_team).sprite = deathIcon;
-        DataPersistence.Get(_team).isDestroyed= true;
-        GameManager.Instance.DecreasePlayerRemaining();
+        GameManager.Instance.DecreasePlayerRemaining(_team);
     }
     private void SpawnExplosionsOnShipBody()
     {

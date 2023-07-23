@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public Vector2 Wind;
 
     [SerializeField] private PlayerController playerPrefab;
+    [SerializeField] private GameOverScreen gameOverScreen;
 
     private int _playerRemaining;
     private GameObject[] _respawnPoints;
@@ -92,15 +93,11 @@ public class GameManager : MonoBehaviour
         HUD.Instance.StartObservePlayer(target);
     }
 
-    public void DecreasePlayerRemaining()
+    public void DecreasePlayerRemaining(Team team)
     {
         _playerRemaining--;
+        DataPersistence.Get(team).isDestroyed = true;
         if (_playerRemaining > 1) return;
-        Debug.Log("GameOver");
-        foreach(Team team in OpennedTeams)
-        {
-            if (DataPersistence.Get(team).isDestroyed) continue;
-            Debug.LogWarning("Winner: " + team);
-        }
+        gameOverScreen.Show();
     }
 }

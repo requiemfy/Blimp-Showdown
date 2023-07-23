@@ -59,7 +59,7 @@ public class HUD : MonoBehaviour
         };
         aimJoystick.WhileDraging = (Vector2 dragVec) => {
             curWeapon.Shooter.Adjust(dragVec);
-            UpdatePowerAndAngleTMP();
+            UpdatePowerAnglePad();
         };
         aimJoystick.UponPointerUp = () =>
         {
@@ -137,7 +137,7 @@ public class HUD : MonoBehaviour
         SetTrajectoryTarget();
         UpdateWeaponHealthUI();
         UpdateRangeIdctUI();
-        UpdatePowerAndAngleTMP();
+        UpdatePowerAnglePad();
         ShowWeaponHUD(true);
     }
     public void StartObservePlayer(PlayerController newPlayer)
@@ -208,17 +208,17 @@ public class HUD : MonoBehaviour
         energyBar.DOFillAmount((float)curPlayer.Energy.GetRatio(), duration: 0.5f);
         energyTMP.text = curPlayer.Energy.currentEnergy.ToString();
     }
-    private void UpdatePowerAndAngleTMP()
+    private void UpdatePowerAnglePad()
     {
         var shooter = curWeapon.Shooter;
         powerAnglePad.UpdateValues((float)shooter.Power,(int)shooter.Angle);
         if (shooter.Angle.InRange(0, 180))
         {
-            powerAnglePad.transform.position = curWeapon.transform.position + new Vector3(0,-1,0);
+            powerAnglePad.transform.position = curWeapon.transform.position + new Vector3(0,-2,0);
         }
         else
         {
-            powerAnglePad.transform.position = curWeapon.transform.position + new Vector3(0,1,0);
+            powerAnglePad.transform.position = curWeapon.transform.position + new Vector3(0,2,0);
         }
         /*
         powerTMP.text = (curWeapon.Shooter.Power * 100).ToString("0");

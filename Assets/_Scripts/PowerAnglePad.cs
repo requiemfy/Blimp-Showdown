@@ -8,7 +8,7 @@ public class PowerAnglePad : MonoBehaviour
 
     public void UpdateValues(float power, int angle)
     {
-        powerTMP.text = (power * 100).ToString("0");
-        angleTMP.text = angle.ToString();
+        powerTMP.text = $"{(int)(power * 100)}%";
+        angleTMP.text = $"{angle}°";
     }
 }
