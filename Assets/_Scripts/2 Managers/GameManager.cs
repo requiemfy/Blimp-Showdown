@@ -10,16 +10,18 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     public Action onTurnEnded;
     public Team[] OpennedTeams { get; private set; }
-    public Vector2 wind;
+    public Vector2 Wind;
 
     [SerializeField] private PlayerController playerPrefab;
 
+    private int _playerRemaining;
     private GameObject[] _respawnPoints;
 
     private void Awake()
     {
         Instance = this;
         OpennedTeams = DataPersistence.GetOpenedTeams();
+        _playerRemaining = OpennedTeams.Length;
         RandomizeTurnOrder();
     }
     private void RandomizeTurnOrder()
@@ -90,5 +92,12 @@ public class GameManager : MonoBehaviour
         CinemachineManager.Instance.SetFollow(target.transform, isPlayer: true);
         HUD.Instance.StartObserveWeapon(null);
         HUD.Instance.StartObservePlayer(target);
+    }
+
+    public void DecreasePlayerRemaining()
+    {
+        _playerRemaining--;
+        if (_playerRemaining > 1) return;
+        Debug.Log("GameOver");
     }
 }
