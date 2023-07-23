@@ -74,6 +74,7 @@ public class PlayerController : MonoBehaviour
         };
        
         //energy
+        energyBar.SetFill(Energy.currentEnergy, 10);
         Energy.onEnergyChanged += () =>
         {
             energyBar.SetFill(Energy.currentEnergy, 10);
