@@ -145,9 +145,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4543192888695250097}
   - component: {fileID: 4543192888695250096}
+  - component: {fileID: 3063269989147688359}
+  - component: {fileID: 7916760633559410017}
   m_Layer: 0
   m_Name: Barrel
-  m_TagString: Untagged
+  m_TagString: ExplodeImmediate
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -209,17 +211,85 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6aadc32187c4a0140b9fe7aaf4e1f39d, type: 3}
+  m_Sprite: {fileID: 2102902859, guid: 198382b356144b144bf4160d20a6ee1e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 1
+  m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.98, y: 0.58}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!60 &3063269989147688359
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4543192888695250102}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.1465287, y: 0.5}
+    oldSize: {x: 1.98, y: 0.58}
+    newSize: {x: 1.98, y: 0.58}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 1.5875686, y: -0.17999999}
+      - {x: 1.5975686, y: -0.17}
+      - {x: 1.6375686, y: -0.16}
+      - {x: 1.6775687, y: -0.12}
+      - {x: 1.6875687, y: -0.08}
+      - {x: 1.6875687, y: 0.089999996}
+      - {x: 1.6575686, y: 0.13}
+      - {x: 1.6475686, y: 0.14999999}
+      - {x: 1.5975686, y: 0.16}
+      - {x: 1.5875686, y: 0.17}
+      - {x: 0.90756863, y: 0.17}
+      - {x: 0.88756865, y: 0.19}
+      - {x: 0.88756865, y: 0.19999999}
+      - {x: 0.82756865, y: 0.26999998}
+      - {x: 0.77756864, y: 0.29}
+      - {x: -0.11243133, y: 0.29}
+      - {x: -0.18243133, y: 0.26}
+      - {x: -0.26243132, y: 0.17999999}
+      - {x: -0.29243132, y: 0.11}
+      - {x: -0.29243132, y: -0.11}
+      - {x: -0.26243132, y: -0.17999999}
+      - {x: -0.18243133, y: -0.26}
+      - {x: -0.11243133, y: -0.29}
+      - {x: 0.77756864, y: -0.29}
+      - {x: 0.82756865, y: -0.26999998}
+      - {x: 0.89756864, y: -0.19999999}
+      - {x: 0.90756863, y: -0.17999999}
+--- !u!114 &7916760633559410017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4543192888695250102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cd51b2cc43122e4a87d661ca67a89f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 3963567930102406008}
+  stunRens:
+  - {fileID: 4543192888695250096}
+  flashMat: {fileID: 2100000, guid: 1f516562961949e4fab32a234fe590db, type: 2}
 --- !u!1 &4543192888884246416
 GameObject:
   m_ObjectHideFlags: 0
@@ -231,12 +301,10 @@ GameObject:
   - component: {fileID: 4543192888884246419}
   - component: {fileID: 7103582697796971814}
   - component: {fileID: 4543192888884246428}
-  - component: {fileID: 4543192888884246430}
-  - component: {fileID: 4543192888884246425}
   - component: {fileID: 4543192888884246424}
   m_Layer: 0
   m_Name: Weapon
-  m_TagString: ExplodeImmediate
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -272,7 +340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a74fda6df9508349acab805a6f76153, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: {fileID: 0}
+  Health: {fileID: 7916760633559410017}
   Shooter: {fileID: 0}
   smokingPS: {fileID: 3359528283890307923}
   burningPS: {fileID: 6906666177626736829}
@@ -291,48 +359,6 @@ MonoBehaviour:
   firePoint: {fileID: 758563786508019004}
   bulletPrefab: {fileID: 6975473246788735417, guid: e89423e6533e682419051758291ff559, type: 3}
   fireSparkPS: {fileID: 3279389614415072230, guid: 8e8ae340322985f488df293cbcc865ec, type: 3}
---- !u!61 &4543192888884246430
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4543192888884246416}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.05654025}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 0.5974817}
-  m_EdgeRadius: 0
---- !u!114 &4543192888884246425
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4543192888884246416}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cd51b2cc43122e4a87d661ca67a89f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthBar: {fileID: 3963567930102406008}
-  stunRens:
-  - {fileID: 4543192888695250096}
-  flashMat: {fileID: 2100000, guid: 1f516562961949e4fab32a234fe590db, type: 2}
 --- !u!114 &4543192888884246424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -340,7 +366,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4543192888884246416}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 576d55ef8665b124c9470384aa4d5f16, type: 3}
   m_Name: 

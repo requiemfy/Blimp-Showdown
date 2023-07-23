@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class WeaponController : MonoBehaviour
@@ -8,7 +10,7 @@ public class WeaponController : MonoBehaviour
     {
         get { return !_isCollapsed && _parentShip.IsInTurn; }
     }
-    [HideInInspector] public Health Health;
+    public Health Health;
     [HideInInspector] public WeaponShooting Shooter;
 
     [Header("Effects")]
@@ -21,7 +23,6 @@ public class WeaponController : MonoBehaviour
     private void Awake()
     {
         _parentShip = GetComponentInParent<PlayerController>();
-        Health = GetComponent<Health>();
         Shooter = GetComponent<WeaponShooting>();
 
         Health.OnDamageTaken += () =>
@@ -39,13 +40,33 @@ public class WeaponController : MonoBehaviour
             smokingPS.Stop();
         };
     }
+    private void AssignBarrelVisual()
+    {
+        var barrelRen = transform.Find("Barrel").GetComponent<SpriteRenderer>();
+
+        //Sprite
+        barrelRen.sprite = WeaponType.barrel;
+        barrelRen.transform.eulerAngles = new(0, 0, 135);
+    }
+    private void ResetPolygonCollider()
+    {
+        var colldr = Health.GetComponent<PolygonCollider2D>();
+        var spriteRen = Health.GetComponent<SpriteRenderer>();
+        List<Vector2> physicsShape = new();
+        spriteRen.sprite.GetPhysicsShape(0, physicsShape);
+        colldr.SetPath(0, physicsShape);
+    }
 
     public void Construct(LayerMask layer, WeaponType weaponType)
     {
         gameObject.layer = layer;
         this.WeaponType = weaponType;
+        Health.gameObject.layer = layer;
         Health.Construct(weaponType.health);
         Shooter.Construct(weaponType);
+
+        AssignBarrelVisual();
+        ResetPolygonCollider();
     }
     public void OnPointerDown()
     {

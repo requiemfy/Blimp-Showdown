@@ -38,7 +38,7 @@ public class Health : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag(tag)) return;
+        if (!collision.CompareTag("Bullet")) return;
         var bullet = collision.GetComponentInParent<Bullet>();
         DecreaseHealth(bullet.Damage);
         PopUpManager.Instance.SpawnText(bullet.Damage.ToString(), collision.transform.position, CustomColors.Red);

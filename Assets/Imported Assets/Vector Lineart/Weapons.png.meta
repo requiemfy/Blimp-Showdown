@@ -129,28 +129,76 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Weapons_0
+      name: Weapons_2
       rect:
         serializedVersion: 2
-        x: 40
-        y: 176
-        width: 185
+        x: 38
+        y: 186
+        width: 169
         height: 58
       alignment: 9
-      pivot: {x: 0.842, y: 0.5}
+      pivot: {x: 0.17406034, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
-      tessellationDetail: 0
+      physicsShape:
+      - - {x: 84.5, y: 16}
+        - {x: 76.5, y: 27}
+        - {x: 25.5, y: 29}
+        - {x: -66.5, y: 29}
+        - {x: -73.5, y: 26}
+        - {x: -81.5, y: 18}
+        - {x: -84.5, y: 12}
+        - {x: -84.5, y: -11}
+        - {x: -81.5, y: -18}
+        - {x: -73.5, y: -26}
+        - {x: -67.5, y: -29}
+        - {x: 22.5, y: -29}
+        - {x: 27.5, y: -26}
+        - {x: 70.5, y: -27}
+        - {x: 84.5, y: -19}
+      tessellationDetail: 0.5
       bones: []
-      spriteID: 7fb1492f36c21114e902e5ab33e72cbc
-      internalID: 581493997
+      spriteID: 7bf95fe0bc1ad3040922c03af4443f91
+      internalID: 2136475679
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Weapons_1
+      name: Weapons_7
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 22
+        width: 185
+        height: 58
+      alignment: 9
+      pivot: {x: 0.157513, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 92.5, y: 17}
+        - {x: 86.5, y: 22}
+        - {x: 29.5, y: 29}
+        - {x: -78.5, y: 29}
+        - {x: -89.5, y: 18}
+        - {x: -92.5, y: 16}
+        - {x: -92.5, y: -17}
+        - {x: -88.5, y: -29}
+        - {x: 21.5, y: -29}
+        - {x: 25.5, y: -20}
+        - {x: 86.5, y: -20}
+        - {x: 92.5, y: -17}
+      tessellationDetail: 0.5
+      bones: []
+      spriteID: 8021cb0611e1e534e87b6da406af4faa
+      internalID: -1466229553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Weapons_4
       rect:
         serializedVersion: 2
         x: 29
@@ -158,35 +206,28 @@ TextureImporter:
         width: 198
         height: 58
       alignment: 9
-      pivot: {x: 0.8523976, y: 0.5}
+      pivot: {x: 0.1465287, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
-      tessellationDetail: 0
+      physicsShape:
+      - - {x: 99, y: -10}
+        - {x: 99, y: 12}
+        - {x: 90, y: 19}
+        - {x: 22, y: 21}
+        - {x: 11, y: 29}
+        - {x: -82, y: 29}
+        - {x: -98, y: 19}
+        - {x: -99, y: 16}
+        - {x: -99, y: -17}
+        - {x: -88, y: -29}
+        - {x: 15, y: -29}
+        - {x: 22, y: -18}
+        - {x: 89, y: -17}
+        - {x: 96, y: -14}
+      tessellationDetail: 0.5
       bones: []
-      spriteID: e4d7871a77bc5ed43866019ebdfe9818
-      internalID: -1625798675
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Weapons_2
-      rect:
-        serializedVersion: 2
-        x: 49
-        y: 12
-        width: 169
-        height: 58
-      alignment: 9
-      pivot: {x: 0.826965, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7bf95fe0bc1ad3040922c03af4443f91
-      internalID: 2136475679
+      spriteID: 409eb8b42c80cfd43bfc59792acba97d
+      internalID: 2102902859
       vertices: []
       indices: 
       edges: []
@@ -204,7 +245,18 @@ TextureImporter:
     nameFileIdTable:
       Weapons_0: 581493997
       Weapons_1: -1625798675
+      Weapons_10: -2034191597
+      Weapons_11: -1368612658
+      Weapons_12: 364099611
+      Weapons_13: -206631019
       Weapons_2: 2136475679
+      Weapons_3: -1259848188
+      Weapons_4: 2102902859
+      Weapons_5: -684798980
+      Weapons_6: -1837033982
+      Weapons_7: -1466229553
+      Weapons_8: -1429167155
+      Weapons_9: 1213979416
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
