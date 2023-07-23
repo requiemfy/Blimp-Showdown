@@ -11,8 +11,12 @@ public class Bullet : MonoBehaviour
     [SerializeField] private SpriteRenderer bulletRen;
     [SerializeField] private CircleCollider2D colldr;
     [SerializeField] private Rigidbody2D rb;
+
+    [Header("Effects")]
+    [SerializeField] private float multiplier;
     [SerializeField] private GameObject trailPS;
     [SerializeField] private TrailRenderer trailRen;
+    [SerializeField] private ParticleSystem bounceDustPS;
 
     [SerializeField]
     private SpriteRenderer explosion;
@@ -51,6 +55,21 @@ public class Bullet : MonoBehaviour
             Explode();
             return;
         }
+
+        var vel = collision.relativeVelocity.magnitude;
+        Debug.Log(vel);
+        if (vel > 5)
+        {
+            var bounceDustEffect = Instantiate(bounceDustPS, transform.position, Quaternion.identity);
+            var main = bounceDustEffect.main;
+            var emission = bounceDustEffect.emission;
+            main.startLifetime = vel * multiplier;
+            main.startSpeed= vel * multiplier;
+            emission.rateOverTime = vel * multiplier;
+            bounceDustEffect.transform.up = collision.relativeVelocity;
+            Destroy(bounceDustEffect.gameObject, 2);
+        }
+
         rb.gravityScale = 1f;
         StartTimeCounter();
     }
