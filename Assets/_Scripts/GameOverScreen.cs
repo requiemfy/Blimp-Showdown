@@ -1,9 +1,14 @@
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(CanvasGroup))]
 public class GameOverScreen : MonoBehaviour
 {
+    [SerializeField] private Image crownIcon;
+    [SerializeField] private TextMeshProUGUI winnerTMP;
+
     private CanvasGroup _canvasGroup;
     private void Awake()
     {
@@ -14,12 +19,14 @@ public class GameOverScreen : MonoBehaviour
 
     public void Show()
     {
-        gameObject.SetActive(true);
-        DOTween.To(() => _canvasGroup.alpha, x => _canvasGroup.alpha = x, endValue: 1, duration: 1);
         foreach (Team team in DataPersistence.GetOpenedTeams())
         {
             if (DataPersistence.Get(team).isDestroyed) continue;
-            Debug.LogWarning("Winner: " + team);
+            crownIcon.color = team.GetTeamColor();
+            winnerTMP.color = team.GetTeamColor();
+            winnerTMP.text = team.ToString();
         }
+        gameObject.SetActive(true);
+        DOTween.To(() => _canvasGroup.alpha, x => _canvasGroup.alpha = x, endValue: 1, duration: 1);
     }
 }

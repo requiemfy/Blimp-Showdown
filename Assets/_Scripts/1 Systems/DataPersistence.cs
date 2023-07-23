@@ -11,6 +11,13 @@ public static class DataPersistence
     {
         _teamDatabase = new TeamData[_teamDatabase.Length]; //all null
     }
+    public static void Rematch()
+    {
+        foreach(Team team in GetOpenedTeams())
+        {
+            Get(team).isDestroyed = false;
+        }
+    }
     public static Team[] GetOpenedTeams()
     {
         var result = new List<Team>();
