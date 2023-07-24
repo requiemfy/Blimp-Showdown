@@ -161,6 +161,7 @@ public class HUD : MonoBehaviour
         UpdatePlayerHealthUI();
         UpdateEnergyBarUI();
         UpdateFuelUI();
+        Update_weapon_button_thumbnails();
         ShowWeaponHUD(false);
     }
 
@@ -230,5 +231,11 @@ public class HUD : MonoBehaviour
     private void UpdateFuelUI()
     {
         fuelBar.SetFill((int)((float)curPlayer.Movement.GetRatio() * 100), 100);
+    }
+    private void Update_weapon_button_thumbnails()
+    {
+        weapon0.transform.GetChild(0).GetComponent<Image>().sprite = curPlayer.Weapons.GetWeaponCtrl(0).WeaponType.barrel;
+        weapon1.transform.GetChild(0).GetComponent<Image>().sprite = curPlayer.Weapons.GetWeaponCtrl(1).WeaponType.barrel;
+        weapon2.transform.GetChild(0).GetComponent<Image>().sprite = curPlayer.Weapons.GetWeaponCtrl(2).WeaponType.barrel;
     }
 }

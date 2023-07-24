@@ -1,9 +1,12 @@
+using DG.Tweening;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Image))]
+[RequireComponent(typeof(CanvasGroup))]
 public class ReadyCard : MonoBehaviour, IPointerDownHandler
 {
     public static int NotReadyCount = 0;
@@ -12,7 +15,8 @@ public class ReadyCard : MonoBehaviour, IPointerDownHandler
     [SerializeField] TextMeshProUGUI stateTMP;
     [SerializeField] Button closeBtn;
 
-    private GameObject _parent;
+    private CanvasGroup _parentCanvasGrp;
+    private CanvasGroup _thisCanvasGrp;
     private Image _image;
     private TeamState _state = TeamState.Closed;
     enum TeamState 
@@ -24,20 +28,26 @@ public class ReadyCard : MonoBehaviour, IPointerDownHandler
 
     private void Awake()
     {
-        _parent = transform.parent.gameObject;
+        _parentCanvasGrp = transform.parent.GetComponent<CanvasGroup>();
+        _thisCanvasGrp = GetComponent<CanvasGroup>();
+        _thisCanvasGrp.alpha = 0;
         _image = GetComponent<Image>();
         _image.color = Color.white;
         closeBtn.onClick.AddListener(CloseSlot);
     }
-
     private void OnEnable()
     {
+        StartCoroutine(FadeIn());
         if (DataPersistence.Get(targetTeam) == null) return; //first time
         if (DataPersistence.Get(targetTeam).Weapons.HasNullElement()) return;
         if (_state == TeamState.Ready) return;
         _state = TeamState.Ready;
         NotReadyCount--;
         stateTMP.text = "ready";
+    }
+    private void OnDisable()
+    {
+        _thisCanvasGrp.alpha = 0;
     }
     public void OnPointerDown(PointerEventData eventData)
     {
@@ -66,7 +76,7 @@ public class ReadyCard : MonoBehaviour, IPointerDownHandler
     private void EnterEdit()
     {
         SelectManager.Instance.StagedTeam = targetTeam;
-        _parent.SetActive(false);
+        FadeOut();
     }
     private void CloseSlot()
     {
@@ -76,5 +86,21 @@ public class ReadyCard : MonoBehaviour, IPointerDownHandler
         stateTMP.text = "add player";
         closeBtn.gameObject.SetActive(false);
         DataPersistence.Push(targetTeam, data: null);
+    }
+
+    private IEnumerator FadeIn()
+    {
+        _parentCanvasGrp.alpha = 1;
+        yield return new WaitForSeconds(Random.Range(0.3f, 1f));
+        DOTween.To(() => _thisCanvasGrp.alpha, x => _thisCanvasGrp.alpha = x, endValue: 1, duration: 0.5f);
+    }
+    private void FadeOut()
+    {
+        DOTween.To(() => _parentCanvasGrp.alpha, x => _parentCanvasGrp.alpha = x, endValue: 0, duration: 1)
+            .onComplete = () =>
+            {
+                _parentCanvasGrp.gameObject.SetActive(false);
+                _thisCanvasGrp.alpha = 0;
+            };
     }
 }
