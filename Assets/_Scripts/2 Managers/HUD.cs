@@ -33,7 +33,6 @@ public class HUD : MonoBehaviour
     [SerializeField] Bar fuelBar;
 
     [Header("Common")]
-    [SerializeField] TextMeshProUGUI title;
     [SerializeField] Image energyBar;
     [SerializeField] TextMeshProUGUI energyTMP;
     [SerializeField] Image turnPrefab;
@@ -177,14 +176,6 @@ public class HUD : MonoBehaviour
         trajectory.gameObject.SetActive(status);
         weaponHUD.SetActive(status);
         playerHUD.SetActive(!status);
-        if (status)
-        {
-            title.text = curWeapon.WeaponType.name;
-        }
-        else
-        {
-            title.text = curPlayer?.tag;
-        }
     }
     private void SetTrajectoryTarget()
     {
@@ -234,8 +225,17 @@ public class HUD : MonoBehaviour
     }
     private void Update_weapon_button_thumbnails()
     {
-        weapon0.transform.GetChild(0).GetComponent<Image>().sprite = curPlayer.Weapons.GetWeaponCtrl(0).WeaponType.barrel;
-        weapon1.transform.GetChild(0).GetComponent<Image>().sprite = curPlayer.Weapons.GetWeaponCtrl(1).WeaponType.barrel;
-        weapon2.transform.GetChild(0).GetComponent<Image>().sprite = curPlayer.Weapons.GetWeaponCtrl(2).WeaponType.barrel;
+        var playerWeapon0 = curPlayer.Weapons.GetWeaponCtrl(0);
+        var playerWeapon1 = curPlayer.Weapons.GetWeaponCtrl(1);
+        var playerWeapon2 = curPlayer.Weapons.GetWeaponCtrl(2);
+
+        weapon0.interactable = playerWeapon0.IsFocusable;
+        weapon0.transform.GetChild(0).GetComponent<Image>().sprite = playerWeapon0.WeaponType.barrel;
+
+        weapon1.interactable = playerWeapon1.IsFocusable;
+        weapon1.transform.GetChild(0).GetComponent<Image>().sprite = playerWeapon1.WeaponType.barrel;
+
+        weapon2.interactable = playerWeapon2.IsFocusable;
+        weapon2.transform.GetChild(0).GetComponent<Image>().sprite = playerWeapon2.WeaponType.barrel;
     }
 }
