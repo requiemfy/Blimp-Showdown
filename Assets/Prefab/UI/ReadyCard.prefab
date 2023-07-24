@@ -404,6 +404,7 @@ GameObject:
   - component: {fileID: 7335363363007185042}
   - component: {fileID: 7335363363007185043}
   - component: {fileID: 7335363363007185040}
+  - component: {fileID: 1323379563361328106}
   m_Layer: 5
   m_Name: ReadyCard
   m_TagString: Untagged
@@ -486,3 +487,15 @@ MonoBehaviour:
   targetTeam: 0
   stateTMP: {fileID: 7335363362941251881}
   closeBtn: {fileID: 1918175766908794807}
+--- !u!225 &1323379563361328106
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7335363363007185046}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0

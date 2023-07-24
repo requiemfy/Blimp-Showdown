@@ -1,5 +1,6 @@
 using DG.Tweening;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -37,7 +38,7 @@ public class ReadyCard : MonoBehaviour, IPointerDownHandler
     }
     private void OnEnable()
     {
-        StartCoroutine(FadeIn());
+        FadeIn();
         if (DataPersistence.Get(targetTeam) == null) return; //first time
         if (DataPersistence.Get(targetTeam).Weapons.HasNullElement()) return;
         if (_state == TeamState.Ready) return;
@@ -88,19 +89,23 @@ public class ReadyCard : MonoBehaviour, IPointerDownHandler
         DataPersistence.Push(targetTeam, data: null);
     }
 
-    private IEnumerator FadeIn()
+    private void FadeIn()
     {
-        _parentCanvasGrp.alpha = 1;
-        yield return new WaitForSeconds(Random.Range(0.3f, 1f));
-        DOTween.To(() => _thisCanvasGrp.alpha, x => _thisCanvasGrp.alpha = x, endValue: 1, duration: 0.5f);
+        _thisCanvasGrp.DOKill();
+        _parentCanvasGrp.DOFade(1, 1.5f)
+            .onComplete = () => {
+                _thisCanvasGrp.DOFade(1, 0.5f)
+                    .SetDelay((int)targetTeam * 0.2f);
+            };
+        
     }
     private void FadeOut()
     {
-        DOTween.To(() => _parentCanvasGrp.alpha, x => _parentCanvasGrp.alpha = x, endValue: 0, duration: 1)
+        _parentCanvasGrp.DOKill();
+        _parentCanvasGrp.DOFade(0, 0.2f)
             .onComplete = () =>
             {
                 _parentCanvasGrp.gameObject.SetActive(false);
-                _thisCanvasGrp.alpha = 0;
             };
     }
 }
