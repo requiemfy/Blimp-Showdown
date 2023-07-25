@@ -19,6 +19,7 @@ public class JuiceButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     }
     public void OnPointerDown(PointerEventData eventData)
     {
+        AudioManager.Instance.PlayAudioGroup("ButtonClick");
         DOTween.Kill(transform);
         transform.localScale = new(1.2f, 0.7f);
         image.color = onClickCol;
