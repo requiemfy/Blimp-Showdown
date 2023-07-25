@@ -19,7 +19,6 @@ public class JuiceButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     }
     public void OnPointerDown(PointerEventData eventData)
     {
-        onClick.Invoke();
         DOTween.Kill(transform);
         transform.localScale = new(1.2f, 0.7f);
         image.color = onClickCol;
@@ -27,7 +26,8 @@ public class JuiceButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        transform.DOScale(new Vector2(1f, 1f), duration: 0.1f);
+        transform.DOScale(new Vector2(1f, 1f), duration: 0.1f)
+            .onComplete = () => onClick?.Invoke();
         image.color = originalCol;
     }
 }
