@@ -12,7 +12,7 @@ public class InfoSection : MonoBehaviour
     [SerializeField] private TextMeshProUGUI bulletCountTMP;
 
     [Header("Button")]
-    [SerializeField] private JuiceButton closeBtn;
+    [SerializeField] private Button closeBtn;
 
     private void Start()
     {

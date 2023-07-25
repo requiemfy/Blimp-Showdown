@@ -21,13 +21,11 @@ public class WeaponBoard : MonoBehaviour
     {
         Instance = this;
         RectTransfrom = transform as RectTransform;
-    }
-    private void Start()
-    {
         SpawnCards();
         ResizeWeaponBoard();
+        BackToTop();
     }
-    private void OnEnable()
+    private void OnDisable()
     {
         BackToTop();
     }

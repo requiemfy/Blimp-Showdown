@@ -54,10 +54,6 @@ public static class Extension
         var targetColor = color; targetColor.a = alphaVal;
         return targetColor;
     }
-    public static void SetActive(this GameObject GO, bool value)
-    {
-        GO.SetActive(value);
-    }
 }
 public static class CustomColors
 {

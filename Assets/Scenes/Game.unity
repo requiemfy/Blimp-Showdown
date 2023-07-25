@@ -1276,6 +1276,7 @@ GameObject:
   - component: {fileID: 297388683}
   - component: {fileID: 297388682}
   - component: {fileID: 297388685}
+  - component: {fileID: 297388686}
   m_Layer: 5
   m_Name: FireBtn
   m_TagString: Untagged
@@ -1301,9 +1302,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.9, y: 0.1}
   m_AnchorMax: {x: 0.9, y: 0.1}
-  m_AnchoredPosition: {x: -386.5, y: 0}
+  m_AnchoredPosition: {x: -495.55, y: 0}
   m_SizeDelta: {x: 218.1, y: 106}
-  m_Pivot: {x: 1, y: 0}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &297388682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1412,6 +1413,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: 0
   duration: 1
+--- !u!114 &297388686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 297388680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8c49c785dccb1c4288c450bdf103d37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &335387091
 GameObject:
   m_ObjectHideFlags: 0
@@ -6354,6 +6367,7 @@ GameObject:
   - component: {fileID: 1269019001}
   - component: {fileID: 1269019003}
   - component: {fileID: 1269019004}
+  - component: {fileID: 1269019005}
   m_Layer: 5
   m_Name: EndTurnBtn
   m_TagString: Untagged
@@ -6379,9 +6393,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.95, y: 0.95}
   m_AnchorMax: {x: 0.95, y: 0.95}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -175, y: -135}
   m_SizeDelta: {x: 350, y: 135}
-  m_Pivot: {x: 1, y: 1}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1269019001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6490,6 +6504,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: 1
   duration: 1
+--- !u!114 &1269019005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1269018999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8c49c785dccb1c4288c450bdf103d37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1301074086
 GameObject:
   m_ObjectHideFlags: 0
