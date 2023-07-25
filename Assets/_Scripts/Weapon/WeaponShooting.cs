@@ -87,6 +87,7 @@ public class WeaponShooting : MonoBehaviour
                 layer: gameObject.layer,
                 launchVec: LaunchVec
                 );
+            AudioManager.Instance.PlayAudioGroup("GunShot");
             SpawnSpark();
             Recoil();
             //ShipKnockBack();

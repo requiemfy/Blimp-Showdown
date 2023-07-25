@@ -92,7 +92,7 @@ public class ReadyCard : MonoBehaviour, IPointerDownHandler
     private void FadeIn()
     {
         _thisCanvasGrp.DOKill();
-        _parentCanvasGrp.DOFade(1, 1.5f)
+        _parentCanvasGrp.DOFade(1, 0.2f)
             .onComplete = () => {
                 _thisCanvasGrp.DOFade(1, 0.5f)
                     .SetDelay((int)targetTeam * 0.2f);
