@@ -1275,6 +1275,7 @@ GameObject:
   - component: {fileID: 297388684}
   - component: {fileID: 297388683}
   - component: {fileID: 297388682}
+  - component: {fileID: 297388685}
   m_Layer: 5
   m_Name: FireBtn
   m_TagString: Untagged
@@ -1397,6 +1398,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 297388680}
   m_CullTransparentMesh: 1
+--- !u!114 &297388685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 297388680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 218369dd856265344acbef88e331f6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  direction: 0
+  duration: 1
 --- !u!1 &335387091
 GameObject:
   m_ObjectHideFlags: 0
@@ -4069,6 +4084,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 642842830}
     m_Modifications:
+    - target: {fileID: 1932800513441219711, guid: 6c109418ad644924ba494b8c9e05556e, type: 3}
+      propertyPath: direction
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5533238403241804950, guid: 6c109418ad644924ba494b8c9e05556e, type: 3}
       propertyPath: fixedOrigin
       value: 1
@@ -4800,6 +4819,7 @@ GameObject:
   - component: {fileID: 614481913}
   - component: {fileID: 614481915}
   - component: {fileID: 614481914}
+  - component: {fileID: 614481916}
   m_Layer: 5
   m_Name: EndTurn Confirm
   m_TagString: Untagged
@@ -4868,6 +4888,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 614481912}
   m_CullTransparentMesh: 1
+--- !u!114 &614481916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 614481912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 218369dd856265344acbef88e331f6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  direction: 1
+  duration: 0.5
 --- !u!1 &642842829
 GameObject:
   m_ObjectHideFlags: 0
@@ -6319,6 +6353,7 @@ GameObject:
   - component: {fileID: 1269019002}
   - component: {fileID: 1269019001}
   - component: {fileID: 1269019003}
+  - component: {fileID: 1269019004}
   m_Layer: 5
   m_Name: EndTurnBtn
   m_TagString: Untagged
@@ -6441,6 +6476,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &1269019004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1269018999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 218369dd856265344acbef88e331f6fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  direction: 1
+  duration: 1
 --- !u!1 &1301074086
 GameObject:
   m_ObjectHideFlags: 0
@@ -8360,7 +8409,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aimJoystick: {fileID: 1754370008}
   moveJoystick: {fileID: 513860604}
-  weaponHUD: {fileID: 1966219003}
+  weaponHUD: {fileID: 1966219005}
   healthBar: {fileID: 1005647877}
   healthTMP: {fileID: 1978445552}
   fireBtn: {fileID: 297388682}
@@ -8371,7 +8420,7 @@ MonoBehaviour:
   weapon0: {fileID: 660835555}
   weapon1: {fileID: 1576605975}
   weapon2: {fileID: 73741649}
-  playerHUD: {fileID: 1928353983}
+  playerHUD: {fileID: 1928353985}
   endTurnBtn: {fileID: 1799290522}
   playerHealthBar: {fileID: 339981763}
   fuelBar: {fileID: 1086104360}
@@ -9327,6 +9376,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1928353984}
+  - component: {fileID: 1928353985}
   m_Layer: 5
   m_Name: Player
   m_TagString: Untagged
@@ -9356,6 +9406,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &1928353985
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1928353983}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1966219003
 GameObject:
   m_ObjectHideFlags: 0
@@ -9365,6 +9427,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1966219004}
+  - component: {fileID: 1966219005}
   m_Layer: 5
   m_Name: Weapon
   m_TagString: Untagged
@@ -9396,6 +9459,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &1966219005
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966219003}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1968174945
 GameObject:
   m_ObjectHideFlags: 0
@@ -10004,9 +10079,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1966219004}
     m_Modifications:
+    - target: {fileID: 1932800513441219711, guid: 6c109418ad644924ba494b8c9e05556e, type: 3}
+      propertyPath: direction
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5533238403241804952, guid: 6c109418ad644924ba494b8c9e05556e, type: 3}
       propertyPath: m_Name
-      value: Joystick
+      value: AimJoystick
       objectReference: {fileID: 0}
     - target: {fileID: 5533238403241804953, guid: 6c109418ad644924ba494b8c9e05556e, type: 3}
       propertyPath: m_Pivot.x

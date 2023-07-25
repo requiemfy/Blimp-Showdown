@@ -26,8 +26,22 @@ public class WeaponBoard : MonoBehaviour
     {
         SpawnCards();
         ResizeWeaponBoard();
+    }
+    private void OnEnable()
+    {
         BackToTop();
     }
+
+
+    //__________METHODS_______________
+    public void MoveUp(Vector2 anchor, float amount)
+    {
+        Vector2 targetPos = anchor + amount * SENSITIVITY * Vector2.up;
+        bool exceedLim = Mathf.Abs(targetPos.y) > _scrollLimit;
+        if (exceedLim) return;
+        RectTransfrom.anchoredPosition = targetPos;
+    }
+
     private void SpawnCards()
     {
         WeaponType[] allWeapons = Resources.LoadAll<WeaponType>("Weapons");
@@ -45,18 +59,7 @@ public class WeaponBoard : MonoBehaviour
         RectTransfrom.sizeDelta = RectTransfrom.sizeDelta.ChangeY(gridLayout.cellSize.y * childCount + gridLayout.spacing.y * (childCount - 1));
         _scrollLimit = (float)(RectTransfrom.sizeDelta.y - (float)1920 / Screen.width * Screen.height) / 2 + SCROLLPADDING;
     }
-
-
-    //__________METHODS_______________
-    public void MoveUp(Vector2 anchor, float amount)
-    {
-        Vector2 targetPos = anchor + amount * SENSITIVITY * Vector2.up;
-        bool exceedLim = Mathf.Abs(targetPos.y) > _scrollLimit;
-        if (exceedLim) return;
-        RectTransfrom.anchoredPosition = targetPos;
-    }
-
-    public void BackToTop()
+    private void BackToTop()
     {
         RectTransfrom.anchoredPosition = new(0,-_scrollLimit);
     }

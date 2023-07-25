@@ -455,7 +455,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 218369dd856265344acbef88e331f6fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  direction: 1
+  direction: 2
   duration: 1
 --- !u!114 &7335363363007185043
 MonoBehaviour:

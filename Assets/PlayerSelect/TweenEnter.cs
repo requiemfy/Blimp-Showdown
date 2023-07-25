@@ -1,7 +1,5 @@
 using DG.Tweening;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 [RequireComponent(typeof(RectTransform))]
@@ -13,6 +11,7 @@ public class TweenEnter : MonoBehaviour
 
     [System.Serializable]
     enum Direction {BottomUp, TopDown, LeftToRight, RightToLeft}
+
     private void OnEnable()
     {
         var rectTransform = transform as RectTransform;
@@ -39,4 +38,7 @@ public class TweenEnter : MonoBehaviour
 
         rectTransform.DOAnchorPos(originalPos, duration).SetEase(Ease.OutCubic);
     }
+}
+
+public interface ITweenEnter {
 }

@@ -14,7 +14,7 @@ public class HUD : MonoBehaviour
     [SerializeField] Joystick moveJoystick;
 
     [Header("Weapon")]
-    [SerializeField] GameObject weaponHUD;
+    [SerializeField] CanvasGroup weaponHUD;
     [SerializeField] Image healthBar;
     [SerializeField] TextMeshProUGUI healthTMP;
     [SerializeField] Button fireBtn;
@@ -27,7 +27,7 @@ public class HUD : MonoBehaviour
     [SerializeField] Button weapon2;
 
     [Header("Player")]
-    [SerializeField] GameObject playerHUD;
+    [SerializeField] CanvasGroup playerHUD;
     [SerializeField] Button endTurnBtn;
     [SerializeField] Bar playerHealthBar;
     [SerializeField] Bar fuelBar;
@@ -174,8 +174,21 @@ public class HUD : MonoBehaviour
     public void ShowWeaponHUD(bool status)
     {
         trajectory.gameObject.SetActive(status);
-        weaponHUD.SetActive(status);
-        playerHUD.SetActive(!status);
+        if (status)
+        {
+            weaponHUD.alpha = 1;
+            weaponHUD.gameObject.SetActive(true);
+            playerHUD.DOFade(0,0.5f)
+                .onComplete = () => playerHUD.gameObject.SetActive(false);
+        }
+        else
+        {
+            playerHUD.alpha = 1;
+            playerHUD.gameObject.SetActive(true);
+            weaponHUD.DOFade(0, 0.5f)
+                .onComplete = () => weaponHUD.gameObject.SetActive(false);
+            
+        }
     }
     private void SetTrajectoryTarget()
     {

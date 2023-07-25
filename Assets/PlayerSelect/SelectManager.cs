@@ -9,6 +9,7 @@ public class SelectManager : MonoBehaviour
 
     public Action<Team> onStartedEdit;
     public InfoSection infoSection;
+    public GameObject weaponSelectScreen;
 
     public WeaponType[] StagedWeapons = new WeaponType[3];
     public Team StagedTeam 

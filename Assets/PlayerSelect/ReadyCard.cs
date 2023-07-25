@@ -55,7 +55,7 @@ public class ReadyCard : MonoBehaviour, IPointerDownHandler
         switch (_state)
         {
             case TeamState.Closed:
-                _image.color = targetTeam.GetTeamColor();
+                _image.DOColor(targetTeam.GetTeamColor(), duration: 0.5f);
                 _state = TeamState.NotReady;
                 stateTMP.text = "not ready";
                 closeBtn.gameObject.SetActive(true);
@@ -84,7 +84,7 @@ public class ReadyCard : MonoBehaviour, IPointerDownHandler
     private void CloseSlot()
     {
         if (_state == TeamState.NotReady) NotReadyCount--;
-        _image.color = Color.white;
+        _image.DOColor(Color.white, duration: 0.5f);
         _state = TeamState.Closed;
         stateTMP.text = "add player";
         closeBtn.gameObject.SetActive(false);
@@ -95,6 +95,7 @@ public class ReadyCard : MonoBehaviour, IPointerDownHandler
         _thisCanvasGrp.DOKill();
         _parentCanvasGrp.DOFade(1, 0.2f)
             .onComplete = () => {
+                SelectManager.Instance.weaponSelectScreen.SetActive(false);
                 _thisCanvasGrp.DOFade(1, 0.5f)
                     .SetDelay((int)targetTeam * 0.2f);
             };
@@ -103,6 +104,7 @@ public class ReadyCard : MonoBehaviour, IPointerDownHandler
     private void FadeOut()
     {
         _parentCanvasGrp.DOKill();
+        SelectManager.Instance.weaponSelectScreen.SetActive(true);
         _parentCanvasGrp.DOFade(0, 0.2f)
             .onComplete = () =>
             {
