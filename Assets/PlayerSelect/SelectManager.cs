@@ -7,7 +7,6 @@ public class SelectManager : MonoBehaviour
 {
     public static SelectManager Instance { get; private set; }
 
-    public Action onSaved;
     public Action<Team> onStartedEdit;
     public InfoSection infoSection;
 
@@ -31,6 +30,7 @@ public class SelectManager : MonoBehaviour
         Instance = this;
         onStartedEdit += (team) =>
         {
+            StagedWeapons = new WeaponType[3];
             TeamData data = DataPersistence.Get(team);
             if (data == null) return;
             StagedWeapons = data.Weapons;
@@ -50,8 +50,6 @@ public class SelectManager : MonoBehaviour
     {
         TeamData data = new(StagedWeapons);
         DataPersistence.Push(StagedTeam, data);
-        StagedWeapons = new WeaponType[3];
-        onSaved();
     }
     public void UpdateTotalHealth()
     {

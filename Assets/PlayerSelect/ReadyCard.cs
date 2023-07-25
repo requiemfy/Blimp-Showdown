@@ -74,6 +74,8 @@ public class ReadyCard : MonoBehaviour, IPointerDownHandler
                 break;
         }
     }
+
+
     private void EnterEdit()
     {
         SelectManager.Instance.StagedTeam = targetTeam;
@@ -88,7 +90,6 @@ public class ReadyCard : MonoBehaviour, IPointerDownHandler
         closeBtn.gameObject.SetActive(false);
         DataPersistence.Push(targetTeam, data: null);
     }
-
     private void FadeIn()
     {
         _thisCanvasGrp.DOKill();

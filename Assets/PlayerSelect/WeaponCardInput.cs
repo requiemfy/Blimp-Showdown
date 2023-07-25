@@ -6,9 +6,9 @@ public class WeaponCardInput : DropSlot
   
     private void Start()
     {
-        SelectManager.Instance.onSaved += ClearDropSlot;
         SelectManager.Instance.onStartedEdit += (team) =>
         {
+            ClearDropSlot();
             TeamData data = DataPersistence.Get(team);
             if (data == null) return;
             if (data.Weapons[order] == null) return;
