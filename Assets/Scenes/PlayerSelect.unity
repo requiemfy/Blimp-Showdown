@@ -1782,6 +1782,12 @@ MonoBehaviour:
     sounds:
     - clip: {fileID: 8300000, guid: cda3ab33e7663594a8a14fe5a3c767c1, type: 3}
       volume: 1
+  - name: InsertWeapon
+    loop: 0
+    source: {fileID: 0}
+    sounds:
+    - clip: {fileID: 8300000, guid: cda3ab33e7663594a8a14fe5a3c767c1, type: 3}
+      volume: 1
 --- !u!1 &992219905
 GameObject:
   m_ObjectHideFlags: 0

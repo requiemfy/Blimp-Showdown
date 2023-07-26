@@ -22,7 +22,7 @@ public class WeaponCardInput : DropSlot
     {
         if (droppedItem.TryGetComponent(out WeaponCard card))
         {
-            Debug.Log("hello" + order);
+            AudioManager.Instance.PlayAudioGroup("InsertWeapon");
             var droppedWeapon = card.Represent;
             SelectManager.Instance.StagedWeapons[order] = droppedWeapon;
             SelectManager.Instance.UpdateTotalHealth();
