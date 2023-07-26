@@ -1780,7 +1780,7 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
     sounds:
-    - clip: {fileID: 8300000, guid: cda3ab33e7663594a8a14fe5a3c767c1, type: 3}
+    - clip: {fileID: 8300000, guid: 6c961b2b28395354c969b894ddae090f, type: 3}
       volume: 1
   - name: InsertWeapon
     loop: 0
