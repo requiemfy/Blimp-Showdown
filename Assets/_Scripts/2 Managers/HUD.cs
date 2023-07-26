@@ -212,6 +212,7 @@ public class HUD : MonoBehaviour
         if (insideScreen && !isCurrentlyInside)
         {
             isCurrentlyInside = true;
+            _backToShipCanvasGrp.DOKill();
             _backToShipCanvasGrp.DOFade(0, duration: 0.4f)
                 .onComplete = () => backToShipBtn.gameObject.SetActive(false);
         }
@@ -219,6 +220,7 @@ public class HUD : MonoBehaviour
         {
             isCurrentlyInside = false;
             backToShipBtn.gameObject.SetActive(true);
+            _backToShipCanvasGrp.DOKill();
             _backToShipCanvasGrp.DOFade(1, duration: 0.4f);
         }
 
