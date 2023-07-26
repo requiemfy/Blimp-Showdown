@@ -38,17 +38,30 @@ public class HUD : MonoBehaviour
     [SerializeField] Image turnPrefab;
     [SerializeField] Transform turnIndicatorParent;
 
+    [Header("BackToShipBtn")]
+    [SerializeField] Button backToShipBtn;
+    [SerializeField] Transform backToShipArrow;
+    private CanvasGroup _backToShipCanvasGrp;
+
+    private Camera _cam;
+
     private void Awake()
     {
         Instance = this;
+        _cam = Camera.main;
         InitializeButtons();
         SpawnTurnIndicator();
     }
-
+    private void Update()
+    {
+        CheckPlayerInsideScreen();
+    }
     private void InitializeButtons()
     {
         fireBtn.onClick.AddListener(() => { curWeapon.Shooter.Fire(); });
         endTurnBtn.onClick.AddListener(() => GameManager.Instance.NextTurn());
+        backToShipBtn.onClick.AddListener(() => CinemachineManager.Instance.SetFollow(curPlayer.transform));
+        _backToShipCanvasGrp = backToShipBtn.GetComponent<CanvasGroup>();
 
         //aim
         aimJoystick.OnDragStarted = () => 
@@ -90,7 +103,6 @@ public class HUD : MonoBehaviour
         });
         ShowWeaponHUD(false);
     }
-
     public Image FindTurnIndicator(Team target)
     {
         foreach(Transform child in turnIndicatorParent)
@@ -163,14 +175,6 @@ public class HUD : MonoBehaviour
         Update_weapon_button_thumbnails();
         ShowWeaponHUD(false);
     }
-
-
-
-
-
-
-
-    //_______________________________________________________________
     public void ShowWeaponHUD(bool status)
     {
         trajectory.gameObject.SetActive(status);
@@ -188,6 +192,37 @@ public class HUD : MonoBehaviour
             weaponHUD.DOFade(0, 0.5f)
                 .onComplete = () => weaponHUD.gameObject.SetActive(false);
             
+        }
+    }
+
+
+
+
+
+
+
+    //_______________________________________________________________
+    private void CheckPlayerInsideScreen()
+    {
+        Vector2 pos = _cam.WorldToScreenPoint(curPlayer.transform.position);
+        bool insideScreen = Screen.safeArea.Contains(pos);
+
+        if (insideScreen)
+        {
+            _backToShipCanvasGrp.DOFade(0, duration: 0.4f)
+                .onComplete = () => backToShipBtn.gameObject.SetActive(false);
+        }
+        else
+        {
+            backToShipBtn.gameObject.SetActive(true);
+            _backToShipCanvasGrp.DOFade(1, duration: 0.4f);
+            RotateArrow();
+        }
+
+        void RotateArrow()
+        {
+            Vector2 playerToCam = curPlayer.transform.position - _cam.transform.position;
+            backToShipArrow.right = playerToCam;
         }
     }
     private void SetTrajectoryTarget()
