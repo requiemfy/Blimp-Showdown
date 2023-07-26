@@ -202,21 +202,24 @@ public class HUD : MonoBehaviour
 
 
     //_______________________________________________________________
+    private bool isCurrentlyInside = false;
     private void CheckPlayerInsideScreen()
     {
         Vector2 pos = _cam.WorldToScreenPoint(curPlayer.transform.position);
         bool insideScreen = Screen.safeArea.Contains(pos);
+        RotateArrow();
 
-        if (insideScreen)
+        if (insideScreen && !isCurrentlyInside)
         {
+            isCurrentlyInside = true;
             _backToShipCanvasGrp.DOFade(0, duration: 0.4f)
                 .onComplete = () => backToShipBtn.gameObject.SetActive(false);
         }
-        else
+        else if (!insideScreen && isCurrentlyInside)
         {
+            isCurrentlyInside = false;
             backToShipBtn.gameObject.SetActive(true);
             _backToShipCanvasGrp.DOFade(1, duration: 0.4f);
-            RotateArrow();
         }
 
         void RotateArrow()

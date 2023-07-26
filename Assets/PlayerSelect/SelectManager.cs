@@ -2,6 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class SelectManager : MonoBehaviour
 {
@@ -45,6 +46,7 @@ public class SelectManager : MonoBehaviour
             Debug.LogWarning("not all team ready");
             return;
         }
+        DOTween.KillAll();
         SceneManager.LoadScene(1);
     }
     public void Save()

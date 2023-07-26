@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -32,6 +33,7 @@ public class PauseHandler : MonoBehaviour
     }
     public void BackToMenu()
     {
+        DOTween.KillAll();
         SceneManager.LoadScene(0);
         DataPersistence.ClearTeamDB();
         ResumeGame();
