@@ -28,6 +28,7 @@ public class PauseHandler : MonoBehaviour
     public void RestartGame()
     {
         DataPersistence.Rematch();
+        DOTween.KillAll();
         SceneManager.LoadScene(1);
         ResumeGame();
     }
