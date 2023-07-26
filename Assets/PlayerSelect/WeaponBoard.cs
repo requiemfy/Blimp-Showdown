@@ -14,13 +14,14 @@ public class WeaponBoard : MonoBehaviour
 
     private float _scrollLimit;
 
-    private const int SENSITIVITY = 1;
+    private float sensitivity = 1;
     private const int SCROLLPADDING = 80;
 
     private void Awake()
     {
         Instance = this;
         RectTransfrom = transform as RectTransform;
+        sensitivity = 1080 / Screen.safeArea.height;
         SpawnCards();
         ResizeWeaponBoard();
         BackToTop();
@@ -34,7 +35,7 @@ public class WeaponBoard : MonoBehaviour
     //__________METHODS_______________
     public void MoveUp(Vector2 anchor, float amount)
     {
-        Vector2 targetPos = anchor + amount * SENSITIVITY * Vector2.up;
+        Vector2 targetPos = anchor + amount * sensitivity * Vector2.up;
         bool exceedLim = Mathf.Abs(targetPos.y) > _scrollLimit;
         if (exceedLim) return;
         RectTransfrom.anchoredPosition = targetPos;
