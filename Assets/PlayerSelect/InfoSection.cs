@@ -29,6 +29,7 @@ public class InfoSection : MonoBehaviour
     public void ShowInfoOf(WeaponType weapon)
     {
         gameObject.SetActive(true);
+        closeBtn.gameObject.SetActive(true);
 
         //flip card animation
 
@@ -44,5 +45,9 @@ public class InfoSection : MonoBehaviour
         explodeRadiusTMP.text = $"{weapon.explodeRadius}";
         bulletCountTMP.text = $"x{weapon.bulletCount}";
         trajectoryTMP.text = weapon.isGravityAffected ? "parabola" : "straight line";
+    }
+    private void OnDisable()
+    {
+        closeBtn.gameObject.SetActive(false);
     }
 }
