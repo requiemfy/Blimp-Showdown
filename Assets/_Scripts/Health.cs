@@ -110,7 +110,7 @@ public class Health : MonoBehaviour
                 stunRens[i].color = Color.white;
                 if (flashMat) stunRens[i].material = flashMat;
             }
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(1.5f);
             for (int i = 0; i < stunRens.Length; i++)
             {
                 stunRens[i].color = originalCol[i];
