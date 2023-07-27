@@ -18,6 +18,7 @@ public class PopUpManager : MonoBehaviour
         TMP.color = color;
         TMP.transform.position = position + new Vector2(Random.Range(-2f,2f), Random.Range(0f,2f));
         TMP.transform.DOMoveY(position.y + 3, duration: 1.5f)
+            .onComplete = () => TMP.DOColor(color.ChangeAlpha(0), duration: 0.5f)
             .onComplete = () => Destroy(TMP.gameObject);
     }
 }

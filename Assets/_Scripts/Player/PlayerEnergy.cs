@@ -28,7 +28,7 @@ public class PlayerEnergy : MonoBehaviour
             onEnergyChanged();
             return true; 
         }
-        Debug.Log("Out of Energy");
+        PopUpManager.Instance.SpawnText("Out of Energy", Camera.main.transform.position, Color.white);
         return false;
     }
 }

@@ -81,12 +81,16 @@ public class WeaponShooting : MonoBehaviour
         {
             float offset = 1 - i * _weapon.bulletOffset;
             Bullet bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
-            Vector2 LaunchVec = Mathf.Sqrt(_weapon.range * 10) * (offset * Power * Direction + GameManager.Instance.Wind);
+
+            Vector2 LaunchVec;
+            if (_weapon.isGravityAffected) LaunchVec = Mathf.Sqrt(_weapon.range * 10) * (offset * Power * Direction + GameManager.Instance.Wind);
+            else LaunchVec = Mathf.Sqrt(_weapon.range * 10) * (offset * Direction + GameManager.Instance.Wind);
             bullet.Launch(
                 weapon: _weapon,
                 layer: gameObject.layer,
                 launchVec: LaunchVec
                 );
+
             AudioManager.Instance.PlayAudioGroup("GunShot");
             SpawnSpark();
             Recoil();

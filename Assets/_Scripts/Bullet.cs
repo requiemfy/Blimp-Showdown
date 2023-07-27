@@ -20,33 +20,6 @@ public class Bullet : MonoBehaviour
 
     [SerializeField]
     private SpriteRenderer explosion;
-
-    public void Launch(WeaponType weapon, LayerMask layer, Vector2 launchVec)
-    {
-        gameObject.layer = layer;
-        Damage = weapon.damage;
-        bulletRen.sprite = weapon.bulletSprite;
-        colldr.radius = 0.5f * weapon.bulletSprite.rect.width / weapon.bulletSprite.pixelsPerUnit;
-        explRadius = weapon.explodeRadius;
-        rb.gravityScale = weapon.isGravityAffected? 1 : 0;
-        rb.AddForce(launchVec, ForceMode2D.Impulse);
-        trailRen.startWidth = colldr.radius * 2;
-        CinemachineManager.Instance.SetFollow(transform);
-        CinemachineManager.Instance.PlayCamShake(0.5f, 0.25f);
-    }
-
-
-    private Coroutine timeRoutine;
-    private void StartTimeCounter()
-    {
-        if (timeRoutine != null) StopCoroutine(timeRoutine);
-        timeRoutine = StartCoroutine(TimeCounter());
-        IEnumerator TimeCounter()
-        {
-            yield return new WaitForSeconds(2);
-            Explode();
-        }
-    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.CompareTag("ExplodeImmediate"))
@@ -71,7 +44,21 @@ public class Bullet : MonoBehaviour
         }
 
         rb.gravityScale = 1f;
-        StartTimeCounter();
+        StartLifeTimeCounter(duration: 2);
+    }
+
+    public void Launch(WeaponType weapon, LayerMask layer, Vector2 launchVec)
+    {
+        gameObject.layer = layer;
+        Damage = weapon.damage;
+        bulletRen.sprite = weapon.bulletSprite;
+        colldr.radius = 0.5f * weapon.bulletSprite.rect.width / weapon.bulletSprite.pixelsPerUnit;
+        explRadius = weapon.explodeRadius;
+        rb.gravityScale = weapon.isGravityAffected? 1 : 0;
+        rb.AddForce(launchVec, ForceMode2D.Impulse);
+        trailRen.startWidth = colldr.radius * 2;
+        CinemachineManager.Instance.SetFollow(transform);
+        CinemachineManager.Instance.PlayCamShake(0.5f, 0.25f);
     }
     public void Explode()
     {
@@ -86,6 +73,20 @@ public class Bullet : MonoBehaviour
         colldr.enabled = false;
         trailPS.SetActive(false);
         Destroy(gameObject, 2f);
+    }
+
+
+    //_________________________________
+    private Coroutine timeRoutine;
+    private void StartLifeTimeCounter(int duration)
+    {
+        if (timeRoutine != null) StopCoroutine(timeRoutine);
+        timeRoutine = StartCoroutine(TimeCounter());
+        IEnumerator TimeCounter()
+        {
+            yield return new WaitForSeconds(duration);
+            Explode();
+        }
     }
 
     /*

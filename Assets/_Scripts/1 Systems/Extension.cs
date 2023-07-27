@@ -54,6 +54,11 @@ public static class Extension
         var targetColor = color; targetColor.a = alphaVal;
         return targetColor;
     }
+    public static Color ChangeAlpha(this Color color, float alphaVal)
+    {
+        var targetColor = color; targetColor.a = alphaVal;
+        return targetColor;
+    }
 }
 public static class CustomColors
 {
