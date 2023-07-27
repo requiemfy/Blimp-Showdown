@@ -20,6 +20,10 @@ public class TrajectoryLine : MonoBehaviour
         onUpdate = target.WeaponType.isGravityAffected ? UpdateTrajectory : UpdateStraightLine;
     }
 
+    private void Awake()
+    {
+        gameObject.SetActive(false);
+    }
     private Action onUpdate;
     private void Update()
     {

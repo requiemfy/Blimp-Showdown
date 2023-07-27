@@ -51,6 +51,8 @@ public class HUD : MonoBehaviour
         _cam = Camera.main;
         InitializeButtons();
         SpawnTurnIndicator();
+        weaponHUD.gameObject.SetActive(false);
+        playerHUD.gameObject.SetActive(false);
     }
     private void Update()
     {
@@ -101,7 +103,6 @@ public class HUD : MonoBehaviour
         {
             StartObserveWeapon(curPlayer.Weapons.GetWeaponCtrl(2));
         });
-        ShowWeaponHUD(false);
     }
     public Image FindTurnIndicator(Team target)
     {
@@ -128,18 +129,19 @@ public class HUD : MonoBehaviour
 
     public void StartObserveWeapon(WeaponController newWeapon)
     {
-        if (newWeapon == null)
-        {
-            ShowWeaponHUD(false);
-            return;
-        }
-        if (!newWeapon.IsFocusable) return;
         // stop observe current weapon
         if (curWeapon)
         {
             curWeapon.transform.localPosition = curWeapon.transform.localPosition.ChangeZ(-1);
             curWeapon.Health.OnDamageTaken -= UpdateWeaponHealthUI;
         }
+        if (newWeapon == null)
+        {
+            TurnOff(weaponHUD);
+            trajectory.gameObject.SetActive(false);
+            return;
+        }
+        if (!newWeapon.IsFocusable) return;
 
         //start subscribe new weapon
         curWeapon = newWeapon;
@@ -149,11 +151,11 @@ public class HUD : MonoBehaviour
         UpdateWeaponHealthUI();
         UpdateRangeIdctUI();
         UpdatePowerAnglePad();
-        ShowWeaponHUD(true);
+        TurnOn(weaponHUD);
+        trajectory.gameObject.SetActive(true);
     }
     public void StartObservePlayer(PlayerController newPlayer)
     {
-        if (!newPlayer.IsInTurn) return;
         //stop observe currentplayer
         if (curPlayer)
         {
@@ -162,6 +164,13 @@ public class HUD : MonoBehaviour
             curPlayer.Movement.whileMoving -= UpdateFuelUI;
             curPlayer.transform.position = curPlayer.transform.position.ChangeZ(0);
         }
+        if (newPlayer == null)
+        {
+            curPlayer = null;
+            TurnOff(playerHUD);
+            return;
+        }
+        if (!newPlayer.IsInTurn) return;
 
         //start subscribe new player
         curPlayer = newPlayer;
@@ -173,26 +182,18 @@ public class HUD : MonoBehaviour
         UpdateEnergyBarUI();
         UpdateFuelUI();
         Update_weapon_button_thumbnails();
-        ShowWeaponHUD(false);
+        TurnOn(playerHUD);
     }
-    public void ShowWeaponHUD(bool status)
+
+    private void TurnOn(CanvasGroup canvasGrp)
     {
-        trajectory.gameObject.SetActive(status);
-        if (status)
-        {
-            weaponHUD.alpha = 1;
-            weaponHUD.gameObject.SetActive(true);
-            playerHUD.DOFade(0,0.5f)
-                .onComplete = () => playerHUD.gameObject.SetActive(false);
-        }
-        else
-        {
-            playerHUD.alpha = 1;
-            playerHUD.gameObject.SetActive(true);
-            weaponHUD.DOFade(0, 0.5f)
-                .onComplete = () => weaponHUD.gameObject.SetActive(false);
-            
-        }
+        canvasGrp.alpha = 1;
+        canvasGrp.gameObject.SetActive(true);
+    }
+    private void TurnOff(CanvasGroup canvasGrp)
+    {
+        canvasGrp.DOFade(0, 0.5f)
+                .onComplete = () => canvasGrp.gameObject.SetActive(false);
     }
 
 
@@ -205,6 +206,11 @@ public class HUD : MonoBehaviour
     private bool isCurrentlyInside = false;
     private void CheckPlayerInsideScreen()
     {
+        if (curPlayer == null) 
+        {
+            backToShipBtn.gameObject.SetActive(false);
+            return;
+        }
         Vector2 pos = _cam.WorldToScreenPoint(curPlayer.transform.position);
         bool insideScreen = Screen.safeArea.Contains(pos);
         RotateArrow();

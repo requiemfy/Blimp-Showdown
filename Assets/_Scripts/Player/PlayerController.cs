@@ -108,7 +108,6 @@ public class PlayerController : MonoBehaviour
         Health.ShowHealthBar(true);
         fuelBar.gameObject.SetActive(true);
         energyBar.gameObject.SetActive(false);
-        HUD.Instance.StartObservePlayer(this);
     }
     public void OnPointerUp()
     {

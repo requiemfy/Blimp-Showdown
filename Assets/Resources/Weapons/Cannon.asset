@@ -19,7 +19,7 @@ MonoBehaviour:
   energyCost: 1
   health: 12
   damage: 5
-  range: 15
+  range: 20
   explodeRadius: 2
   isGravityAffected: 1
   bulletCount: 1

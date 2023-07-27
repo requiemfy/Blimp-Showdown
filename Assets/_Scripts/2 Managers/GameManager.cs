@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 using Random = System.Random;
@@ -28,10 +29,15 @@ public class GameManager : MonoBehaviour
         Random random = new();
         OpennedTeams = OpennedTeams.OrderBy(x => random.Next()).ToArray();
     }
-    private void Start()
+    private IEnumerator Start()
     {
         GetRespawnPoints();
         SpawnPlayers();
+        foreach (var team in OpennedTeams)
+        {
+            CinemachineManager.Instance.SetFollow(DataPersistence.Get(team).Controller.transform);
+            yield return new WaitForSeconds(1.5f);
+        }
         SetTurn(OpennedTeams[0]);
         HUD.Instance.FindTurnIndicator(OpennedTeams[0]).color = OpennedTeams[0].GetTeamColor();
     }
@@ -78,19 +84,26 @@ public class GameManager : MonoBehaviour
     }
     private void SetTurn(Team team)
     {
-        foreach (Team otherTeam in OpennedTeams)
+        StopAllCoroutines();
+        StartCoroutine(SetTurnRoutine());
+        IEnumerator SetTurnRoutine()
         {
-            if (otherTeam == team)
+            foreach (Team otherTeam in OpennedTeams)
             {
-                continue;
+                if (otherTeam == team)
+                {
+                    continue;
+                }
+                DataPersistence.Get(otherTeam).Controller.IsInTurn = false;
             }
-            DataPersistence.Get(otherTeam).Controller.IsInTurn = false;
+            var target = DataPersistence.Get(team).Controller;
+            target.IsInTurn = true;
+            CinemachineManager.Instance.SetFollow(target.transform, isPlayer: true);
+            HUD.Instance.StartObserveWeapon(null);
+            HUD.Instance.StartObservePlayer(null);
+            yield return new WaitForSeconds(3);
+            HUD.Instance.StartObservePlayer(target);
         }
-        var target = DataPersistence.Get(team).Controller;
-        target.IsInTurn = true;
-        CinemachineManager.Instance.SetFollow(target.transform, isPlayer: true);
-        HUD.Instance.StartObserveWeapon(null);
-        HUD.Instance.StartObservePlayer(target);
     }
 
     public void DecreasePlayerRemaining(Team team)
