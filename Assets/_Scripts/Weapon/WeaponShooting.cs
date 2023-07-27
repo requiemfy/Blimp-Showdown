@@ -71,10 +71,10 @@ public class WeaponShooting : MonoBehaviour
                 FireRayCast();
                 return;
             }
-            StartCoroutine(FireCO());
+            StartCoroutine(FireNormal());
         }
     }
-    private IEnumerator FireCO()
+    private IEnumerator FireNormal()
     {
         _isFiring = true;
         for (int i = 0; i < _weapon.bulletCount; i++)
@@ -83,8 +83,10 @@ public class WeaponShooting : MonoBehaviour
             Bullet bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
 
             Vector2 LaunchVec;
+            //projectile
             if (_weapon.isGravityAffected) LaunchVec = Mathf.Sqrt(_weapon.range * 10) * (offset * Power * Direction + GameManager.Instance.Wind);
-            else LaunchVec = Mathf.Sqrt(_weapon.range * 10) * (offset * Direction + GameManager.Instance.Wind);
+            //straight line
+            else LaunchVec = 12 * (offset * Direction + GameManager.Instance.Wind);
             bullet.Launch(
                 weapon: _weapon,
                 layer: gameObject.layer,

@@ -59,6 +59,7 @@ public class Bullet : MonoBehaviour
         trailRen.startWidth = colldr.radius * 2;
         CinemachineManager.Instance.SetFollow(transform);
         CinemachineManager.Instance.PlayCamShake(0.5f, 0.25f);
+        if (!weapon.isGravityAffected) StartLifeTimeCounter((float)weapon.range/12);
     }
     public void Explode()
     {
@@ -78,7 +79,7 @@ public class Bullet : MonoBehaviour
 
     //_________________________________
     private Coroutine timeRoutine;
-    private void StartLifeTimeCounter(int duration)
+    private void StartLifeTimeCounter(float duration)
     {
         if (timeRoutine != null) StopCoroutine(timeRoutine);
         timeRoutine = StartCoroutine(TimeCounter());
