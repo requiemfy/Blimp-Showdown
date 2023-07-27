@@ -6,23 +6,16 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Image))]
 public class StretchOnClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
-    private void OnValidate()
-    {
-        var rectTransform = transform as RectTransform;
-        if (rectTransform.pivot.x != 0.5f)
-        {
-            Debug.LogWarning(name + ": stretchOnClick works best with pivot X set to 0.5");
-        }
-    }
+    private Tween currentTween;
     public void OnPointerDown(PointerEventData eventData)
     {
         AudioManager.Instance.PlayAudioGroup("ButtonClick");
-        DOTween.Kill(transform);
-        transform.localScale = new(1.2f, 0.7f);
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        transform.DOScale(new Vector2(1f, 1f), duration: 0.1f);
+        currentTween?.Kill(true);
+        currentTween = transform.DOScale(new Vector2(1.2f, 0.7f), duration: 0.1f)
+            .SetLoops(2, LoopType.Yoyo);
     }
 }
