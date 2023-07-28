@@ -1,7 +1,9 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = System.Random;
 
 public class GameManager : MonoBehaviour
@@ -13,6 +15,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private PlayerController playerPrefab;
     [SerializeField] private GameOverScreen gameOverScreen;
+    [SerializeField] private Image cameraRaycast;
 
     private int _playerRemaining;
     private GameObject[] _respawnPoints;
@@ -33,11 +36,25 @@ public class GameManager : MonoBehaviour
     {
         GetRespawnPoints();
         SpawnPlayers();
+        //cam control off
+        cameraRaycast.raycastTarget = false;
+        CameraManager.Instance.enabled = false;
+
+        //cam zoom animation
+        var vcam = CinemachineManager.Instance.VCam;
+        vcam.m_Lens.OrthographicSize = 30;
+        DOTween.To(() => vcam.m_Lens.OrthographicSize, x => vcam.m_Lens.OrthographicSize = x, 15, duration: 3).SetEase(Ease.InOutCubic);
+
+        //go through players
         foreach (var team in OpennedTeams)
         {
             CinemachineManager.Instance.SetFollow(DataPersistence.Get(team).Controller.transform);
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(2);
         }
+
+        //cam controll on
+        cameraRaycast.raycastTarget = true;
+        CameraManager.Instance.enabled = true;
         SetTurn(OpennedTeams[0]);
         HUD.Instance.FindTurnIndicator(OpennedTeams[0]).color = OpennedTeams[0].GetTeamColor();
     }

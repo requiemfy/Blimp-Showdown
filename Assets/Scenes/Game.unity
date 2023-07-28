@@ -5502,7 +5502,7 @@ GameObject:
   - component: {fileID: 867285727}
   - component: {fileID: 867285728}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: BG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8555,6 +8555,7 @@ GameObject:
   - component: {fileID: 1730563918}
   - component: {fileID: 1730563917}
   - component: {fileID: 1730563919}
+  - component: {fileID: 1730563920}
   m_Layer: 0
   m_Name: PowerAnglePad
   m_TagString: Untagged
@@ -8606,6 +8607,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09aec656b209f574abe9ce352f16963e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!225 &1730563920
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1730563916}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1751549959
 GameObject:
   m_ObjectHideFlags: 0
@@ -9315,6 +9328,7 @@ MonoBehaviour:
   Wind: {x: 0, y: 0}
   playerPrefab: {fileID: 6642035526497430091, guid: cfb16cad46d595642bc83ca3c2dba7e7, type: 3}
   gameOverScreen: {fileID: 1309299635}
+  cameraRaycast: {fileID: 799045877}
 --- !u!114 &1841826437
 MonoBehaviour:
   m_ObjectHideFlags: 0
