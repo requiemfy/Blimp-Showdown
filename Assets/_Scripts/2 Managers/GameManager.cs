@@ -55,8 +55,9 @@ public class GameManager : MonoBehaviour
         //cam controll on
         cameraRaycast.raycastTarget = true;
         CameraManager.Instance.enabled = true;
-        SetTurn(OpennedTeams[0]);
-        HUD.Instance.FindTurnIndicator(OpennedTeams[0]).color = OpennedTeams[0].GetTeamColor();
+        var firstTeam = OpennedTeams[0];
+        SetTurn(firstTeam);
+        HUD.Instance.FindTurnIndicator(firstTeam).DOColor(firstTeam.GetTeamColor(), duration: 0.5f);
     }
     private void GetRespawnPoints()
     {
@@ -83,7 +84,7 @@ public class GameManager : MonoBehaviour
     {
         //before
         var before = OpennedTeams[current];
-        HUD.Instance.FindTurnIndicator(before).color = before.GetTeamColor().ChangeAlpha(50);
+        HUD.Instance.FindTurnIndicator(before).DOColor(before.GetTeamColor().ChangeAlpha(50), duration: 0.5f);
         onTurnEnded();
 
         //after
@@ -97,7 +98,7 @@ public class GameManager : MonoBehaviour
         }
         var after = OpennedTeams[current];
         SetTurn(after);
-        HUD.Instance.FindTurnIndicator(after).color = after.GetTeamColor();
+        HUD.Instance.FindTurnIndicator(after).DOColor(after.GetTeamColor(), duration: 0.5f);
     }
     private void SetTurn(Team team)
     {
