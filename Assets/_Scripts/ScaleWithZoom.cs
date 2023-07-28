@@ -6,7 +6,7 @@ public class ScaleWithZoom : MonoBehaviour
     {
         CameraManager.Instance.WhileZoomChanging += Scale;
     }
-    private void OnDisable()
+    private void OnDestroy()
     {
         CameraManager.Instance.WhileZoomChanging -= Scale;
     }
