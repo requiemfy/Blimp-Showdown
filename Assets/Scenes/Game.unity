@@ -5711,7 +5711,7 @@ MonoBehaviour:
   m_ScreenY: 0.5
   m_CameraDistance: 10
   m_DeadZoneWidth: 0
-  m_DeadZoneHeight: 0.5
+  m_DeadZoneHeight: 0.2
   m_DeadZoneDepth: 0
   m_UnlimitedSoftZone: 1
   m_SoftZoneWidth: 0.8
@@ -9351,7 +9351,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Offset: {x: 0, y: 0}
   speed: 1
-  virtualCam: {fileID: 1814538070}
 --- !u!114 &1841826438
 MonoBehaviour:
   m_ObjectHideFlags: 0
