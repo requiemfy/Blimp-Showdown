@@ -1,5 +1,4 @@
 using DG.Tweening;
-using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(RectTransform))]
@@ -7,6 +6,7 @@ public class TweenEnter : MonoBehaviour
 {
     [SerializeField] Direction direction;
     [SerializeField] float duration;
+    [SerializeField] float delay = 0;
 
 
     [System.Serializable]
@@ -36,7 +36,9 @@ public class TweenEnter : MonoBehaviour
                 break;
         }
 
-        rectTransform.DOAnchorPos(originalPos, duration).SetEase(Ease.OutCubic);
+        rectTransform.DOAnchorPos(originalPos, duration)
+            .SetDelay(delay)
+            .SetEase(Ease.OutCubic);
     }
 }
 
