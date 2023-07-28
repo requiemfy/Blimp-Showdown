@@ -62,9 +62,9 @@ public static class Extension
 }
 public static class CustomColors
 {
-    public static Color32 Red { get; } = new Color32(255, 0, 0, 255);
+    public static Color32 Red { get; } = new Color32(242, 111, 103, 255);
     public static Color32 Blue { get; } = new Color32(75, 154, 255, 255);
-    public static Color32 Yellow { get; } = new Color32(255, 226, 75, 255);
-    public static Color32 Green { get; } = new Color32(41, 233, 105, 255);
+    public static Color32 Yellow { get; } = new Color32(253, 191, 92, 255);
+    public static Color32 Green { get; } = new Color32(54, 217, 140, 255);
     public static Color32 Purple { get; } = new Color32(128, 0, 255, 255);
 }
