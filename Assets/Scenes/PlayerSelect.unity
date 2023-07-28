@@ -287,6 +287,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1027629996}
     m_Modifications:
+    - target: {fileID: 1522621198987527437, guid: af1b06c17a2ff974a882f909bb9eb98e, type: 3}
+      propertyPath: delay
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2651285476379837521, guid: af1b06c17a2ff974a882f909bb9eb98e, type: 3}
       propertyPath: direction
       value: 1
@@ -1067,6 +1071,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1027629996}
     m_Modifications:
+    - target: {fileID: 1522621198987527437, guid: af1b06c17a2ff974a882f909bb9eb98e, type: 3}
+      propertyPath: delay
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2651285476379837521, guid: af1b06c17a2ff974a882f909bb9eb98e, type: 3}
       propertyPath: direction
       value: 3
@@ -2821,6 +2829,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc45d289ef2851b488a4c3d0cbf48c07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  delay: 0
   delta: 30
 --- !u!224 &1312251638 stripped
 RectTransform:
@@ -3516,6 +3525,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1027629996}
     m_Modifications:
+    - target: {fileID: 1522621198987527437, guid: af1b06c17a2ff974a882f909bb9eb98e, type: 3}
+      propertyPath: delay
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 2651285476379837521, guid: af1b06c17a2ff974a882f909bb9eb98e, type: 3}
       propertyPath: direction
       value: 0

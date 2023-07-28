@@ -1,17 +1,18 @@
 using DG.Tweening;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(RectTransform))]
 public class HoveringObject : MonoBehaviour
 {
     RectTransform rectTransform;
 
+    [SerializeField] float delay = 0;
     [SerializeField] int delta;
-    private void Awake()
+    private void Start()
     {
         rectTransform = transform as RectTransform;
-        rectTransform.DOAnchorPos(rectTransform.anchoredPosition + new Vector2(0,delta), duration: 1)
+        rectTransform.DOAnchorPos(rectTransform.anchoredPosition + new Vector2(0, delta), duration: 1)
+            .SetDelay(delay)
             .SetEase(Ease.InOutSine)
             .SetLoops(-1, LoopType.Yoyo);
     }

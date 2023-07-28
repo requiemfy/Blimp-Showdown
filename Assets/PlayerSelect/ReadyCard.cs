@@ -12,6 +12,8 @@ public class ReadyCard : MonoBehaviour, IPointerDownHandler
 
     [SerializeField] Team targetTeam;
     [SerializeField] TextMeshProUGUI stateTMP;
+    [SerializeField] GameObject notReadyDisplay;
+    [SerializeField] GameObject readyDisplay;
     [SerializeField] Button closeBtn;
 
     private CanvasGroup _parentCanvasGrp;
@@ -27,6 +29,8 @@ public class ReadyCard : MonoBehaviour, IPointerDownHandler
 
     private void Awake()
     {
+        notReadyDisplay.transform.Find("ColorDynamic").GetComponent<Image>().color = targetTeam.GetTeamColor();
+        readyDisplay.transform.Find("ColorDynamic").GetComponent<Image>().color = targetTeam.GetTeamColor();
         _parentCanvasGrp = transform.parent.GetComponent<CanvasGroup>();
         _thisCanvasGrp = GetComponent<CanvasGroup>();
         _thisCanvasGrp.alpha = 0;
@@ -43,6 +47,7 @@ public class ReadyCard : MonoBehaviour, IPointerDownHandler
         _state = TeamState.Ready;
         NotReadyCount--;
         stateTMP.text = "ready";
+        TurnOnDisplay(TeamState.Ready);
     }
     private void OnDisable()
     {
@@ -58,6 +63,7 @@ public class ReadyCard : MonoBehaviour, IPointerDownHandler
                 stateTMP.text = "not ready";
                 closeBtn.gameObject.SetActive(true);
                 NotReadyCount++;
+                TurnOnDisplay(TeamState.NotReady);
                 break;
 
             case TeamState.NotReady:
@@ -73,7 +79,29 @@ public class ReadyCard : MonoBehaviour, IPointerDownHandler
         }
     }
 
+    private void TurnOnDisplay(TeamState state)
+    {
+        switch (state)
+        {
+            case TeamState.Closed:
+                notReadyDisplay.SetActive(false);
+                readyDisplay.SetActive(false);
+                break;
 
+            case TeamState.NotReady:
+                notReadyDisplay.SetActive(true);
+                readyDisplay.SetActive(false);
+                break;
+
+            case TeamState.Ready:
+                notReadyDisplay.SetActive(false);
+                readyDisplay.SetActive(true);
+                break;
+
+            default:
+                break;
+        }
+    }
     private void EnterEdit()
     {
         SelectManager.Instance.StagedTeam = targetTeam;
@@ -87,6 +115,7 @@ public class ReadyCard : MonoBehaviour, IPointerDownHandler
         stateTMP.text = "add player";
         closeBtn.gameObject.SetActive(false);
         DataPersistence.Push(targetTeam, data: null);
+        TurnOnDisplay(TeamState.Closed);
     }
     private void FadeIn()
     {
