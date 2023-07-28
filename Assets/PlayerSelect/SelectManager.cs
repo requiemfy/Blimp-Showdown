@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
+using UnityEngine.UI;
 
 public class SelectManager : MonoBehaviour
 {
@@ -19,11 +20,13 @@ public class SelectManager : MonoBehaviour
         set 
         {
             _stagedTeam = value;
+            shipTail.color = value.GetTeamColor();
             onStartedEdit(value);
         }
     }
     private Team _stagedTeam;
 
+    [SerializeField] private Image shipTail;
     [SerializeField] private TextMeshProUGUI healthTMP;
     [SerializeField] private TextMeshProUGUI damageTMP;
 

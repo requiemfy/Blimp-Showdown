@@ -52,6 +52,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private ParticleSystem shipCollapsedPS;
     [SerializeField] private Transform explosionPS;
     [SerializeField] private Sprite deathIcon;
+    [SerializeField] private SpriteRenderer shipTail;
 
     private Team _team;
     private Rigidbody2D RB;
@@ -102,6 +103,7 @@ public class PlayerController : MonoBehaviour
         gameObject.layer = LayerMask.NameToLayer(team.ToString());
         Health.Construct(30, tag);
         Weapons.Construct(DataPersistence.Get(team).Weapons);
+        shipTail.color = team.GetTeamColor();
     }
     public void OnPointerDown()
     {
