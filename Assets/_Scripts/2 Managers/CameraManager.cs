@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
+
 public class CameraManager : MonoBehaviour
 {
     public static CameraManager Instance { get; private set; }
@@ -12,11 +13,6 @@ public class CameraManager : MonoBehaviour
     {
         Instance= this;
         _cam = Camera.main;
-    }
-    private void Update()
-    {
-        //Update_Follow();
-        Update_PitchZoom();
     }
 
     #region FOLLOW
@@ -65,40 +61,6 @@ public class CameraManager : MonoBehaviour
         _triggered = true;
         yield return new WaitForSeconds(1.5f);
         SetFollow(_currentPlayer);
-    }
-    #endregion
-
-    #region PITCHZOOM
-    public Action<float> WhileZoomChanging;
-
-    [SerializeField]
-    private CinemachineVirtualCamera virtualCam;
-    private void Update_PitchZoom()
-    {
-        if (Input.touchCount == 2)
-        {
-            Touch touchZero = Input.GetTouch(0);
-            Touch touchOne = Input.GetTouch(1);
-
-            Vector2 touchZeroPos = touchZero.position;
-            Vector2 touchOnePos = touchOne.position;
-            float distance = (touchZeroPos - touchOnePos).magnitude;
-
-            Vector2 touchZeroPrevPos = touchZeroPos - touchZero.deltaPosition;
-            Vector2 touchOnePrevPos = touchOnePos - touchOne.deltaPosition;
-            float preDistance = (touchZeroPrevPos - touchOnePrevPos).magnitude;
-
-            float pitchAmount = distance - preDistance;
-            Zoom(pitchAmount * 0.01f);
-            return;
-        }
-        Zoom(Input.GetAxis("Mouse ScrollWheel"));
-    }
-
-    private void Zoom(float amount)
-    {
-        virtualCam.m_Lens.OrthographicSize = Mathf.Clamp(virtualCam.m_Lens.OrthographicSize - amount, 5f, 20f);
-        WhileZoomChanging(virtualCam.m_Lens.OrthographicSize);
     }
     #endregion
 }

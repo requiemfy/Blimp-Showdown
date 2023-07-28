@@ -2,6 +2,7 @@ using DG.Tweening;
 using System;
 using System.Collections;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = System.Random;
@@ -36,14 +37,12 @@ public class GameManager : MonoBehaviour
     {
         GetRespawnPoints();
         SpawnPlayers();
-        //cam control off
-        cameraRaycast.raycastTarget = false;
-        CameraManager.Instance.enabled = false;
+        EnableCamControll(false);
 
         //cam zoom animation
-        var vcam = CinemachineManager.Instance.VCam;
-        vcam.m_Lens.OrthographicSize = 30;
-        DOTween.To(() => vcam.m_Lens.OrthographicSize, x => vcam.m_Lens.OrthographicSize = x, 15, duration: 3).SetEase(Ease.InOutCubic);
+        var cineMana = CinemachineManager.Instance;
+        cineMana.OrthographicSize = 30;
+        DOTween.To(() => cineMana.OrthographicSize, x => cineMana.OrthographicSize = x, 15, duration: 3).SetEase(Ease.InOutCubic);
 
         //go through players
         foreach (var team in OpennedTeams)
@@ -53,8 +52,7 @@ public class GameManager : MonoBehaviour
         }
 
         //cam controll on
-        cameraRaycast.raycastTarget = true;
-        CameraManager.Instance.enabled = true;
+        EnableCamControll(true);
         var firstTeam = OpennedTeams[0];
         SetTurn(firstTeam);
         HUD.Instance.FindTurnIndicator(firstTeam).DOColor(firstTeam.GetTeamColor(), duration: 0.5f);
@@ -75,6 +73,11 @@ public class GameManager : MonoBehaviour
             playerCtrl.transform.position = _respawnPoints[i].transform.position;
             i++;
         }
+    }
+    private void EnableCamControll(bool value)
+    {
+        cameraRaycast.raycastTarget = value;
+        CinemachineManager.Instance.enabled = value;
     }
 
 

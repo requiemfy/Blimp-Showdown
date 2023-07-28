@@ -1,7 +1,10 @@
 using Cinemachine;
 using DG.Tweening;
+using System;
 using System.Collections;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class CinemachineManager : MonoBehaviour
 {
@@ -16,6 +19,10 @@ public class CinemachineManager : MonoBehaviour
     {
         Instance = this;
         Offset = VCam.GetComponent<CinemachineCameraOffset>();
+    }
+    private void Update()
+    {
+        Update_PitchZoom();
     }
 
     public void SetFollow(Transform target, bool isPlayer = false)
@@ -52,4 +59,47 @@ public class CinemachineManager : MonoBehaviour
             Offset.m_Offset = original;
         }
     }
+
+    #region PITCHZOOM
+    public Action<float> WhileZoomChanging;
+    public float OrthographicSize
+    {
+        get
+        {
+            return VCam.m_Lens.OrthographicSize;
+        }
+        set
+        {
+            VCam.m_Lens.OrthographicSize = value;
+            WhileZoomChanging?.Invoke(value);
+        }
+    }
+
+    private void Update_PitchZoom()
+    {
+        if (Input.touchCount == 2)
+        {
+            Touch touchZero = Input.GetTouch(0);
+            Touch touchOne = Input.GetTouch(1);
+
+            Vector2 touchZeroPos = touchZero.position;
+            Vector2 touchOnePos = touchOne.position;
+            float distance = (touchZeroPos - touchOnePos).magnitude;
+
+            Vector2 touchZeroPrevPos = touchZeroPos - touchZero.deltaPosition;
+            Vector2 touchOnePrevPos = touchOnePos - touchOne.deltaPosition;
+            float preDistance = (touchZeroPrevPos - touchOnePrevPos).magnitude;
+
+            float pitchAmount = distance - preDistance;
+            Zoom(pitchAmount * 0.01f);
+            return;
+        }
+        Zoom(Input.GetAxis("Mouse ScrollWheel"));
+    }
+
+    private void Zoom(float amount)
+    {
+        OrthographicSize = Mathf.Clamp(VCam.m_Lens.OrthographicSize - amount, min: 5f, max: 20f);
+    }
+    #endregion
 }

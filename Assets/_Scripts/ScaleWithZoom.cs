@@ -4,11 +4,11 @@ public class ScaleWithZoom : MonoBehaviour
 {
     private void Start()
     {
-        CameraManager.Instance.WhileZoomChanging += Scale;
+        CinemachineManager.Instance.WhileZoomChanging += Scale;
     }
     private void OnDestroy()
     {
-        CameraManager.Instance.WhileZoomChanging -= Scale;
+        CinemachineManager.Instance.WhileZoomChanging -= Scale;
     }
 
     private void Scale(float orthographicSize)
