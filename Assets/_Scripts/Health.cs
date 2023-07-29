@@ -79,7 +79,7 @@ public class Health : MonoBehaviour
         IEnumerator ShowHealthBarCO()
         {
             ShowHealthBar(true);
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(3);
             ShowHealthBar(false);
         }
     }
