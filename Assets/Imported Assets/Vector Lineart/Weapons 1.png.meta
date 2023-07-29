@@ -129,15 +129,15 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Weapons 1_0
+      name: cannon
       rect:
         serializedVersion: 2
         x: 12
         y: 858
         width: 227
         height: 61
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.13470812, y: 0.522656}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -150,15 +150,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Weapons 1_1
+      name: mortar
       rect:
         serializedVersion: 2
         x: 294
         y: 861
         width: 169
         height: 58
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.17289454, y: 0.51588494}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -171,15 +171,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Weapons 1_2
+      name: machinegun
       rect:
         serializedVersion: 2
         x: 546
         y: 858
         width: 188
         height: 66
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.1765484, y: 0.51395947}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -192,7 +192,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Weapons 1_3
+      name: shieldcannon
       rect:
         serializedVersion: 2
         x: 12
@@ -200,7 +200,7 @@ TextureImporter:
         width: 230
         height: 127
       alignment: 9
-      pivot: {x: 0.12237515, y: 0.5091596}
+      pivot: {x: 0.12421273, y: 0.49917626}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -213,7 +213,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Weapons 1_4
+      name: shotgun
       rect:
         serializedVersion: 2
         x: 306
@@ -221,7 +221,7 @@ TextureImporter:
         width: 176
         height: 58
       alignment: 9
-      pivot: {x: 0.1673369, y: 0.5}
+      pivot: {x: 0.1673369, y: 0.5145737}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -234,15 +234,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Weapons 1_5
+      name: sniper
       rect:
         serializedVersion: 2
         x: 516
         y: 584
         width: 248
         height: 70
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.12848909, y: 0.59056485}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -255,15 +255,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Weapons 1_6
+      name: bombdropper
       rect:
         serializedVersion: 2
         x: 18
         y: 337
         width: 165
         height: 90
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.19324237, y: 0.5034936}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -286,13 +286,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Weapons 1_0: -533365730
-      Weapons 1_1: 189540413
-      Weapons 1_2: 649849974
-      Weapons 1_3: -917330214
-      Weapons 1_4: -526929678
-      Weapons 1_5: -235498521
-      Weapons 1_6: 37260029
+      bombdropper: 37260029
+      cannon: -533365730
+      machinegun: 649849974
+      mortar: 189540413
+      shieldcannon: -917330214
+      shotgun: -526929678
+      sniper: -235498521
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
