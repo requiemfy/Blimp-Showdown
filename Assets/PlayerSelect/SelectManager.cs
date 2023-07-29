@@ -62,19 +62,34 @@ public class SelectManager : MonoBehaviour
     public void UpdateTotalHealthDamage()
     {
         Vector2 current = new (int.Parse(healthTMP.text), int.Parse(damageTMP.text));
-        var tween = DOTween.To(() => current, x => current = x, new(GetTotalHealth(), GetTotalDamage()), 1);
+        Vector2 target = new(GetTotalHealth(), GetTotalDamage());
+        var tween = DOTween.To(() => current, x => current = x, target, 1);
         tween.onPlay = () => StartCoroutine(UpdateString());
-        tween.onComplete = () => StopAllCoroutines();
+        tween.onComplete = () =>
+        {
+            healthTMP.DOColor(CustomColors.Black, 0.4f);
+            damageTMP.DOColor(CustomColors.Black, 0.4f);
+            StopAllCoroutines();
+        };
         
 
         IEnumerator UpdateString()
         {
+            RecolorText();
             while (tween.IsPlaying())
             {
                 healthTMP.text = (MathF.Round(current.x)).ToString();
                 damageTMP.text = (MathF.Round(current.y)).ToString();
                 yield return null;
             }
+        }
+        void RecolorText()
+        {
+            if (target.x < current.x) healthTMP.color = CustomColors.Red;
+            else healthTMP.color = CustomColors.Green;
+
+            if (target.y < current.y) damageTMP.color = CustomColors.Red;
+            else damageTMP.color = CustomColors.Green;
         }
     }
     private int GetTotalHealth()

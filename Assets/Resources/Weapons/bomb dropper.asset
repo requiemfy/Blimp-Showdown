@@ -16,11 +16,11 @@ MonoBehaviour:
   barrel: {fileID: 37260029, guid: 97bfab33733690742883a8c2256b0c86, type: 3}
   frame: {fileID: 0}
   bulletSprite: {fileID: 122147768, guid: 712264267df3aa549af218d13c576b8d, type: 3}
-  energyCost: 1
-  health: 30
-  damage: 20
+  energyCost: 2
+  health: 60
+  damage: 35
   range: 1
-  explodeRadius: 3
+  explodeRadius: 4.5
   isGravityAffected: 1
   bulletCount: 1
   bulletOffset: 0

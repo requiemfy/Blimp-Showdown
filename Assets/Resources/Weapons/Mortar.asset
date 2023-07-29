@@ -15,15 +15,15 @@ MonoBehaviour:
   firePointPos: {x: 0.46, y: -0.03125}
   barrel: {fileID: 189540413, guid: 97bfab33733690742883a8c2256b0c86, type: 3}
   frame: {fileID: -1153638114, guid: b4adc1cb4895a8b489c8a1b7b6ba0f5b, type: 3}
-  bulletSprite: {fileID: 122147768, guid: 712264267df3aa549af218d13c576b8d, type: 3}
-  energyCost: 2
-  health: 20
-  damage: 2
-  range: 12
-  explodeRadius: 3
+  bulletSprite: {fileID: 175172019, guid: 712264267df3aa549af218d13c576b8d, type: 3}
+  energyCost: 7
+  health: 363
+  damage: 14
+  range: 18
+  explodeRadius: 1.5
   isGravityAffected: 1
   bulletCount: 3
   bulletOffset: 0.07
-  bulletShootTime: 0.3
+  bulletShootTime: 0.6
   isRaycast: 0
   isRayMultiple: 0
