@@ -132,8 +132,8 @@ TextureImporter:
       name: bullets_1
       rect:
         serializedVersion: 2
-        x: 50
-        y: 32
+        x: 54
+        y: 30
         width: 64
         height: 64
       alignment: 0
@@ -153,8 +153,8 @@ TextureImporter:
       name: bullets_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 48
+        x: 11
+        y: 46
         width: 32
         height: 32
       alignment: 0
@@ -174,10 +174,10 @@ TextureImporter:
       name: bullets_2
       rect:
         serializedVersion: 2
-        x: 128
-        y: 0
-        width: 128
-        height: 128
+        x: 143
+        y: 14
+        width: 96
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
