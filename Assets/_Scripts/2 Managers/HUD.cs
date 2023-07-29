@@ -289,12 +289,15 @@ public class HUD : MonoBehaviour
         var playerWeapon2 = curPlayer.Weapons.GetWeaponCtrl(2);
 
         weapon0.interactable = playerWeapon0.IsFocusable;
-        weapon0.transform.GetChild(0).GetComponent<Image>().sprite = playerWeapon0.WeaponType.barrel;
+        weapon0.transform.Find("Thumbnail").GetComponent<Image>().sprite = playerWeapon0.WeaponType.barrel;
+        weapon0.GetComponentInChildren<TextMeshProUGUI>().text = playerWeapon1.WeaponType.energyCost.ToString();
 
         weapon1.interactable = playerWeapon1.IsFocusable;
-        weapon1.transform.GetChild(0).GetComponent<Image>().sprite = playerWeapon1.WeaponType.barrel;
+        weapon1.transform.Find("Thumbnail").GetComponent<Image>().sprite = playerWeapon1.WeaponType.barrel;
+        weapon1.GetComponentInChildren<TextMeshProUGUI>().text = playerWeapon1.WeaponType.energyCost.ToString();
 
         weapon2.interactable = playerWeapon2.IsFocusable;
-        weapon2.transform.GetChild(0).GetComponent<Image>().sprite = playerWeapon2.WeaponType.barrel;
+        weapon2.transform.Find("Thumbnail").GetComponent<Image>().sprite = playerWeapon2.WeaponType.barrel;
+        weapon2.GetComponentInChildren<TextMeshProUGUI>().text = playerWeapon2.WeaponType.energyCost.ToString();
     }
 }
