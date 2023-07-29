@@ -25,8 +25,7 @@ public class WeaponCardInput : DropSlot
             AudioManager.Instance.PlayAudioGroup("InsertWeapon");
             var droppedWeapon = card.Represent;
             SelectManager.Instance.StagedWeapons[order] = droppedWeapon;
-            SelectManager.Instance.UpdateTotalHealth();
-            SelectManager.Instance.UpdateTotalDamage();
+            SelectManager.Instance.UpdateTotalHealthDamage();
         }
     }
 }

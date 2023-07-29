@@ -20,7 +20,6 @@ public class SelectManager : MonoBehaviour
         set 
         {
             _stagedTeam = value;
-            shipTail.color = value.GetTeamColor();
             onStartedEdit(value);
         }
     }
@@ -35,10 +34,10 @@ public class SelectManager : MonoBehaviour
         Instance = this;
         onStartedEdit += (team) =>
         {
-            StagedWeapons = new WeaponType[3];
+            shipTail.color = team.GetTeamColor();
             TeamData data = DataPersistence.Get(team);
-            if (data == null) return;
-            StagedWeapons = data.Weapons;
+            StagedWeapons = data == null? new WeaponType[3] : data.Weapons;
+            UpdateTotalHealthDamage();
         };
     }
 
@@ -57,13 +56,10 @@ public class SelectManager : MonoBehaviour
         TeamData data = new(StagedWeapons);
         DataPersistence.Push(StagedTeam, data);
     }
-    public void UpdateTotalHealth()
+    public void UpdateTotalHealthDamage()
     {
-        healthTMP.text = $"Health: {GetTotalHealth()}";
-    }
-    public void UpdateTotalDamage()
-    {
-        damageTMP.text = $"Damage: {GetTotalDamage()}";
+        healthTMP.text = $"{GetTotalHealth()}";
+        damageTMP.text = $"{GetTotalDamage()}";
     }
     private int GetTotalHealth()
     {
