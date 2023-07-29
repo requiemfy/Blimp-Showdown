@@ -21,7 +21,8 @@ public class CamDragable : MonoBehaviour, IBeginDragHandler, IDragHandler
     }
     public void OnDrag(PointerEventData touch)
     {
-        if (Input.touchCount != 1) return;
+        if (Input.touchCount >= 2) return;
+        if (!Input.GetMouseButton(0)) return;
         var sensitivity = (float)1920 / Screen.width;
         Vector2 dragVec = sensitivity * (touch.position - firstTouchPos);
         _transposer.m_Offset = firstOffset - dragVec * multiplier;
