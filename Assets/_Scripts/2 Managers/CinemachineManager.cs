@@ -13,12 +13,13 @@ public class CinemachineManager : MonoBehaviour
     public CinemachineVirtualCamera VCam;
     public CinemachineCameraOffset Offset { get; private set; }
 
-    private Transform _currentPlayer;
+    private Transform m_currentPlayer;
 
     private void Awake()
     {
         Instance = this;
         Offset = VCam.GetComponent<CinemachineCameraOffset>();
+        m_sensitivity = 1920 / Screen.width;
     }
     private void Update()
     {
@@ -27,8 +28,8 @@ public class CinemachineManager : MonoBehaviour
 
     public void SetFollow(Transform target, bool isPlayer = false)
     {
-        if (target == null) target = _currentPlayer;
-        if (isPlayer) _currentPlayer = target;
+        if (target == null) target = m_currentPlayer;
+        if (isPlayer) m_currentPlayer = target;
         VCam.Follow = target;
         //Offset.m_Offset = Vector2.zero;
         DOTween.To(() => (Vector2)Offset.m_Offset, x => Offset.m_Offset = x, Vector2.zero, 1.5f);
@@ -75,6 +76,8 @@ public class CinemachineManager : MonoBehaviour
         }
     }
 
+    private float m_sensitivity;
+
     private void Update_PitchZoom()
     {
         if (Input.touchCount == 2)
@@ -99,7 +102,7 @@ public class CinemachineManager : MonoBehaviour
 
     private void Zoom(float amount)
     {
-        OrthographicSize = Mathf.Clamp(VCam.m_Lens.OrthographicSize - amount, min: 5f, max: 20f);
+        OrthographicSize = Mathf.Clamp(VCam.m_Lens.OrthographicSize - amount * m_sensitivity, min: 5f, max: 20f);
     }
     #endregion
 }
