@@ -288,16 +288,15 @@ public class HUD : MonoBehaviour
         var playerWeapon1 = curPlayer.Weapons.GetWeaponCtrl(1);
         var playerWeapon2 = curPlayer.Weapons.GetWeaponCtrl(2);
 
-        weapon0.interactable = playerWeapon0.IsFocusable;
-        weapon0.transform.Find("Thumbnail").GetComponent<Image>().sprite = playerWeapon0.WeaponType.barrel;
-        weapon0.GetComponentInChildren<TextMeshProUGUI>().text = playerWeapon1.WeaponType.energyCost.ToString();
+        AssignButton(weapon0, playerWeapon0);
+        AssignButton(weapon1, playerWeapon1);
+        AssignButton(weapon2, playerWeapon2);
 
-        weapon1.interactable = playerWeapon1.IsFocusable;
-        weapon1.transform.Find("Thumbnail").GetComponent<Image>().sprite = playerWeapon1.WeaponType.barrel;
-        weapon1.GetComponentInChildren<TextMeshProUGUI>().text = playerWeapon1.WeaponType.energyCost.ToString();
-
-        weapon2.interactable = playerWeapon2.IsFocusable;
-        weapon2.transform.Find("Thumbnail").GetComponent<Image>().sprite = playerWeapon2.WeaponType.barrel;
-        weapon2.GetComponentInChildren<TextMeshProUGUI>().text = playerWeapon2.WeaponType.energyCost.ToString();
+        void AssignButton(Button button, WeaponController controller)
+        {
+            button.interactable = controller.IsFocusable;
+            button.transform.Find("Thumbnail").GetComponent<Image>().sprite = controller.WeaponType.barrel;
+            button.GetComponentInChildren<TextMeshProUGUI>().text = controller.WeaponType.energyCost.ToString();
+        }
     }
 }
