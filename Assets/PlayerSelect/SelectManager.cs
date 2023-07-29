@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
 using UnityEngine.UI;
+using System.Collections;
 
 public class SelectManager : MonoBehaviour
 {
@@ -37,6 +38,8 @@ public class SelectManager : MonoBehaviour
             shipTail.color = team.GetTeamColor();
             TeamData data = DataPersistence.Get(team);
             StagedWeapons = data == null? new WeaponType[3] : data.Weapons;
+            healthTMP.text = "0";
+            damageTMP.text = "0";
             UpdateTotalHealthDamage();
         };
     }
@@ -58,8 +61,21 @@ public class SelectManager : MonoBehaviour
     }
     public void UpdateTotalHealthDamage()
     {
-        healthTMP.text = $"{GetTotalHealth()}";
-        damageTMP.text = $"{GetTotalDamage()}";
+        Vector2 current = new (int.Parse(healthTMP.text), int.Parse(damageTMP.text));
+        var tween = DOTween.To(() => current, x => current = x, new(GetTotalHealth(), GetTotalDamage()), 1);
+        tween.onPlay = () => StartCoroutine(UpdateString());
+        tween.onComplete = () => StopAllCoroutines();
+        
+
+        IEnumerator UpdateString()
+        {
+            while (tween.IsPlaying())
+            {
+                healthTMP.text = (MathF.Round(current.x)).ToString();
+                damageTMP.text = (MathF.Round(current.y)).ToString();
+                yield return null;
+            }
+        }
     }
     private int GetTotalHealth()
     {
