@@ -1933,10 +1933,6 @@ MonoBehaviour:
     sounds:
     - clip: {fileID: 8300000, guid: 06f98dfce4e837d4b82c1c90c8aa865d, type: 3}
       volume: 0.5
-    - clip: {fileID: 8300000, guid: ddba0569701f9df43b2317ce43883fc5, type: 3}
-      volume: 0.5
-    - clip: {fileID: 8300000, guid: 8d52af2f2317d22408b669dc9e2aa875, type: 3}
-      volume: 0.5
   - name: ButtonClick
     loop: 0
     source: {fileID: 0}
