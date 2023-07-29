@@ -91,10 +91,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: -66
+    m_Left: -79
     m_Right: 0
     m_Top: 0
-    m_Bottom: 517
+    m_Bottom: 540
   m_ChildAlignment: 3
   m_StartCorner: 0
   m_StartAxis: 0
@@ -115,4 +115,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   order: 0
-  arrow: {fileID: 0}

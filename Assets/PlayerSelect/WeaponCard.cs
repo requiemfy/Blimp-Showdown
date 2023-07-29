@@ -43,6 +43,8 @@ public class WeaponCard : DragableItem
     {
         Represent = weapon;
         barrelImg.sprite = weapon.barrel;
+        barrelImg.rectTransform.sizeDelta = weapon.barrel.rect.size;
+        barrelImg.rectTransform.pivot = weapon.barrel.pivot / weapon.barrel.rect.size;
         energyTMP.text = weapon.energyCost.ToString();
     }
 
