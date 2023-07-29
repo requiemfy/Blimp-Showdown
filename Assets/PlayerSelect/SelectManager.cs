@@ -59,10 +59,18 @@ public class SelectManager : MonoBehaviour
         TeamData data = new(StagedWeapons);
         DataPersistence.Push(StagedTeam, data);
     }
+
+
+
+    //total health & damage
     public void UpdateTotalHealthDamage()
     {
         Vector2 current = new (int.Parse(healthTMP.text), int.Parse(damageTMP.text));
         Vector2 target = new(GetTotalHealth(), GetTotalDamage());
+
+        healthTMP.DOKill();
+        damageTMP.DOKill();
+        StopAllCoroutines();
         var tween = DOTween.To(() => current, x => current = x, target, 1);
         tween.onPlay = () => StartCoroutine(UpdateString());
         tween.onComplete = () =>
@@ -108,7 +116,7 @@ public class SelectManager : MonoBehaviour
         foreach (WeaponType weapon in StagedWeapons)
         {
             if (!weapon) continue;
-            total += weapon.damage;
+            total += weapon.damage * weapon.bulletCount;
         }
         return total;
     }
