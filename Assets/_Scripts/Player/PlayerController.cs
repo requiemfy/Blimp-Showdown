@@ -71,7 +71,7 @@ public class PlayerController : MonoBehaviour
         GameManager.Instance.onTurnEnded += () =>
         {
             Movement.Restore(500);
-            Energy.Restore(1);
+            Energy.Restore(2);
         };
        
         //energy

@@ -88,7 +88,6 @@ public class GameManager : MonoBehaviour
         //before
         var before = OpennedTeams[current];
         HUD.Instance.FindTurnIndicator(before).DOColor(before.GetTeamColor().ChangeAlpha(50), duration: 0.5f);
-        onTurnEnded();
 
         //after
         current++;
@@ -100,6 +99,7 @@ public class GameManager : MonoBehaviour
             return;
         }
         var after = OpennedTeams[current];
+        onTurnEnded();
         SetTurn(after);
         HUD.Instance.FindTurnIndicator(after).DOColor(after.GetTeamColor(), duration: 0.5f);
     }
