@@ -32,6 +32,9 @@ public class SelectManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI damageTMP;
     [SerializeField] private TextMeshProUGUI energyTMP;
 
+    [Space(30)]
+    [SerializeField] private TextMeshProUGUI UIpopupTMP;
+
     private void Awake()
     {
         Instance = this;
@@ -51,7 +54,12 @@ public class SelectManager : MonoBehaviour
     {
         if (ReadyCard.NotReadyCount > 0)
         {
-            Debug.LogWarning("not all team ready");
+            SpawnUIPopup("not all team ready!");
+            return;
+        }
+        if (DataPersistence.GetOpenedTeams().Length < 2)
+        {
+            SpawnUIPopup("find a friend to play with!");
             return;
         }
         DOTween.KillAll();
@@ -62,7 +70,16 @@ public class SelectManager : MonoBehaviour
         TeamData data = new(StagedWeapons);
         DataPersistence.Push(StagedTeam, data);
     }
-
+    public void SpawnUIPopup(string content)
+    {
+        var TMP = Instantiate(UIpopupTMP, transform.root);
+        TMP.transform.SetAsLastSibling();
+        TMP.text= content;
+        TMP.DOColor(TMP.color.ChangeAlpha(0), duration: 0.5f)
+            .SetDelay(2);
+        TMP.rectTransform.DOAnchorPosY(TMP.rectTransform.anchoredPosition.y + 200, duration: 3)
+            .onComplete = () => Destroy( TMP.gameObject );
+    }
 
 
     //total health & damage

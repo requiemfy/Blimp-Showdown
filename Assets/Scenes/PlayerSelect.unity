@@ -3960,6 +3960,7 @@ MonoBehaviour:
   healthTMP: {fileID: 534890890}
   damageTMP: {fileID: 1826242126}
   energyTMP: {fileID: 1159724049}
+  UIpopupTMP: {fileID: 4269313684853788662, guid: 6b7673155d87d484b895e32a5703e510, type: 3}
 --- !u!1 &1952885149
 GameObject:
   m_ObjectHideFlags: 0
