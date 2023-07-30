@@ -40,14 +40,6 @@ public class WeaponController : MonoBehaviour
             smokingPS.Stop();
         };
     }
-    private void AssignBarrelVisual()
-    {
-        var barrelRen = transform.Find("Barrel").GetComponent<SpriteRenderer>();
-
-        //Sprite
-        barrelRen.sprite = WeaponType.barrel;
-        barrelRen.transform.eulerAngles = new(0, 0, 135);
-    }
     private void ResetPolygonCollider()
     {
         var colldr = Health.GetComponent<PolygonCollider2D>();
@@ -65,7 +57,6 @@ public class WeaponController : MonoBehaviour
         Health.Construct(weaponType.health);
         Shooter.Construct(weaponType);
 
-        AssignBarrelVisual();
         ResetPolygonCollider();
     }
     public void OnPointerDown()

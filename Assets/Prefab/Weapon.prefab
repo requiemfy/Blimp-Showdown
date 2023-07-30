@@ -301,7 +301,6 @@ GameObject:
   - component: {fileID: 4543192888884246419}
   - component: {fileID: 7103582697796971814}
   - component: {fileID: 4543192888884246428}
-  - component: {fileID: 4543192888884246424}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -359,18 +358,7 @@ MonoBehaviour:
   firePoint: {fileID: 758563786508019004}
   bulletPrefab: {fileID: 6975473246788735417, guid: e89423e6533e682419051758291ff559, type: 3}
   fireSparkPS: {fileID: 3279389614415072230, guid: 8e8ae340322985f488df293cbcc865ec, type: 3}
---- !u!114 &4543192888884246424
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4543192888884246416}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 576d55ef8665b124c9470384aa4d5f16, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  barrel: {fileID: 4543192888695250097}
 --- !u!1 &5617847156090971097
 GameObject:
   m_ObjectHideFlags: 0

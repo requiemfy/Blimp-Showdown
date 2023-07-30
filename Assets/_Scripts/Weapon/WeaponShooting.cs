@@ -19,15 +19,18 @@ public class WeaponShooting : MonoBehaviour
     public void Construct(WeaponType weaponType)
     {
         _weapon = weaponType;
+        barrel.GetComponent<SpriteRenderer>().sprite = weaponType.barrel;
     }
     private void Start()
     {
         _parentRB = GetComponentInParent<Rigidbody2D>();
         _energy = GetComponentInParent<PlayerEnergy>();
-        barrel = transform.Find("Barrel");
         Power = 1f;
-        Direction = new Vector2(-1, 1).normalized;
-        Angle = 135f;
+        SetBarrelRotation(new(-1, -1), -135);
+        GameManager.Instance.onTurnEnded += () =>
+        {
+            SetBarrelRotation(new(-1, -1), -135);
+        };
     }
 
 
@@ -122,6 +125,7 @@ public class WeaponShooting : MonoBehaviour
 
 
     #region SHOOTING VISUAL
+    [SerializeField]
     private Transform barrel;
     private void ShipKnockBack()
     {
@@ -145,6 +149,12 @@ public class WeaponShooting : MonoBehaviour
                     firePoint.localPosition = originalPos;
                 };
             };
+    }
+    private void SetBarrelRotation(Vector2 direction, int angle)
+    {
+        Direction = direction;
+        Angle = angle;
+        barrel.DORotate(new Vector3(0, 0, angle), duration: 1);
     }
     private float GetTanDeg(Vector2 vec)
     {
