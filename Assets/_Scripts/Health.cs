@@ -12,10 +12,6 @@ public class Health : MonoBehaviour
     public Action OnDeath;
 
     [SerializeField] private Bar healthBar;
-    private void Awake()
-    {
-        if (healthBar) ShowHealthBar(false);
-    }
     private void Start()
     {
         healthBar.SetFill(CurrentHealth, MaxHealth);
@@ -50,7 +46,6 @@ public class Health : MonoBehaviour
     {
         CurrentHealth -= val;
         SwitchMaterial();
-        CountDownHealthBar();
         OnDamageTaken?.Invoke();
         if (CurrentHealth <= 0)
         {
@@ -71,15 +66,15 @@ public class Health : MonoBehaviour
     }
 
     //healthbar timer
-    private Coroutine _currentRoutine;
-    private void CountDownHealthBar()
+    private Coroutine m_currentRoutine;
+    public void ShowHealthBarForSeconds(int duration)
     {
-        if (_currentRoutine != null) StopCoroutine(_currentRoutine);
-        _currentRoutine = StartCoroutine(ShowHealthBarCO());
+        if (m_currentRoutine != null) StopCoroutine(m_currentRoutine);
+        m_currentRoutine = StartCoroutine(ShowHealthBarCO());
         IEnumerator ShowHealthBarCO()
         {
             ShowHealthBar(true);
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(duration);
             ShowHealthBar(false);
         }
     }

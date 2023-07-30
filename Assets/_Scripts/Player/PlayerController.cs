@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -46,6 +47,7 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public PlayerEnergy Energy;
     [HideInInspector] public Health Health;
 
+    [SerializeField] private CanvasGroup weaponHealthBars;
     [SerializeField] private Bar energyBar;
     [SerializeField] private Bar fuelBar;
     [Header("Visual")]
@@ -73,7 +75,9 @@ public class PlayerController : MonoBehaviour
             Movement.Restore(500);
             Energy.Restore(2);
         };
-       
+
+        //weapon health bars
+        weaponHealthBars.gameObject.SetActive(false);
         //energy
         energyBar.SetFill(Energy.currentEnergy, 10);
         Energy.onEnergyChanged += () =>
@@ -85,10 +89,12 @@ public class PlayerController : MonoBehaviour
         Movement.whileMoving += () =>
         {
             fuelBar.gameObject.SetActive(true);
+            energyBar.gameObject.SetActive(false);
             fuelBar.SetFill((int)((float)Movement.GetRatio() * 100), 100);
         };
         Movement.OnStopped += () =>
         {
+            energyBar.gameObject.SetActive(true);
             fuelBar.gameObject.SetActive(false);
         };
     }
@@ -104,15 +110,34 @@ public class PlayerController : MonoBehaviour
         Weapons.Construct(DataPersistence.Get(team).Weapons);
         shipTail.color = team.GetTeamColor();
     }
+    public void ShowWeaponHealthBars(bool value, bool autoDisabledAfterShow = false)
+    {
+        if (value == true)
+        {
+            weaponHealthBars.DOKill();
+            weaponHealthBars.gameObject.SetActive(true);
+            weaponHealthBars.DOFade(1, duration: 0.2f)
+                .onComplete = () =>
+                {
+                    if (autoDisabledAfterShow) ShowWeaponHealthBars(false);
+                };
+        }
+        else
+        {
+            weaponHealthBars.DOFade(0, duration: 0.6f)
+                .SetDelay(2)
+                .onComplete = () => weaponHealthBars.gameObject.SetActive(false);
+        }
+    }
     public void OnPointerDown()
     {
-        Health.ShowHealthBar(true);
+        ShowWeaponHealthBars(true);
         fuelBar.gameObject.SetActive(true);
         energyBar.gameObject.SetActive(false);
     }
     public void OnPointerUp()
     {
-        Health.ShowHealthBar(false);
+        ShowWeaponHealthBars(false);
         fuelBar.gameObject.SetActive(false);
         energyBar.gameObject.SetActive(true);
     }

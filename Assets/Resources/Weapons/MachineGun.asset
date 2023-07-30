@@ -20,7 +20,7 @@ MonoBehaviour:
   health: 40
   damage: 7
   range: 48
-  explodeRadius: 0.5
+  explodeRadius: 1
   isGravityAffected: 1
   bulletCount: 5
   bulletOffset: 0.03

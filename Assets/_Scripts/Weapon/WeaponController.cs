@@ -27,8 +27,8 @@ public class WeaponController : MonoBehaviour
 
         Health.OnDamageTaken += () =>
         {
+            _parentShip.ShowWeaponHealthBars(true, autoDisabledAfterShow: true);
             float healthRatio = (float)Health.GetRatio();
-            Debug.Log(healthRatio);
             if (healthRatio >= 0.5f) return;
             smokingPS.Play();
         };
@@ -71,11 +71,11 @@ public class WeaponController : MonoBehaviour
     public void OnPointerDown()
     {
         HUD.Instance.StartObserveWeapon(this);
-        Health.ShowHealthBar(true);
+        //Health.ShowHealthBar(true);
     }
     public void OnPointerUp()
     {
-        Health.ShowHealthBar(false);
+        //Health.ShowHealthBar(false);
     }
 }
 
