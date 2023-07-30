@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using DG.Tweening;
 using UnityEngine.UI;
 using System.Collections;
+using Unity.VisualScripting;
 
 public class SelectManager : MonoBehaviour
 {
@@ -29,6 +30,7 @@ public class SelectManager : MonoBehaviour
     [SerializeField] private Image shipTail;
     [SerializeField] private TextMeshProUGUI healthTMP;
     [SerializeField] private TextMeshProUGUI damageTMP;
+    [SerializeField] private TextMeshProUGUI energyTMP;
 
     private void Awake()
     {
@@ -40,6 +42,7 @@ public class SelectManager : MonoBehaviour
             StagedWeapons = data == null? new WeaponType[3] : data.Weapons;
             healthTMP.text = "0";
             damageTMP.text = "0";
+            energyTMP.text = "0";
             UpdateTotalHealthDamage();
         };
     }
@@ -65,8 +68,8 @@ public class SelectManager : MonoBehaviour
     //total health & damage
     public void UpdateTotalHealthDamage()
     {
-        Vector2 current = new (int.Parse(healthTMP.text), int.Parse(damageTMP.text));
-        Vector2 target = new(GetTotalHealth(), GetTotalDamage());
+        Vector3 current = new (int.Parse(healthTMP.text), int.Parse(damageTMP.text), float.Parse(energyTMP.text));
+        Vector3 target = new(GetTotalHealth(), GetTotalDamage(), GetAverageEnergy());
 
         healthTMP.DOKill();
         damageTMP.DOKill();
@@ -88,6 +91,7 @@ public class SelectManager : MonoBehaviour
             {
                 healthTMP.text = (MathF.Round(current.x)).ToString();
                 damageTMP.text = (MathF.Round(current.y)).ToString();
+                energyTMP.text = (MathF.Round(current.z, 1)).ToString();
                 yield return null;
             }
         }
@@ -119,5 +123,18 @@ public class SelectManager : MonoBehaviour
             total += weapon.damage * weapon.bulletCount;
         }
         return total;
+    }
+    private float GetAverageEnergy()
+    {
+        int totalEnergyCost = 0;
+        int weaponCount = 0;
+        foreach (WeaponType weapon in StagedWeapons)
+        {
+            if (!weapon) continue;
+            totalEnergyCost += weapon.energyCost;
+            weaponCount++;
+        }
+        if (weaponCount == 0) return 0;
+        return (float) totalEnergyCost / weaponCount;
     }
 }
