@@ -16,6 +16,7 @@ public class PlayerEnergy : MonoBehaviour
     {
         if (currentEnergy >= maxEnergy) return;
         currentEnergy += amount;
+        PopUpManager.Instance.SpawnText($"+{amount}", transform.position, CustomColors.Energy);
         onEnergyChanged?.Invoke();
         if (currentEnergy > maxEnergy) currentEnergy = maxEnergy;
     }
@@ -24,6 +25,7 @@ public class PlayerEnergy : MonoBehaviour
     {
         if (currentEnergy - amount >= 0)
         {
+            PopUpManager.Instance.SpawnText($"-{amount}", transform.position, CustomColors.Energy);
             currentEnergy -= amount;
             onEnergyChanged();
             return true; 

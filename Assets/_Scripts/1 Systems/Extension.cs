@@ -66,7 +66,7 @@ public static class CustomColors
     public static Color32 Blue { get; } = new Color32(75, 154, 255, 255);
     public static Color32 Yellow { get; } = new Color32(253, 191, 92, 255);
     public static Color32 Green { get; } = new Color32(54, 217, 140, 255);
-    public static Color32 Purple { get; } = new Color32(128, 0, 255, 255);
+    public static Color32 Energy { get; } = new Color32(255, 182, 0, 255);
     public static Color32 Black { get; } = new Color32(75 , 81, 103, 255);
     public static Color32 White { get; } = new Color32(235, 244, 255, 255);
 }
