@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+    public Action onFuelChanged;
     public Action whileMoving;
     public Action OnStopped;
 
@@ -39,6 +40,7 @@ public class Movement : MonoBehaviour
         rb.AddForce(testStrength * rb.mass * Time.fixedDeltaTime * direction);
         currentFuel -= testStrength * Time.fixedDeltaTime * direction.magnitude;
         whileMoving();
+        onFuelChanged();
     }
 
     private void CheckBorderMax()
@@ -70,9 +72,11 @@ public class Movement : MonoBehaviour
         this.enabled = false;
     }
 
-    public void Restore(int amount)
+    public void RestorePercent(int percent)
     {
-        currentFuel += amount;
+        currentFuel += (float)percent/100 * maxFuel;
+        PopUpManager.Instance.SpawnText($"+{percent}%", transform.position, CustomColors.Green);
         if (currentFuel > maxFuel) currentFuel = maxFuel;
+        onFuelChanged?.Invoke();
     }
 }

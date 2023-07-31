@@ -5418,7 +5418,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be88bbc0cf8a65641a7462b6c083d868, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentEnergy: 5
+  currentEnergy: 2
 --- !u!114 &3067302567888788033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5810,7 +5810,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.632
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -6057,7 +6057,7 @@ MonoBehaviour:
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.5
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0

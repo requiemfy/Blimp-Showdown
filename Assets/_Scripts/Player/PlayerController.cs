@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
     {
         GameManager.Instance.onTurnEnded += () =>
         {
-            Movement.Restore(500);
+            Movement.RestorePercent(60 / DataPersistence.GetOpenedTeams().Length);
             Energy.Restore(2);
         };
 
@@ -86,11 +86,15 @@ public class PlayerController : MonoBehaviour
         };
         //fuel
         fuelBar.gameObject.SetActive(false);
+        fuelBar.SetFill((int)((float)Movement.GetRatio() * 100), 100);
+        Movement.onFuelChanged += () =>
+        {
+            fuelBar.SetFill((int)((float)Movement.GetRatio() * 100), 100);
+        };
         Movement.whileMoving += () =>
         {
             fuelBar.gameObject.SetActive(true);
             energyBar.gameObject.SetActive(false);
-            fuelBar.SetFill((int)((float)Movement.GetRatio() * 100), 100);
         };
         Movement.OnStopped += () =>
         {

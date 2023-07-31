@@ -119,10 +119,11 @@ public class GameManager : MonoBehaviour
             }
             var target = DataPersistence.Get(team).Controller;
             target.IsInTurn = true;
-            CinemachineManager.Instance.SetFollow(target.transform, isPlayer: true);
             HUD.Instance.StartObserveWeapon(null);
             HUD.Instance.StartObservePlayer(null);
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(2);
+            CinemachineManager.Instance.SetFollow(target.transform, isPlayer: true);
+            yield return new WaitForSeconds(2);
             HUD.Instance.StartObservePlayer(target);
         }
     }

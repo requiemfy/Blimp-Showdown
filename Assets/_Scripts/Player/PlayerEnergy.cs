@@ -5,7 +5,7 @@ public class PlayerEnergy : MonoBehaviour
 {
     public Action onEnergyChanged;
     private const int maxEnergy = 10;
-    public int currentEnergy = 5;
+    public int currentEnergy;
 
     public float GetRatio()
     {
@@ -14,11 +14,10 @@ public class PlayerEnergy : MonoBehaviour
 
     public void Restore(int amount)
     {
-        if (currentEnergy >= maxEnergy) return;
         currentEnergy += amount;
         PopUpManager.Instance.SpawnText($"+{amount}", transform.position, CustomColors.Energy);
-        onEnergyChanged?.Invoke();
         if (currentEnergy > maxEnergy) currentEnergy = maxEnergy;
+        onEnergyChanged?.Invoke();
     }
 
     public bool Drain(int amount)
