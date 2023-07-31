@@ -24,7 +24,7 @@ public class Bullet : MonoBehaviour
     {
         if (collision.collider.CompareTag("ExplodeImmediate"))
         {
-            if (timeRoutine != null) StopCoroutine(timeRoutine);
+            if (m_lifeRoutine != null) StopCoroutine(m_lifeRoutine);
             Explode();
             return;
         }
