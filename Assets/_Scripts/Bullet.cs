@@ -18,8 +18,11 @@ public class Bullet : MonoBehaviour
     [SerializeField] private TrailRenderer trailRen;
     [SerializeField] private ParticleSystem bounceDustPS;
 
+    [Header("Explosion")]
     [SerializeField]
     private SpriteRenderer explosion;
+    [SerializeField]
+    private Transform explosionPS;
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.CompareTag("ExplodeImmediate"))
@@ -56,6 +59,7 @@ public class Bullet : MonoBehaviour
         explosion.gameObject.SetActive(true);
         explosion.DOColor(Color.clear, 0.5f);
         explosion.transform.localScale = new Vector2(explRadius, explRadius);
+        explosionPS.transform.localScale = 0.3f * new Vector2(explRadius, explRadius);
 
         bulletRen.enabled = false;
         colldr.enabled = false;

@@ -4959,6 +4959,7 @@ MonoBehaviour:
   trailRen: {fileID: 851519667930774452}
   bounceDustPS: {fileID: 3309225495186098352, guid: cebcaa17334173841aa74667d69a6e50, type: 3}
   explosion: {fileID: 6411295345266916911}
+  explosionPS: {fileID: 5795292382979761232}
 --- !u!1 &3854015644747716529
 GameObject:
   m_ObjectHideFlags: 0
