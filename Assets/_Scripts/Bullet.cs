@@ -29,20 +29,7 @@ public class Bullet : MonoBehaviour
             return;
         }
 
-        var vel = collision.relativeVelocity.magnitude;
-        Debug.Log(vel);
-        if (vel > 5)
-        {
-            var bounceDustEffect = Instantiate(bounceDustPS, transform.position, Quaternion.identity);
-            var main = bounceDustEffect.main;
-            var emission = bounceDustEffect.emission;
-            main.startLifetime = vel * multiplier;
-            main.startSpeed= vel * multiplier;
-            emission.rateOverTime = vel * multiplier;
-            bounceDustEffect.transform.up = collision.relativeVelocity;
-            Destroy(bounceDustEffect.gameObject, 2);
-        }
-
+        SpawnBounceDust(collision);
         rb.gravityScale = 1f;
         StartLifeTimeCounter(duration: 2);
     }
@@ -87,6 +74,21 @@ public class Bullet : MonoBehaviour
         {
             yield return new WaitForSeconds(duration);
             Explode();
+        }
+    }
+    private void SpawnBounceDust(Collision2D collision)
+    {
+        var vel = collision.relativeVelocity.magnitude;
+        if (vel > 5)
+        {
+            var bounceDustEffect = Instantiate(bounceDustPS, transform.position, Quaternion.identity);
+            var main = bounceDustEffect.main;
+            var emission = bounceDustEffect.emission;
+            //main.startLifetime = vel * multiplier;
+            main.startSpeed = vel * multiplier;
+            //emission.rateOverTime = vel * multiplier;
+            bounceDustEffect.transform.up = collision.relativeVelocity;
+            Destroy(bounceDustEffect.gameObject, 2);
         }
     }
 

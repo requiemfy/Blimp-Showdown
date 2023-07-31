@@ -4954,7 +4954,7 @@ MonoBehaviour:
   bulletRen: {fileID: 3210641858306005589}
   colldr: {fileID: 4552121382392858264}
   rb: {fileID: 3210641858306005586}
-  multiplier: 0.5
+  multiplier: 0.2
   trailPS: {fileID: 2792044069535482699}
   trailRen: {fileID: 851519667930774452}
   bounceDustPS: {fileID: 3309225495186098352, guid: cebcaa17334173841aa74667d69a6e50, type: 3}
