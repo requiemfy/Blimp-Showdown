@@ -5445,7 +5445,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   testStrength: 100
   maxFuel: 1000
-  maxHeight: 15
+  maxHeight: 20
 --- !u!70 &7191063437545320678
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
