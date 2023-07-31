@@ -65,11 +65,11 @@ public class Bullet : MonoBehaviour
 
 
     //_________________________________
-    private Coroutine timeRoutine;
+    private Coroutine m_lifeRoutine;
     private void StartLifeTimeCounter(float duration)
     {
-        if (timeRoutine != null) StopCoroutine(timeRoutine);
-        timeRoutine = StartCoroutine(TimeCounter());
+        if (m_lifeRoutine != null) StopCoroutine(m_lifeRoutine);
+        m_lifeRoutine = StartCoroutine(TimeCounter());
         IEnumerator TimeCounter()
         {
             yield return new WaitForSeconds(duration);
