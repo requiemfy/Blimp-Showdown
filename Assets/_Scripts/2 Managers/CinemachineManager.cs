@@ -28,11 +28,22 @@ public class CinemachineManager : MonoBehaviour
 
     public void SetFollow(Transform target, bool isPlayer = false)
     {
-        if (target == null) target = m_currentPlayer;
+        DOTween.To(() => (Vector2)Offset.m_Offset, x => Offset.m_Offset = x, Vector2.zero, 1.5f);
+        if (target == null) {
+            BackToCurrentPlayer();
+            return;
+        };
         if (isPlayer) m_currentPlayer = target;
         VCam.Follow = target;
-        //Offset.m_Offset = Vector2.zero;
-        DOTween.To(() => (Vector2)Offset.m_Offset, x => Offset.m_Offset = x, Vector2.zero, 1.5f);
+    }
+    private void BackToCurrentPlayer()
+    {
+        StartCoroutine(Wait());
+        IEnumerator Wait()
+        {
+            yield return new WaitForSeconds(2);
+            VCam.Follow = m_currentPlayer;
+        }
     }
 
     public void PlayCamShake(float intensity, float duration)
