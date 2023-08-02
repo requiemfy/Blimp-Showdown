@@ -37,7 +37,6 @@ public class Health : MonoBehaviour
         if (!collision.CompareTag("Bullet")) return;
         var bullet = collision.GetComponentInParent<Bullet>();
         DecreaseHealth(bullet.Damage);
-        PopUpManager.Instance.SpawnText(bullet.Damage.ToString(), collision.transform.position, CustomColors.Red);
     }
 
     //take damage
@@ -47,6 +46,7 @@ public class Health : MonoBehaviour
         CurrentHealth -= val;
         SwitchMaterial();
         OnDamageTaken?.Invoke();
+        PopUpManager.Instance.SpawnText(val.ToString(), transform.position, CustomColors.Red);
         if (CurrentHealth <= 0)
         {
             CurrentHealth = 0;

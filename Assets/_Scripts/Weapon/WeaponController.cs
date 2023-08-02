@@ -10,6 +10,7 @@ public class WeaponController : MonoBehaviour
     {
         get { return !_isCollapsed && _parentShip.IsInTurn; }
     }
+    public bool isInDeadZone = false;
     public Health Health;
     [HideInInspector] public WeaponShooting Shooter;
 
@@ -22,6 +23,7 @@ public class WeaponController : MonoBehaviour
 
     private void Awake()
     {
+        GameManager.Instance.onTurnEnded += TakeDeadZoneDamage;
         _parentShip = GetComponentInParent<PlayerController>();
         Shooter = GetComponent<WeaponShooting>();
 
@@ -40,15 +42,6 @@ public class WeaponController : MonoBehaviour
             smokingPS.Stop();
         };
     }
-    private void ResetPolygonCollider()
-    {
-        var colldr = Health.GetComponent<PolygonCollider2D>();
-        var spriteRen = Health.GetComponent<SpriteRenderer>();
-        List<Vector2> physicsShape = new();
-        spriteRen.sprite.GetPhysicsShape(0, physicsShape);
-        colldr.SetPath(0, physicsShape);
-    }
-
     public void Construct(LayerMask layer, WeaponType weaponType)
     {
         gameObject.layer = layer;
@@ -67,6 +60,23 @@ public class WeaponController : MonoBehaviour
     public void OnPointerUp()
     {
         //Health.ShowHealthBar(false);
+    }
+
+
+    private void ResetPolygonCollider()
+    {
+        var colldr = Health.GetComponent<PolygonCollider2D>();
+        var spriteRen = Health.GetComponent<SpriteRenderer>();
+        List<Vector2> physicsShape = new();
+        spriteRen.sprite.GetPhysicsShape(0, physicsShape);
+        colldr.SetPath(0, physicsShape);
+    }
+    private void TakeDeadZoneDamage()
+    {
+        if (isInDeadZone)
+        {
+            Health.DecreaseHealth((int)(0.2f * Health.MaxHealth));
+        }
     }
 }
 
