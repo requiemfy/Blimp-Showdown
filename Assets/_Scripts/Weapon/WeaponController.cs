@@ -73,7 +73,7 @@ public class WeaponController : MonoBehaviour
     }
     private void TakeDeadZoneDamage()
     {
-        if (isInDeadZone)
+        if (isInDeadZone && IsFocusable)
         {
             Health.DecreaseHealth((int)(0.2f * Health.MaxHealth));
         }

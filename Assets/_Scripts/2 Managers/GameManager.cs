@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     public Action onTurnEnded;
+    public Action onCycleEnded;
     public Team[] OpennedTeams { get; private set; }
     public Vector2 Wind;
 
@@ -18,14 +19,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameOverScreen gameOverScreen;
     [SerializeField] private Image cameraRaycast;
 
-    private int _playerRemaining;
-    private GameObject[] _respawnPoints;
+    private int m_turnCount;
+    private int m_playerRemaining;
+    private GameObject[] m_respawnPoints;
 
     private void Awake()
     {
         Instance = this;
         OpennedTeams = DataPersistence.GetOpenedTeams();
-        _playerRemaining = OpennedTeams.Length;
+        m_playerRemaining = OpennedTeams.Length;
         RandomizeTurnOrder();
     }
     private void RandomizeTurnOrder()
@@ -59,9 +61,9 @@ public class GameManager : MonoBehaviour
     }
     private void GetRespawnPoints()
     {
-        _respawnPoints = GameObject.FindGameObjectsWithTag("Respawn");
+        m_respawnPoints = GameObject.FindGameObjectsWithTag("Respawn");
         Random random = new();
-        _respawnPoints = _respawnPoints.OrderBy(x => random.Next()).ToArray();
+        m_respawnPoints = m_respawnPoints.OrderBy(x => random.Next()).ToArray();
     }
     private void SpawnPlayers()
     {
@@ -70,7 +72,7 @@ public class GameManager : MonoBehaviour
         {
             var playerCtrl = Instantiate(playerPrefab);
             playerCtrl.Construct(team);
-            playerCtrl.transform.position = _respawnPoints[i].transform.position;
+            playerCtrl.transform.position = m_respawnPoints[i].transform.position;
             i++;
         }
     }
@@ -102,6 +104,10 @@ public class GameManager : MonoBehaviour
         onTurnEnded();
         SetTurn(after);
         HUD.Instance.FindTurnIndicator(after).DOColor(after.GetTeamColor(), duration: 0.5f);
+
+        //cycle 
+        m_turnCount++;
+        if (m_turnCount % m_playerRemaining == 0) onCycleEnded();
     }
     private void SetTurn(Team team)
     {
@@ -130,9 +136,9 @@ public class GameManager : MonoBehaviour
 
     public void DecreasePlayerRemaining(Team team)
     {
-        _playerRemaining--;
+        m_playerRemaining--;
         DataPersistence.Get(team).isDestroyed = true;
-        if (_playerRemaining > 1) return;
+        if (m_playerRemaining > 1) return;
         gameOverScreen.Show();
     }
 }

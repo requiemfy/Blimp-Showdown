@@ -7,7 +7,7 @@ public class BorderShrinking : MonoBehaviour
     private float unitScale = 2.51f;
     private void Awake()
     {
-        GameManager.Instance.onTurnEnded += () =>
+        GameManager.Instance.onCycleEnded += () =>
         {
             transform.DOScale(new Vector2(transform.localScale.x - 2*unitScale, transform.localScale.y - 2 * unitScale), duration: 1);
         };
