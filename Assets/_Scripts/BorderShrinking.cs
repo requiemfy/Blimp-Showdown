@@ -9,7 +9,10 @@ public class BorderShrinking : MonoBehaviour
     {
         GameManager.Instance.onCycleEnded += () =>
         {
-            transform.DOScale(new Vector2(transform.localScale.x - 2*unitScale, transform.localScale.y - 2 * unitScale), duration: 1);
+            float decrease = 2 * unitScale;
+            Vector2 end = new(transform.localScale.x - decrease, transform.localScale.y - decrease);
+            if (end.x < 0 || end.y < 0) end = Vector2.zero;
+            transform.DOScale(end, duration: 1);
         };
     }
     private void OnTriggerEnter2D(Collider2D collision)
