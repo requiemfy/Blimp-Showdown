@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     {
         RB.constraints = RigidbodyConstraints2D.None;
         RB.gravityScale = 0.5f;
+        energyBar.gameObject.SetActive(false);
         shipCollapsedPS.Play();
         SpawnExplosionsOnShipBody();
         CinemachineManager.Instance.PlayCamShake(0.7f, 2f);
