@@ -1062,14 +1062,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Thanks for checking out!
+  m_text: 'Thanks for testing.
+
+    Final game subject to change.
 
     <size=60%><alpha=#88>
 
-    This is an internal
-    test version
+    Le
+    Viet Tung - programmer / artist
 
-    Final game subject to change
+    WalrusSama - sound designer / music composer
+
 
 '
   m_isRightToLeft: 0

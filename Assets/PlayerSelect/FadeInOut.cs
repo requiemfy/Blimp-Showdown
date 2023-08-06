@@ -13,13 +13,13 @@ public class FadeInOut : MonoBehaviour
     }
     public void FadeIn()
     {
-        m_CanvasGroup.DOKill();
+        if (DOTween.IsTweening(m_CanvasGroup)) return;
         gameObject.SetActive(true);
         m_CanvasGroup.DOFade(1, duration);
     }
     public void FadeOut() 
     {
-        m_CanvasGroup.DOKill();
+        if (DOTween.IsTweening(m_CanvasGroup)) return;
         m_CanvasGroup.DOFade(0, duration)
             .onComplete = () => gameObject.SetActive(false);
     }
