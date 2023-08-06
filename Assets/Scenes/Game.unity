@@ -236,8 +236,8 @@ RectTransform:
   m_Father: {fileID: 646654972}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMin: {x: 0.05, y: 0.95}
+  m_AnchorMax: {x: 0.05, y: 0.95}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 90, y: 90}
   m_Pivot: {x: 0, y: 1}
@@ -254,14 +254,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.16862746, g: 0.16862746, b: 0.16862746, a: 1}
+  m_Color: {r: 0.29411766, g: 0.31764707, b: 0.4039216, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: -5177388603050735206, guid: 8884154dfe85442a3a3578be807dbcdf, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -270,7 +270,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 0.5
 --- !u!222 &38149463
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4338,6 +4338,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WeaponBtn_2
       objectReference: {fileID: 0}
+    - target: {fileID: 6030572934666091308, guid: f413530f9e6326047bd12c140e79aae2, type: 3}
+      propertyPath: delay
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f413530f9e6326047bd12c140e79aae2, type: 3}
 --- !u!224 &479324376 stripped
@@ -7007,6 +7011,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WeaponBtn_1
       objectReference: {fileID: 0}
+    - target: {fileID: 6030572934666091308, guid: f413530f9e6326047bd12c140e79aae2, type: 3}
+      propertyPath: delay
+      value: 0.3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f413530f9e6326047bd12c140e79aae2, type: 3}
 --- !u!224 &1276627416 stripped
@@ -7459,10 +7467,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '||'
+  m_text: '| |'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: c97967d04954c914db38e416be00fa51, type: 2}
-  m_sharedMaterial: {fileID: -2683455342290940934, guid: c97967d04954c914db38e416be00fa51, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d6d2424bc96186247b8af0b6e8f73c31, type: 2}
+  m_sharedMaterial: {fileID: 463250106729147823, guid: d6d2424bc96186247b8af0b6e8f73c31, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -11059,6 +11067,10 @@ PrefabInstance:
     - target: {fileID: 6030572934666091307, guid: f413530f9e6326047bd12c140e79aae2, type: 3}
       propertyPath: m_Name
       value: WeaponBtn
+      objectReference: {fileID: 0}
+    - target: {fileID: 6030572934666091308, guid: f413530f9e6326047bd12c140e79aae2, type: 3}
+      propertyPath: delay
+      value: 0.6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f413530f9e6326047bd12c140e79aae2, type: 3}
