@@ -1,6 +1,8 @@
 using UnityEngine;
 using DG.Tweening;
 using System.Collections;
+using UnityEditor.Experimental.GraphView;
+using JetBrains.Annotations;
 
 public class WeaponShooting : MonoBehaviour
 {
@@ -34,6 +36,7 @@ public class WeaponShooting : MonoBehaviour
     }
 
 
+    #region AIMING
     private Vector2 baseDirection;
     private Vector2 lastDragVec;
 
@@ -41,28 +44,56 @@ public class WeaponShooting : MonoBehaviour
     private const float POWERSEN = 0.01f;
     public void OnDragBegin()
     {
-        baseDirection = Direction;
-        lastDragVec = Vector2.zero;
+        Mode1_beginDrag();
     }
     public void Adjust(Vector2 dragVec)
     {
+        Mode1_Adjust(dragVec);
+    }
+    //
+    private void Mode1_beginDrag()
+    {
+        baseDirection = Direction;
+        lastDragVec = Vector2.zero;
+    }
+    private void Mode1_Adjust(Vector2 dragVec)
+    {
         //direction
         if ((int)dragVec.x == 0 && (int)dragVec.y == 0) return;
-        Direction = (baseDirection + (float)1920/Screen.width * ROTATESEN * dragVec ).normalized;
-        Debug.Log(Screen.width);
+        Direction = (baseDirection + (float)1920 / Screen.width * ROTATESEN * dragVec).normalized;
 
         //angle
         Angle = GetTanDeg(Direction);
-        barrel.eulerAngles = new Vector3(0,0,Angle);
+        barrel.eulerAngles = new Vector3(0, 0, Angle);
 
         //power
         var delta = dragVec - lastDragVec;
-        Power += (delta.x * Direction.x + delta.y * Direction.y) * 1920 / Screen.width*POWERSEN;
+        Power += (delta.x * Direction.x + delta.y * Direction.y) * 1920 / Screen.width * POWERSEN;
         Power = Mathf.Clamp(Power, 0.1f, 1f);
 
         lastDragVec = dragVec;
     }
+    private void Mode2_beginDrag()
+    {
+    }
+    private void Mode2_Adjust(Vector2 dragVec)
+    {
+        //direction
+        if ((int)dragVec.x == 0 && (int)dragVec.y == 0) return;
+        Direction = dragVec.normalized;
 
+        //angle
+        Angle = GetTanDeg(Direction);
+        barrel.eulerAngles = new Vector3(0, 0, Angle);
+
+        //power
+        Power = dragVec.magnitude * 1920 / Screen.width * 0.001f;
+        Power = Mathf.Clamp(Power, 0.1f, 1f);
+    }
+    #endregion
+
+
+    #region SHOOTING
     private bool _isFiring = false;
     public void Fire()
     {
@@ -122,6 +153,7 @@ public class WeaponShooting : MonoBehaviour
         spark.up = Direction;
         Destroy(spark.gameObject, 2f);
     }
+    #endregion
 
 
     #region SHOOTING VISUAL
