@@ -75,7 +75,6 @@ public class Movement : MonoBehaviour
     public void RestorePercent(int percent)
     {
         currentFuel += (float)percent/100 * maxFuel;
-        PopUpManager.Instance.SpawnText($"+{percent}%", transform.position, CustomColors.Green);
         if (currentFuel > maxFuel) currentFuel = maxFuel;
         onFuelChanged?.Invoke();
     }
