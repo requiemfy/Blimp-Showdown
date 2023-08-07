@@ -1,8 +1,6 @@
 using UnityEngine;
 using DG.Tweening;
 using System.Collections;
-using UnityEditor.Experimental.GraphView;
-using JetBrains.Annotations;
 
 public class WeaponShooting : MonoBehaviour
 {
