@@ -21,7 +21,9 @@ public class AdsManager : MonoBehaviour
     {
         MobileAds.Initialize((InitializationStatus initStatus) =>
         {
-            Debug.Log("Ads ready");
+            LoadInterstitialAd();
+            ShowAd();
+            RegisterReloadHandler(interstitialAd);
         });
     }
 
@@ -69,4 +71,37 @@ public class AdsManager : MonoBehaviour
                 interstitialAd = ad;
             });
     }
+    public void ShowAd()
+    {
+        if (interstitialAd != null && interstitialAd.CanShowAd())
+        {
+            Debug.Log("Showing interstitial ad.");
+            interstitialAd.Show();
+        }
+        else
+        {
+            Debug.LogError("Interstitial ad is not ready yet.");
+        }
+    }
+
+    private void RegisterReloadHandler(InterstitialAd ad)
+    {
+        // Raised when the ad closed full screen content.
+        ad.OnAdFullScreenContentClosed += () =>
+        {
+            Debug.Log("Interstitial Ad full screen content closed.");
+
+            // Reload the ad so that we can show another as soon as possible.
+            LoadInterstitialAd();
+        };
+        // Raised when the ad failed to open full screen content.
+        ad.OnAdFullScreenContentFailed += (AdError error) =>
+        {
+            Debug.LogError("Interstitial ad failed to open full screen content " +
+                           "with error : " + error);
+
+            // Reload the ad so that we can show another as soon as possible.
+            LoadInterstitialAd();
+        };
+        }
 }
