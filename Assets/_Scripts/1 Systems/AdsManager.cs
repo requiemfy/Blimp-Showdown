@@ -22,8 +22,6 @@ public class AdsManager : MonoBehaviour
         MobileAds.Initialize((InitializationStatus initStatus) =>
         {
             LoadInterstitialAd();
-            ShowAd();
-            RegisterReloadHandler(interstitialAd);
         });
     }
 
@@ -70,6 +68,7 @@ public class AdsManager : MonoBehaviour
 
                 interstitialAd = ad;
             });
+        RegisterReloadHandler(interstitialAd);
     }
     public void ShowAd()
     {
