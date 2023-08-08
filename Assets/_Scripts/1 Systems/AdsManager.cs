@@ -58,6 +58,7 @@ public class AdsManager : MonoBehaviour
 #endif
 
     private InterstitialAd interstitialAd;
+    private Action onInterstitialAdEnded;
 
     private void LoadInterstitialAd()
     {
@@ -94,8 +95,9 @@ public class AdsManager : MonoBehaviour
                 RegisterReloadHandler(interstitialAd);
             });
     }
-    public void ShowAd()
+    public void ShowAd(Action onAdEnded = null)
     {
+        onInterstitialAdEnded = onAdEnded;
         if (interstitialAd != null && interstitialAd.CanShowAd())
         {
             Debug.Log("Showing interstitial ad.");
@@ -104,6 +106,7 @@ public class AdsManager : MonoBehaviour
         else
         {
             Debug.LogError("Interstitial ad is not ready yet.");
+            onInterstitialAdEnded?.Invoke();
         }
     }
 
@@ -116,6 +119,7 @@ public class AdsManager : MonoBehaviour
 
             // Reload the ad so that we can show another as soon as possible.
             LoadInterstitialAd();
+            onInterstitialAdEnded?.Invoke();
         };
         // Raised when the ad failed to open full screen content.
         ad.OnAdFullScreenContentFailed += (AdError error) =>
@@ -125,6 +129,7 @@ public class AdsManager : MonoBehaviour
 
             // Reload the ad so that we can show another as soon as possible.
             LoadInterstitialAd();
+            onInterstitialAdEnded?.Invoke();
         };
-        }
+    }
 }

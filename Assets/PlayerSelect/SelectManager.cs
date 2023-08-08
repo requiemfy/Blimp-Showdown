@@ -63,7 +63,7 @@ public class SelectManager : MonoBehaviour
             return;
         }
         DOTween.KillAll();
-        SceneManager.LoadScene(1);
+        SceneHandler.Instance.LoadScene(1);
     }
     public void Save()
     {
