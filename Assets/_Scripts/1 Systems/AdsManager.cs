@@ -8,9 +8,7 @@ public class AdsManager : MonoBehaviour
 {
     public static AdsManager Instance { get; private set; }
 
-    [SerializeField] private TextMeshProUGUI m_debug;
-    private int m_count;
-
+    private int m_requestCount;
     private void Awake()
     {
         if (Instance == null)
@@ -37,23 +35,13 @@ public class AdsManager : MonoBehaviour
         while (enabled)
         {
             CheckCondition();
-            yield return new WaitForSeconds(7);
+            yield return new WaitForSeconds(10);
         }
     }
     private void CheckCondition()
     {
-        m_count++;
-        if (Application.internetReachability == NetworkReachability.NotReachable)
-        {
-            m_debug.text = "no internet found" + m_count;
-            return;
-        }
-        if (interstitialAd != null)
-        {
-            m_debug.text = "ads already pending" + m_count;
-            return;
-        }
-        Debug.Log("requested");
+        if (Application.internetReachability == NetworkReachability.NotReachable) return;
+        if (interstitialAd != null) return;
         LoadInterstitialAd();
     }
 
@@ -73,6 +61,7 @@ public class AdsManager : MonoBehaviour
 
     private void LoadInterstitialAd()
     {
+        m_requestCount++;
         // Clean up the old ad before loading a new one.
         if (interstitialAd != null)
         {
@@ -107,7 +96,6 @@ public class AdsManager : MonoBehaviour
     }
     public void ShowAd()
     {
-        m_debug.text = "";
         if (interstitialAd != null && interstitialAd.CanShowAd())
         {
             Debug.Log("Showing interstitial ad.");
