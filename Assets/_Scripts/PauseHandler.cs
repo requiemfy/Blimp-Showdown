@@ -28,14 +28,12 @@ public class PauseHandler : MonoBehaviour
     public void RestartGame()
     {
         DataPersistence.Rematch();
-        DOTween.KillAll();
-        SceneManager.LoadScene(1);
+        SceneHandler.Instance.LoadScene(1, shouldShowAd: true);
         ResumeGame();
     }
     public void BackToMenu()
     {
-        DOTween.KillAll();
-        SceneManager.LoadScene(0);
+        SceneHandler.Instance.LoadScene(0, shouldShowAd: true);
         DataPersistence.ClearTeamDB();
         ResumeGame();
     }

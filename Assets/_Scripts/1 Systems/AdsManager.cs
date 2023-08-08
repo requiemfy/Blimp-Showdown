@@ -35,7 +35,7 @@ public class AdsManager : MonoBehaviour
         while (enabled)
         {
             CheckCondition();
-            yield return new WaitForSeconds(10);
+            yield return new WaitForSeconds(15);
         }
     }
     private void CheckCondition()

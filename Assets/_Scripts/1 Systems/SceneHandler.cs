@@ -22,21 +22,34 @@ public class SceneHandler : MonoBehaviour
         m_loadingScreen.gameObject.SetActive(false);
         m_loadingScreen.alpha = 0;
     }
-    public void LoadScene(int index)
+    public void LoadScene(int index, bool shouldShowAd = false)
     {
         StartCoroutine(LoadSceneSequence());
         IEnumerator LoadSceneSequence()
         {
+            DOTween.KillAll();
             m_loadingScreen.gameObject.SetActive(true);
             AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(index);
             asyncLoad.allowSceneActivation = false;
             bool adClosed = false;
             m_loadingScreen.DOFade(1, duration: 1)
-                .onComplete = () => AdsManager.Instance.ShowAd(()=>
+                .onComplete = () =>
                 {
-                    adClosed = true;
-                    asyncLoad.allowSceneActivation = true;
-                });
+                    if (shouldShowAd)
+                    {
+                        AdsManager.Instance.ShowAd(() =>
+                        {
+                            adClosed = true;
+                            asyncLoad.allowSceneActivation = true;
+                        });
+                    }
+                    else
+                    {
+                        adClosed = true;
+                        asyncLoad.allowSceneActivation = true;
+                    }
+                };
+                
 
             yield return new WaitUntil(() => asyncLoad.isDone && adClosed);
             

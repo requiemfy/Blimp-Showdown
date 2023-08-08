@@ -62,7 +62,6 @@ public class SelectManager : MonoBehaviour
             SpawnUIPopup("find a friend to play with!");
             return;
         }
-        DOTween.KillAll();
         SceneHandler.Instance.LoadScene(1);
     }
     public void Save()
