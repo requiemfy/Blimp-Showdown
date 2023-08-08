@@ -1,9 +1,15 @@
 using UnityEngine;
 using GoogleMobileAds.Api;
+using System;
+using System.Collections;
+using TMPro;
 
 public class AdsManager : MonoBehaviour
 {
     public static AdsManager Instance { get; private set; }
+
+    [SerializeField] private TextMeshProUGUI m_debug;
+    private int m_count;
 
     private void Awake()
     {
@@ -19,15 +25,44 @@ public class AdsManager : MonoBehaviour
     }
     private void Start()
     {
+        MobileAds.RaiseAdEventsOnUnityMainThread = true;
         MobileAds.Initialize((InitializationStatus initStatus) =>
         {
-            LoadInterstitialAd();
+            StartCoroutine(TryRequestAds());
         });
     }
 
+    private IEnumerator TryRequestAds()
+    {
+        while (enabled)
+        {
+            CheckCondition();
+            yield return new WaitForSeconds(7);
+        }
+    }
+    private void CheckCondition()
+    {
+        m_count++;
+        if (Application.internetReachability == NetworkReachability.NotReachable)
+        {
+            m_debug.text = "no internet found" + m_count;
+            return;
+        }
+        if (interstitialAd != null)
+        {
+            m_debug.text = "ads already pending" + m_count;
+            return;
+        }
+        Debug.Log("requested");
+        LoadInterstitialAd();
+    }
+
+
+
+
     // These ad units are configured to always serve test ads.
 #if UNITY_ANDROID
-    private string _adUnitId = "ca-app-pub-1485483970932537/6822273342";
+    private string _adUnitId = "ca-app-pub-3940256099942544/1033173712";
 #elif UNITY_IPHONE
   private string _adUnitId = "ca-app-pub-3940256099942544/4411468910";
 #else
@@ -36,7 +71,7 @@ public class AdsManager : MonoBehaviour
 
     private InterstitialAd interstitialAd;
 
-    public void LoadInterstitialAd()
+    private void LoadInterstitialAd()
     {
         // Clean up the old ad before loading a new one.
         if (interstitialAd != null)
@@ -67,11 +102,12 @@ public class AdsManager : MonoBehaviour
                           + ad.GetResponseInfo());
 
                 interstitialAd = ad;
+                RegisterReloadHandler(interstitialAd);
             });
-        RegisterReloadHandler(interstitialAd);
     }
     public void ShowAd()
     {
+        m_debug.text = "";
         if (interstitialAd != null && interstitialAd.CanShowAd())
         {
             Debug.Log("Showing interstitial ad.");
