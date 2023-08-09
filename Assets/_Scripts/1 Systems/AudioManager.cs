@@ -27,7 +27,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void PlayAudioGroup(string name, bool overlay = true)
+    public void PlayAudioGroup(string name, bool restartIfPlaying = true)
     {
         AudioGroup group = Array.Find(audioGroups, group => group.name == name);
         if (group == null)
@@ -35,7 +35,7 @@ public class AudioManager : MonoBehaviour
             Debug.LogWarning($"group {name} not found");
             return;
         }
-        if (!overlay && group.source.isPlaying) return;
+        if (restartIfPlaying && group.source.isPlaying) return;
 
         Sound targetSound = group.sounds[UnityEngine.Random.Range(0, group.sounds.Length)];
         group.source.clip = targetSound.clip;
@@ -49,7 +49,7 @@ public class AudioManager : MonoBehaviour
         foreach (string name in names)
         {
             stopGroups = stopGroups.Where(group => group.name != name).ToArray();
-            PlayAudioGroup(name, overlay: false);
+            PlayAudioGroup(name, restartIfPlaying: false);
         }
         foreach (AudioGroup group in stopGroups)
         {

@@ -2379,6 +2379,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 974488820}
+  - component: {fileID: 974488822}
   - component: {fileID: 974488821}
   m_Layer: 0
   m_Name: AudioManager
@@ -2433,6 +2434,20 @@ MonoBehaviour:
     sounds:
     - clip: {fileID: 8300000, guid: cda3ab33e7663594a8a14fe5a3c767c1, type: 3}
       volume: 1
+  - name: BattleMusic
+    loop: 1
+    source: {fileID: 0}
+    sounds:
+    - clip: {fileID: 8300000, guid: 0545229c15986984db35d066386a542a, type: 3}
+      volume: 0.02
+--- !u!81 &974488822
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 974488819}
+  m_Enabled: 1
 --- !u!1 &992219905
 GameObject:
   m_ObjectHideFlags: 0
@@ -4290,7 +4305,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1778278318}
   - component: {fileID: 1778278317}
-  - component: {fileID: 1778278316}
+  - component: {fileID: 1778278319}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -4298,14 +4313,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1778278316
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1778278315}
-  m_Enabled: 1
 --- !u!20 &1778278317
 Camera:
   m_ObjectHideFlags: 0
@@ -4364,6 +4371,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1778278319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1778278315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd0d1d1755d0dc54cb569fe2e30e549a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_musicGroups: []
 --- !u!1001 &1820105854
 PrefabInstance:
   m_ObjectHideFlags: 0
