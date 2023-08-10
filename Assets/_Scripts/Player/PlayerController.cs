@@ -53,6 +53,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Bar fuelBar;
     [Header("Visual")]
     [SerializeField] private ParticleSystem shipCollapsedPS;
+    [SerializeField] private ParticleSystem movePS;
     [SerializeField] private Transform explosionPS;
     [SerializeField] private Sprite deathIcon;
     [SerializeField] private SpriteRenderer shipTail;
@@ -96,11 +97,16 @@ public class PlayerController : MonoBehaviour
         {
             fuelBar.gameObject.SetActive(true);
             energyBar.gameObject.SetActive(false);
+            if (!movePS.isPlaying)
+            {
+                movePS.Play();
+            }
         };
         Movement.OnStopped += () =>
         {
             energyBar.gameObject.SetActive(true);
             fuelBar.gameObject.SetActive(false);
+            movePS.Stop();
         };
     }
 
