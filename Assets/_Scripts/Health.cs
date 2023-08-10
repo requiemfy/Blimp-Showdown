@@ -47,6 +47,7 @@ public class Health : MonoBehaviour
         SwitchMaterial();
         OnDamageTaken?.Invoke();
         PopUpManager.Instance.SpawnText(val.ToString(), transform.position, CustomColors.Red);
+        AudioManager.Instance.PlayAudioGroup("TakeDamage", restartIfPlaying: true);
         if (CurrentHealth <= 0)
         {
             CurrentHealth = 0;

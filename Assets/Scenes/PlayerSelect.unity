@@ -2416,11 +2416,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioGroups:
+  - name: BattleMusic
+    loop: 1
+    source: {fileID: 0}
+    sounds:
+    - clip: {fileID: 8300000, guid: d9286108fa61da24bb7094230f87347d, type: 3}
+      volume: 0.1
   - name: GunShot
     loop: 0
     source: {fileID: 0}
     sounds:
-    - clip: {fileID: 8300000, guid: 06f98dfce4e837d4b82c1c90c8aa865d, type: 3}
+    - clip: {fileID: 8300000, guid: d9d7442034ad0e342a1ca56529a38e26, type: 3}
+      volume: 0.5
+    - clip: {fileID: 8300000, guid: abd96069372137c44bf1e2f103dd2ee4, type: 3}
+      volume: 0.5
+    - clip: {fileID: 8300000, guid: 31a33189bd944d749aea4a3d196d3ebe, type: 3}
+      volume: 0.5
+    - clip: {fileID: 8300000, guid: 76cd191f6e4d06b45bf644b939e0c05f, type: 3}
       volume: 0.5
   - name: ButtonClick
     loop: 0
@@ -2434,12 +2446,12 @@ MonoBehaviour:
     sounds:
     - clip: {fileID: 8300000, guid: cda3ab33e7663594a8a14fe5a3c767c1, type: 3}
       volume: 1
-  - name: BattleMusic
-    loop: 1
+  - name: TakeDamage
+    loop: 0
     source: {fileID: 0}
     sounds:
-    - clip: {fileID: 8300000, guid: 0545229c15986984db35d066386a542a, type: 3}
-      volume: 0.02
+    - clip: {fileID: 8300000, guid: bb1ed9ae985e2824eb101b3cd3223964, type: 3}
+      volume: 0.05
 --- !u!81 &974488822
 AudioListener:
   m_ObjectHideFlags: 0
