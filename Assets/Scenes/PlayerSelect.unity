@@ -2416,6 +2416,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioGroups:
+  - name: MenuMusic
+    loop: 1
+    source: {fileID: 0}
+    sounds:
+    - clip: {fileID: 8300000, guid: 11f7888ce7462a644b4b3374bcc2e8c3, type: 3}
+      volume: 0.2
   - name: BattleMusic
     loop: 1
     source: {fileID: 0}
@@ -4395,7 +4401,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd0d1d1755d0dc54cb569fe2e30e549a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_musicGroups: []
+  m_musicGroups:
+  - MenuMusic
 --- !u!1001 &1820105854
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5392,7 +5399,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -475.00012}
+  m_AnchoredPosition: {x: 0, y: -475.0001}
   m_SizeDelta: {x: 870, y: 950}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2138023227
