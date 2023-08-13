@@ -2421,7 +2421,7 @@ MonoBehaviour:
     source: {fileID: 0}
     sounds:
     - clip: {fileID: 8300000, guid: 11f7888ce7462a644b4b3374bcc2e8c3, type: 3}
-      volume: 0.2
+      volume: 0.3
   - name: BattleMusic
     loop: 1
     source: {fileID: 0}
@@ -2451,7 +2451,7 @@ MonoBehaviour:
     source: {fileID: 0}
     sounds:
     - clip: {fileID: 8300000, guid: cda3ab33e7663594a8a14fe5a3c767c1, type: 3}
-      volume: 1
+      volume: 0.8
   - name: TakeDamage
     loop: 0
     source: {fileID: 0}

@@ -165,14 +165,15 @@ public class WeaponShooting : MonoBehaviour
     }
     private void Recoil()
     {
-        DOTween.Kill(barrel, true);
+        DOTween.Kill(barrel);
+        barrel.transform.localScale = Vector2.one;
         firePoint.parent = barrel;
         var originalPos = firePoint.localPosition;
         firePoint.parent = transform;
-        barrel.DOScale(new Vector2(0.66f, 1.5f), duration: 0.1f)
+        barrel.DOScale(new Vector2(0.66f, 1.5f), duration: 0.2f)
             .onComplete = () =>
             {
-                barrel.DOScale(Vector2.one, duration: 0.2f)
+                barrel.DOScale(Vector2.one, duration: 0.4f)
                 .onComplete = () =>
                 {
                     firePoint.parent = barrel;
