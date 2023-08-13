@@ -19,7 +19,9 @@ public class WeaponShooting : MonoBehaviour
     public void Construct(WeaponType weaponType)
     {
         _weapon = weaponType;
-        barrel.GetComponent<SpriteRenderer>().sprite = weaponType.barrel;
+        var barrelSprite = weaponType.barrel;
+        barrel.GetComponent<SpriteRenderer>().sprite = barrelSprite;
+        firePoint.transform.localPosition = new Vector2((float)barrelSprite.rect.width/barrelSprite.pixelsPerUnit, 0);
     }
     private void Start()
     {
