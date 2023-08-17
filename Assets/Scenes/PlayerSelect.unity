@@ -2417,46 +2417,49 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioGroups:
   - name: MenuMusic
-    loop: 1
     source: {fileID: 0}
     sounds:
     - clip: {fileID: 8300000, guid: 11f7888ce7462a644b4b3374bcc2e8c3, type: 3}
+      loop: 0
       volume: 0.3
   - name: BattleMusic
-    loop: 1
     source: {fileID: 0}
     sounds:
     - clip: {fileID: 8300000, guid: d9286108fa61da24bb7094230f87347d, type: 3}
+      loop: 0
       volume: 0.1
   - name: GunShot
-    loop: 0
     source: {fileID: 0}
     sounds:
     - clip: {fileID: 8300000, guid: d9d7442034ad0e342a1ca56529a38e26, type: 3}
+      loop: 0
       volume: 0.5
     - clip: {fileID: 8300000, guid: abd96069372137c44bf1e2f103dd2ee4, type: 3}
+      loop: 0
       volume: 0.5
     - clip: {fileID: 8300000, guid: 31a33189bd944d749aea4a3d196d3ebe, type: 3}
+      loop: 0
       volume: 0.5
     - clip: {fileID: 8300000, guid: 76cd191f6e4d06b45bf644b939e0c05f, type: 3}
+      loop: 0
       volume: 0.5
   - name: ButtonClick
-    loop: 0
     source: {fileID: 0}
     sounds:
     - clip: {fileID: 8300000, guid: 6c961b2b28395354c969b894ddae090f, type: 3}
+      loop: 0
       volume: 1
   - name: InsertWeapon
-    loop: 0
     source: {fileID: 0}
     sounds:
     - clip: {fileID: 8300000, guid: cda3ab33e7663594a8a14fe5a3c767c1, type: 3}
+      loop: 0
       volume: 0.8
   - name: TakeDamage
-    loop: 0
     source: {fileID: 0}
     sounds:
     - clip: {fileID: 8300000, guid: bb1ed9ae985e2824eb101b3cd3223964, type: 3}
+      loop: 0
       volume: 0.05
 --- !u!81 &974488822
 AudioListener:
@@ -4398,11 +4401,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1778278315}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd0d1d1755d0dc54cb569fe2e30e549a, type: 3}
+  m_Script: {fileID: 11500000, guid: 5c3ea755a5c54f744998d94d85325f9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_musicGroups:
-  - MenuMusic
+  m_audioGrp:
+    name: MenuMusic
+    source: {fileID: 0}
+    sounds:
+    - clip: {fileID: 8300000, guid: 11f7888ce7462a644b4b3374bcc2e8c3, type: 3}
+      loop: 1
+      volume: 0.6
 --- !u!1001 &1820105854
 PrefabInstance:
   m_ObjectHideFlags: 0

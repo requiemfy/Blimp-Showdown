@@ -23,7 +23,6 @@ public class AudioManager : MonoBehaviour
         foreach (AudioGroup audioGroup in audioGroups)
         {
             audioGroup.source = gameObject.AddComponent<AudioSource>();
-            audioGroup.source.loop = audioGroup.loop;
         }
     }
 
@@ -38,6 +37,7 @@ public class AudioManager : MonoBehaviour
         if (restartIfPlaying && group.source.isPlaying) return;
 
         Sound targetSound = group.sounds[UnityEngine.Random.Range(0, group.sounds.Length)];
+        group.source.loop = targetSound.loop;
         group.source.clip = targetSound.clip;
         group.source.volume = targetSound.volume;
         group.source.Play();
@@ -62,7 +62,6 @@ public class AudioManager : MonoBehaviour
 class AudioGroup
 {
     public string name;
-    public bool loop;
     [HideInInspector] public AudioSource source;
 
     public Sound[] sounds;
@@ -72,6 +71,7 @@ class AudioGroup
 class Sound
 {
     public AudioClip clip;
+    public bool loop;
     [Range(0f, 1f)] public float volume;
 }
 

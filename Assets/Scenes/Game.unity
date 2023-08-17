@@ -4558,7 +4558,6 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420033}
-  - component: {fileID: 519420034}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -4659,20 +4658,6 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &519420034
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd0d1d1755d0dc54cb569fe2e30e549a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_musicGroups:
-  - BattleMusic
 --- !u!1 &521329098
 GameObject:
   m_ObjectHideFlags: 0
@@ -9469,6 +9454,7 @@ GameObject:
   - component: {fileID: 1841826437}
   - component: {fileID: 1841826438}
   - component: {fileID: 1841826439}
+  - component: {fileID: 1841826440}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -9547,6 +9533,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VCam: {fileID: 1814538070}
+--- !u!114 &1841826440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1841826433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c3ea755a5c54f744998d94d85325f9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_audioGrp:
+    name: BattleMusic
+    source: {fileID: 0}
+    sounds:
+    - clip: {fileID: 8300000, guid: e90da34ec27c0134d9b8c643ede023ea, type: 3}
+      loop: 0
+      volume: 0.6
+    - clip: {fileID: 8300000, guid: 461ea7db3ce1eb44c96ee5abf7634cec, type: 3}
+      loop: 1
+      volume: 0.6
 --- !u!1 &1842192979
 GameObject:
   m_ObjectHideFlags: 0
