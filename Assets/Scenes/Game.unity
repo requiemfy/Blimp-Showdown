@@ -9426,12 +9426,12 @@ MonoBehaviour:
     name: BattleMusic
     source: {fileID: 0}
     sounds:
-    - clip: {fileID: 8300000, guid: e90da34ec27c0134d9b8c643ede023ea, type: 3}
+    - clip: {fileID: 8300000, guid: c0c3104e913fd6e41a7dea3ee59f84e1, type: 3}
       loop: 0
       volume: 1
     - clip: {fileID: 8300000, guid: 461ea7db3ce1eb44c96ee5abf7634cec, type: 3}
       loop: 1
-      volume: 0.6
+      volume: 1
 --- !u!1 &1842192979
 GameObject:
   m_ObjectHideFlags: 0
