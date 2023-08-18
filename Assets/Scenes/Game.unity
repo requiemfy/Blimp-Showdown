@@ -9428,7 +9428,7 @@ MonoBehaviour:
     sounds:
     - clip: {fileID: 8300000, guid: e90da34ec27c0134d9b8c643ede023ea, type: 3}
       loop: 0
-      volume: 0.6
+      volume: 1
     - clip: {fileID: 8300000, guid: 461ea7db3ce1eb44c96ee5abf7634cec, type: 3}
       loop: 1
       volume: 0.6
