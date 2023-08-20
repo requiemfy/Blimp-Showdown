@@ -14,6 +14,7 @@ public class BackgroundMusic : MonoBehaviour
             source.loop = sound.loop;
             source.clip = sound.clip;
             source.volume = sound.volume;
+            source.priority = 0;
             source.Play();
             yield return new WaitWhile(()=>source.isPlaying);
         }
