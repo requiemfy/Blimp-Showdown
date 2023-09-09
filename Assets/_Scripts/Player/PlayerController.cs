@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
         RB.gravityScale = 0.5f;
         energyBar.gameObject.SetActive(false);
         shipCollapsedPS.Play();
+        AudioManager.Instance.PlayAudioGroup("ShipExplode");
         SpawnExplosionsOnShipBody();
         CinemachineManager.Instance.PlayCamShake(0.7f, 2f);
         CinemachineManager.Instance.SetFollow(transform);

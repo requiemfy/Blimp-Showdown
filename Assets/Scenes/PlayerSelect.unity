@@ -2553,6 +2553,12 @@ MonoBehaviour:
     - clip: {fileID: 8300000, guid: 38f4b34bf24dc8d4984225771edc41e7, type: 3}
       loop: 0
       volume: 1
+  - name: ShipExplode
+    source: {fileID: 0}
+    sounds:
+    - clip: {fileID: 8300000, guid: 29ae1e46c4671bd4aac761f92fd076ed, type: 3}
+      loop: 0
+      volume: 1
 --- !u!81 &974488822
 AudioListener:
   m_ObjectHideFlags: 0
@@ -4743,7 +4749,7 @@ MonoBehaviour:
     sounds:
     - clip: {fileID: 8300000, guid: 11f7888ce7462a644b4b3374bcc2e8c3, type: 3}
       loop: 1
-      volume: 0.85
+      volume: 0.7
 --- !u!1001 &1820105854
 PrefabInstance:
   m_ObjectHideFlags: 0
