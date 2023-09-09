@@ -2544,6 +2544,15 @@ MonoBehaviour:
     - clip: {fileID: 8300000, guid: bb1ed9ae985e2824eb101b3cd3223964, type: 3}
       loop: 0
       volume: 0.05
+  - name: ShipMove
+    source: {fileID: 0}
+    sounds:
+    - clip: {fileID: 8300000, guid: 477aa2cce1ce8d7468843d2265b03b5d, type: 3}
+      loop: 0
+      volume: 1
+    - clip: {fileID: 8300000, guid: 38f4b34bf24dc8d4984225771edc41e7, type: 3}
+      loop: 0
+      volume: 1
 --- !u!81 &974488822
 AudioListener:
   m_ObjectHideFlags: 0

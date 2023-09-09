@@ -42,6 +42,16 @@ public class AudioManager : MonoBehaviour
         group.source.volume = targetSound.volume;
         group.source.Play();
     }
+    public void StopAudioGroup(string name)
+    {
+        AudioGroup group = Array.Find(audioGroups, group => group.name == name);
+        if (group == null)
+        {
+            Debug.LogWarning($"group {name} not found");
+            return;
+        }
+        group.source.Stop();
+    }
 
     public void StopAllButPlay(string[] names)
     {

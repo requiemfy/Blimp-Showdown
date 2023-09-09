@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+    public Action OnStarted;
     public Action onFuelChanged;
     public Action whileMoving;
     public Action OnStopped;
@@ -17,9 +18,9 @@ public class Movement : MonoBehaviour
     [SerializeField]
     private int maxHeight;
 
-
     private Vector2 direction;
     private Rigidbody2D rb;
+    private bool m_started = false;
 
     public float GetRatio()
     {
@@ -64,12 +65,18 @@ public class Movement : MonoBehaviour
     {
         this.enabled = true;
         direction = dragVec.normalized;
+        if (!m_started)
+        {
+            m_started = true;
+            OnStarted?.Invoke();
+        }
     }
 
     public void StopMove()
     {
         OnStopped();
         this.enabled = false;
+        m_started = false;
     }
 
     public void RestorePercent(int percent)

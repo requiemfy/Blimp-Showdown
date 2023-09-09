@@ -89,6 +89,10 @@ public class PlayerController : MonoBehaviour
         //fuel
         fuelBar.gameObject.SetActive(false);
         fuelBar.SetFill((int)((float)Movement.GetRatio() * 100), 100);
+        Movement.OnStarted += () =>
+        {
+            AudioManager.Instance.PlayAudioGroup("ShipMove");
+        };
         Movement.onFuelChanged += () =>
         {
             fuelBar.SetFill((int)((float)Movement.GetRatio() * 100), 100);
@@ -97,16 +101,14 @@ public class PlayerController : MonoBehaviour
         {
             fuelBar.gameObject.SetActive(true);
             energyBar.gameObject.SetActive(false);
-            if (!movePS.isPlaying)
-            {
-                movePS.Play();
-            }
+            if (!movePS.isPlaying) movePS.Play();
         };
         Movement.OnStopped += () =>
         {
             energyBar.gameObject.SetActive(true);
             fuelBar.gameObject.SetActive(false);
             movePS.Stop();
+            AudioManager.Instance.StopAudioGroup("ShipMove");
         };
     }
 
