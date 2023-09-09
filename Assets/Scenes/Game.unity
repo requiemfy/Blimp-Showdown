@@ -1069,7 +1069,6 @@ GameObject:
   - component: {fileID: 297388683}
   - component: {fileID: 297388682}
   - component: {fileID: 297388685}
-  - component: {fileID: 297388686}
   m_Layer: 5
   m_Name: FireBtn
   m_TagString: Untagged
@@ -1121,7 +1120,7 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0, g: 0, b: 0, a: 1}
+    m_PressedColor: {r: 1, g: 0.85566986, b: 0, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -1141,19 +1140,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 297388683}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1751549961}
-        m_TargetAssemblyTypeName: HUD, Assembly-CSharp
-        m_MethodName: Fire
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &297388683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1167,7 +1154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.29411766, g: 0.31764707, b: 0.4039216, a: 1}
+  m_Color: {r: 0.29411766, g: 0.31764707, b: 0.4039216, a: 0.19607843}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1207,18 +1194,6 @@ MonoBehaviour:
   direction: 0
   duration: 1
   delay: 0
---- !u!114 &297388686
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 297388680}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8c49c785dccb1c4288c450bdf103d37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &335387091
 GameObject:
   m_ObjectHideFlags: 0
@@ -9428,10 +9403,10 @@ MonoBehaviour:
     sounds:
     - clip: {fileID: 8300000, guid: c0c3104e913fd6e41a7dea3ee59f84e1, type: 3}
       loop: 0
-      volume: 1
+      volume: 0.7
     - clip: {fileID: 8300000, guid: 461ea7db3ce1eb44c96ee5abf7634cec, type: 3}
       loop: 1
-      volume: 1
+      volume: 0.7
 --- !u!1 &1842192979
 GameObject:
   m_ObjectHideFlags: 0

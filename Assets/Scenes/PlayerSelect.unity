@@ -2511,33 +2511,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioGroups:
-  - name: MenuMusic
-    source: {fileID: 0}
-    sounds:
-    - clip: {fileID: 8300000, guid: 11f7888ce7462a644b4b3374bcc2e8c3, type: 3}
-      loop: 0
-      volume: 0.3
-  - name: BattleMusic
-    source: {fileID: 0}
-    sounds:
-    - clip: {fileID: 8300000, guid: d9286108fa61da24bb7094230f87347d, type: 3}
-      loop: 0
-      volume: 0.1
   - name: GunShot
     source: {fileID: 0}
     sounds:
-    - clip: {fileID: 8300000, guid: d9d7442034ad0e342a1ca56529a38e26, type: 3}
+    - clip: {fileID: 8300000, guid: 3564fbb0defd8eb42abc00b2c03eb0ec, type: 3}
       loop: 0
-      volume: 0.5
-    - clip: {fileID: 8300000, guid: abd96069372137c44bf1e2f103dd2ee4, type: 3}
+      volume: 1
+    - clip: {fileID: 8300000, guid: 44e6940071a9928438e2decfc2c6c15a, type: 3}
       loop: 0
-      volume: 0.5
-    - clip: {fileID: 8300000, guid: 31a33189bd944d749aea4a3d196d3ebe, type: 3}
+      volume: 1
+    - clip: {fileID: 8300000, guid: 53ea45bf49e21674d9949ddb9c6c7fe5, type: 3}
       loop: 0
-      volume: 0.5
-    - clip: {fileID: 8300000, guid: 76cd191f6e4d06b45bf644b939e0c05f, type: 3}
+      volume: 1
+    - clip: {fileID: 8300000, guid: f9acbd7128886974ba5d7ea371610676, type: 3}
       loop: 0
-      volume: 0.5
+      volume: 1
   - name: ButtonClick
     source: {fileID: 0}
     sounds:

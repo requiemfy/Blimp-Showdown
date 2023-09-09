@@ -127,7 +127,7 @@ public class WeaponShooting : MonoBehaviour
                 launchVec: LaunchVec
                 );
 
-            AudioManager.Instance.PlayAudioGroup("GunShot");
+            AudioManager.Instance.PlayAudioGroup("GunShot", restartIfPlaying: false);
             SpawnSpark();
             Recoil();
             //ShipKnockBack();
