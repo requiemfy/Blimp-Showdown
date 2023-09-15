@@ -50,7 +50,7 @@ public class AdsManager : MonoBehaviour
 
     // These ad units are configured to always serve test ads.
 #if UNITY_ANDROID
-    private string _adUnitId = "ca-app-pub-3940256099942544/1033173712";
+    private string _adUnitId = "ca-app-pub-1485483970932537/6822273342";
     // test: ca-app-pub-3940256099942544/1033173712
     // real: ca-app-pub-1485483970932537/6822273342
 #elif UNITY_IPHONE

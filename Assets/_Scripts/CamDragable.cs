@@ -21,6 +21,7 @@ public class CamDragable : MonoBehaviour, IBeginDragHandler, IDragHandler
     }
     public void OnDrag(PointerEventData touch)
     {
+        if (!GameManager.Instance.IsInputEnabled) return;
         if (Input.touchCount >= 2) return;
         if (!Input.GetMouseButton(0)) return;
         var sensitivity = (float)1920 / Screen.width;

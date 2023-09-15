@@ -14,10 +14,10 @@ public class GameManager : MonoBehaviour
     public Action onCycleEnded;
     public Team[] OpennedTeams { get; private set; }
     public Vector2 Wind;
+    public bool IsInputEnabled = false;
 
     [SerializeField] private PlayerController playerPrefab;
     [SerializeField] private GameOverScreen gameOverScreen;
-    [SerializeField] private Image cameraRaycast;
 
     private int m_turnCount;
     private int m_playerRemaining;
@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
     {
         GetRespawnPoints();
         SpawnPlayers();
-        EnableCamControll(false);
+        IsInputEnabled = false;
 
         //cam zoom animation
         var cineMana = CinemachineManager.Instance;
@@ -47,14 +47,14 @@ public class GameManager : MonoBehaviour
         DOTween.To(() => cineMana.OrthographicSize, x => cineMana.OrthographicSize = x, 15, duration: 3).SetEase(Ease.InOutCubic);
 
         //go through players
-        foreach (var team in OpennedTeams)
+        float timePerShip = 1.75f;
+        for (int i=OpennedTeams.Length-1; i>=1; i--)
         {
-            CinemachineManager.Instance.SetFollow(DataPersistence.Get(team).Controller.transform);
-            yield return new WaitForSeconds(2);
+            CinemachineManager.Instance.SetFollow(DataPersistence.Get(OpennedTeams[i]).Controller.transform);
+            yield return new WaitForSeconds(timePerShip);
         }
 
         //cam controll on
-        EnableCamControll(true);
         var firstTeam = OpennedTeams[0];
         SetTurn(firstTeam);
         HUD.Instance.FindTurnIndicator(firstTeam).DOColor(firstTeam.GetTeamColor(), duration: 0.5f);
@@ -75,11 +75,6 @@ public class GameManager : MonoBehaviour
             playerCtrl.transform.position = m_respawnPoints[i].transform.position;
             i++;
         }
-    }
-    private void EnableCamControll(bool value)
-    {
-        cameraRaycast.raycastTarget = value;
-        CinemachineManager.Instance.enabled = value;
     }
 
 
@@ -131,6 +126,7 @@ public class GameManager : MonoBehaviour
             CinemachineManager.Instance.SetFollow(target.transform, isPlayer: true);
             yield return new WaitForSeconds(2);
             HUD.Instance.StartObservePlayer(target);
+            IsInputEnabled = true;
         }
     }
 

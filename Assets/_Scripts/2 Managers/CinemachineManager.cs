@@ -91,6 +91,7 @@ public class CinemachineManager : MonoBehaviour
 
     private void Update_PitchZoom()
     {
+        if (!GameManager.Instance.IsInputEnabled) return;
         if (Input.touchCount == 2)
         {
             Touch touchZero = Input.GetTouch(0);
