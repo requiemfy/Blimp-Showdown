@@ -4,6 +4,7 @@
 
 * [Google Play Store](https://play.google.com/store/apps/details?id=com.Kaptis.BlimpShowdown&hl=en-US&ah=k4YdLJmHhJOVbjhGH28_i7w54Kc)
 * IOS App Store
+* [Youtube](https://www.youtube.com/watch?v=8IH_Qr1WIhY&t=1s&ab_channel=GamesOverCoffeeConsulting) *(Consulting)*
 
 ![We are now Open-Source](https://github.com/TungVietLe/Blimp-Showdown/assets/99946449/332c8755-427f-4a57-a9ad-a21646c91185)
 
